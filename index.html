@@ -1,0 +1,1709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Aromansa - Premium Essential Oils & Natural Wellness</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="essential oils, aromatherapy, natural wellness, lavender oil, tea tree oil, diffusers, organic oils" name="keywords">
+    <meta content="Aromansa provides premium therapeutic grade essential oils, aromatherapy diffusers, and natural wellness products for relaxation, skincare, and holistic health." name="description">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
+    <!-- CSS Libraries -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/clean-professional.css" rel="stylesheet">
+    <link href="css/footer-stunning.css" rel="stylesheet">
+    <style>
+        /* ===== STUNNING HERO SECTION ===== */
+        .hero-stunning {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, #1a202c 0%, #2d3748 50%, #1a202c 100%);
+            overflow: hidden;
+            padding: 140px 0 100px;
+        }
+
+        .hero-particles-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                radial-gradient(circle, rgba(199, 164, 76, 0.25) 2px, transparent 2px),
+                radial-gradient(circle, rgba(199, 164, 76, 0.15) 1px, transparent 1px);
+            background-size: 100px 100px, 60px 60px;
+            background-position: 0 0, 30px 30px;
+            animation: particlesMove 35s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes particlesMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(-100px, -100px); }
+        }
+
+        .hero-gradient-orbs {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .hero-gradient-orbs::before,
+        .hero-gradient-orbs::after {
+            content: '';
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+        }
+
+        .hero-gradient-orbs::before {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(199, 164, 76, 0.2) 0%, transparent 70%);
+            top: -150px;
+            left: -100px;
+            animation: orbFloat 12s ease-in-out infinite;
+        }
+
+        .hero-gradient-orbs::after {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(168, 132, 47, 0.15) 0%, transparent 70%);
+            bottom: -100px;
+            right: -50px;
+            animation: orbFloat 15s ease-in-out infinite reverse;
+        }
+
+        @keyframes orbFloat {
+            0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.6; }
+            50% { transform: translate(50px, 30px) scale(1.2); opacity: 1; }
+        }
+
+        .hero-content-stunning {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .hero-badge-stunning {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 28px;
+            background: linear-gradient(135deg, rgba(199, 164, 76, 0.2), rgba(168, 132, 47, 0.15));
+            border: 2px solid rgba(199, 164, 76, 0.4);
+            border-radius: 50px;
+            color: #c7a44c;
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 30px;
+            font-family: 'Inter', sans-serif;
+            box-shadow: 0 6px 20px rgba(199, 164, 76, 0.3);
+            animation: badgeFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes badgeFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        .hero-badge-stunning i {
+            font-size: 18px;
+        }
+
+        .hero-title-stunning {
+            font-size: 64px;
+            font-weight: 900;
+            color: #ffffff;
+            margin: 0 0 25px 0;
+            font-family: 'Inter', sans-serif;
+            line-height: 1.1;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-title-stunning .highlight-gold {
+            background: linear-gradient(135deg, #c7a44c, #e5cf95, #a8842f);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+        }
+
+        .hero-subtitle-stunning {
+            font-size: 22px;
+            color: rgba(255, 255, 255, 0.85);
+            margin: 0 0 40px 0;
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            max-width: 750px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-buttons-stunning {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 50px;
+        }
+
+        .btn-hero-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 20px 40px;
+            background: linear-gradient(135deg, #c7a44c, #a8842f);
+            color: #ffffff;
+            font-size: 18px;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 14px;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+            box-shadow: 0 8px 25px rgba(199, 164, 76, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-hero-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .btn-hero-primary:hover::before {
+            left: 100%;
+        }
+
+        .btn-hero-primary:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 35px rgba(199, 164, 76, 0.6);
+        }
+
+        .btn-hero-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 20px 40px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            font-size: 18px;
+            font-weight: 700;
+            text-decoration: none;
+            border: 2px solid rgba(199, 164, 76, 0.4);
+            border-radius: 14px;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-hero-secondary:hover {
+            background: rgba(199, 164, 76, 0.2);
+            border-color: #c7a44c;
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px rgba(199, 164, 76, 0.3);
+        }
+
+        .hero-stats-floating {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .hero-stat-pill {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 15px 25px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(199, 164, 76, 0.25);
+            border-radius: 50px;
+            backdrop-filter: blur(10px);
+        }
+
+        .hero-stat-pill i {
+            font-size: 24px;
+            color: #c7a44c;
+        }
+
+        .hero-stat-pill .stat-number {
+            font-size: 24px;
+            font-weight: 800;
+            color: #ffffff;
+        }
+
+        .hero-stat-pill .stat-label {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.7);
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* ===== WELLNESS CATEGORIES ===== */
+        .wellness-categories {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #fff9ea 0%, #ffffff 50%, #fff9ea 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+            margin-top: 50px;
+        }
+
+        .category-card-stunning {
+            position: relative;
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 40px 25px 30px;
+            text-align: center;
+            border: 2px solid rgba(199, 164, 76, 0.15);
+            box-shadow: 0 8px 30px rgba(40, 34, 20, 0.08);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .category-card-stunning::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 0%, rgba(199, 164, 76, 0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .category-card-stunning:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 20px 50px rgba(199, 164, 76, 0.2);
+            border-color: rgba(199, 164, 76, 0.35);
+        }
+
+        .category-card-stunning:hover::before {
+            opacity: 1;
+        }
+
+        .category-icon-stunning {
+            width: 90px;
+            height: 90px;
+            margin: 0 auto 20px;
+            background: linear-gradient(135deg, rgba(199, 164, 76, 0.12), rgba(168, 132, 47, 0.08));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.4s ease;
+            border: 3px solid rgba(199, 164, 76, 0.25);
+        }
+
+        .category-icon-stunning i {
+            font-size: 40px;
+            color: #a8842f;
+            transition: all 0.4s ease;
+        }
+
+        .category-card-stunning:hover .category-icon-stunning {
+            background: linear-gradient(135deg, #c7a44c, #a8842f);
+            transform: scale(1.1);
+            box-shadow: 0 10px 25px rgba(199, 164, 76, 0.4);
+        }
+
+        .category-card-stunning:hover .category-icon-stunning i {
+            color: #ffffff;
+        }
+
+        .category-card-stunning h3 {
+            font-size: 20px;
+            font-weight: 700;
+            color: #2d3748;
+            margin: 0 0 10px 0;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .category-card-stunning p {
+            font-size: 14px;
+            color: #718096;
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+        }
+
+        /* ===== BESTSELLERS SECTION ===== */
+        .bestsellers-section {
+            padding: 100px 0;
+            background: #ffffff;
+        }
+
+        .bestsellers-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .bestseller-card {
+            background: #ffffff;
+            border-radius: 24px;
+            overflow: hidden;
+            border: 2px solid rgba(199, 164, 76, 0.15);
+            box-shadow: 0 8px 30px rgba(40, 34, 20, 0.08);
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .bestseller-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            padding: 8px 16px;
+            background: linear-gradient(135deg, #c7a44c, #a8842f);
+            color: #ffffff;
+            font-size: 12px;
+            font-weight: 700;
+            border-radius: 20px;
+            font-family: 'Inter', sans-serif;
+            box-shadow: 0 4px 12px rgba(199, 164, 76, 0.4);
+            z-index: 2;
+        }
+
+        .bestseller-img {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, #f7fafc, #edf2f7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bestseller-img::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(199, 164, 76, 0.15) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .bestseller-card:hover .bestseller-img::before {
+            opacity: 1;
+        }
+
+        .bestseller-img i {
+            font-size: 80px;
+            color: #c7a44c;
+            transition: all 0.4s ease;
+        }
+
+        .bestseller-card:hover .bestseller-img i {
+            transform: scale(1.2) rotate(10deg);
+        }
+
+        .bestseller-info {
+            padding: 25px;
+        }
+
+        .bestseller-info h3 {
+            font-size: 22px;
+            font-weight: 700;
+            color: #2d3748;
+            margin: 0 0 10px 0;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .bestseller-info p {
+            font-size: 14px;
+            color: #718096;
+            margin: 0 0 15px 0;
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+        }
+
+        .bestseller-price {
+            font-size: 24px;
+            font-weight: 800;
+            color: #a8842f;
+            font-family: 'Inter', sans-serif;
+            margin-bottom: 15px;
+        }
+
+        .bestseller-cta {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-bestseller {
+            flex: 1;
+            padding: 12px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 700;
+            text-align: center;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .btn-bestseller-primary {
+            background: linear-gradient(135deg, #c7a44c, #a8842f);
+            color: #ffffff;
+        }
+
+        .btn-bestseller-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(199, 164, 76, 0.4);
+        }
+
+        .btn-bestseller-secondary {
+            background: rgba(199, 164, 76, 0.1);
+            color: #8a6f2a;
+            border: 2px solid rgba(199, 164, 76, 0.25);
+        }
+
+        .btn-bestseller-secondary:hover {
+            background: rgba(199, 164, 76, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* ===== TESTIMONIALS SECTION ===== */
+        .testimonials-stunning {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
+            position: relative;
+            overflow: hidden;
+            color: #ffffff;
+        }
+
+        .testimonials-stunning::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(circle, rgba(199, 164, 76, 0.2) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: particlesMove 30s linear infinite;
+            pointer-events: none;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .testimonial-card-stunning {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(199, 164, 76, 0.2);
+            border-radius: 24px;
+            padding: 35px;
+            backdrop-filter: blur(10px);
+            transition: all 0.4s ease;
+        }
+
+        .testimonial-card-stunning:hover {
+            transform: translateY(-10px);
+            border-color: rgba(199, 164, 76, 0.4);
+            box-shadow: 0 15px 40px rgba(199, 164, 76, 0.2);
+        }
+
+        .testimonial-stars {
+            display: flex;
+            gap: 5px;
+            margin-bottom: 20px;
+        }
+
+        .testimonial-stars i {
+            font-size: 20px;
+            color: #c7a44c;
+        }
+
+        .testimonial-text {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.7;
+            margin: 0 0 25px 0;
+            font-family: 'Inter', sans-serif;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .testimonial-avatar {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #c7a44c, #a8842f);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: 800;
+            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .testimonial-author-info h4 {
+            font-size: 16px;
+            font-weight: 700;
+            color: #ffffff;
+            margin: 0 0 5px 0;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .testimonial-author-info p {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.6);
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* ===== BENEFITS SECTION ===== */
+        .benefits-stunning {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #fff9ea 0%, #ffffff 50%, #fff9ea 100%);
+        }
+
+        .benefits-grid-stunning {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .benefit-card-stunning {
+            display: flex;
+            gap: 20px;
+            padding: 30px;
+            background: #ffffff;
+            border-radius: 20px;
+            border: 2px solid rgba(199, 164, 76, 0.15);
+            box-shadow: 0 6px 20px rgba(40, 34, 20, 0.06);
+            transition: all 0.3s ease;
+        }
+
+        .benefit-card-stunning:hover {
+            transform: translateX(8px);
+            box-shadow: 0 12px 35px rgba(199, 164, 76, 0.15);
+            border-color: rgba(199, 164, 76, 0.3);
+        }
+
+        .benefit-icon-stunning {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, rgba(199, 164, 76, 0.12), rgba(168, 132, 47, 0.08));
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: all 0.3s ease;
+        }
+
+        .benefit-icon-stunning i {
+            font-size: 32px;
+            color: #a8842f;
+            transition: all 0.3s ease;
+        }
+
+        .benefit-card-stunning:hover .benefit-icon-stunning {
+            background: linear-gradient(135deg, #c7a44c, #a8842f);
+        }
+
+        .benefit-card-stunning:hover .benefit-icon-stunning i {
+            color: #ffffff;
+        }
+
+        .benefit-content h3 {
+            font-size: 20px;
+            font-weight: 700;
+            color: #2d3748;
+            margin: 0 0 10px 0;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .benefit-content p {
+            font-size: 15px;
+            color: #718096;
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+        }
+
+        /* ===== CTA STUNNING ===== */
+        .cta-stunning {
+            padding: 120px 0;
+            background: linear-gradient(135deg, #c7a44c 0%, #a8842f 50%, #8a6f2a 100%);
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+            color: #ffffff;
+        }
+
+        .cta-stunning::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            right: -100px;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, transparent 70%);
+            animation: orbFloat 10s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        .cta-stunning h2 {
+            font-size: 48px;
+            font-weight: 900;
+            margin: 0 0 20px 0;
+            font-family: 'Inter', sans-serif;
+            color: #ffffff;
+            text-shadow: 0 3px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .cta-stunning p {
+            font-size: 20px;
+            margin: 0 0 40px 0;
+            font-family: 'Inter', sans-serif;
+            color: #ffffff;
+            opacity: 0.95;
+        }
+
+        .cta-buttons-stunning {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-cta-stunning {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 20px 40px;
+            background: #ffffff;
+            color: #a8842f;
+            font-size: 18px;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 14px;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-cta-stunning:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
+        }
+
+        .btn-cta-stunning.btn-outline {
+            background: transparent;
+            color: #ffffff;
+            border: 2px solid #ffffff;
+        }
+
+        .btn-cta-stunning.btn-outline:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 991.98px) {
+            .hero-title-stunning {
+                font-size: 48px;
+            }
+
+            .categories-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .bestsellers-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .benefits-grid-stunning {
+                grid-template-columns: 1fr;
+            }
+
+            .section-head h2 {
+                font-size: 36px;
+            }
+        }
+
+        @media (max-width: 767.98px) {
+            .hero-stunning {
+                padding: 120px 0 80px;
+                min-height: auto;
+            }
+
+            .hero-title-stunning {
+                font-size: 36px;
+            }
+
+            .hero-subtitle-stunning {
+                font-size: 18px;
+            }
+
+            .hero-stats-floating {
+                gap: 15px;
+            }
+
+            .hero-stat-pill {
+                padding: 12px 20px;
+            }
+
+            .categories-grid,
+            .bestsellers-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-stunning h2 {
+                font-size: 32px;
+            }
+
+            .cta-stunning p {
+                font-size: 17px;
+            }
+
+            .cta-buttons-stunning {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn-cta-stunning {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
+
+            .section-head h2 {
+                font-size: 30px;
+            }
+
+            .section-head p {
+                font-size: 16px;
+            }
+        }
+
+        /* ===== SECTION HEAD STYLING ===== */
+        .section-head {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .section-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 18px;
+            background: linear-gradient(135deg, rgba(199, 164, 76, 0.1), rgba(168, 132, 47, 0.05));
+            color: #8a6f2a;
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            border-radius: 25px;
+            margin-bottom: 20px;
+            font-family: 'Inter', sans-serif;
+            border: 1px solid rgba(199, 164, 76, 0.25);
+        }
+
+        .section-label i {
+            font-size: 14px;
+        }
+
+        .section-head h2 {
+            font-size: 42px;
+            font-weight: 800;
+            color: #2d3748;
+            margin: 0 0 15px 0;
+            font-family: 'Inter', sans-serif;
+            line-height: 1.2;
+        }
+
+        .section-head p {
+            font-size: 17px;
+            color: #718096;
+            max-width: 600px;
+            margin: 0 auto;
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* ===== TYPEWRITER ANIMATION ===== */
+        .typewriter-oils {
+            margin-top: 25px;
+            font-size: 18px;
+            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+            min-height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .typewriter-glass-bg {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 28px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .typewriter-glass-bg:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .typewriter-text {
+            display: inline-block;
+            overflow: hidden;
+            white-space: nowrap;
+            border-right: 3px solid #c7a44c;
+            animation: typewriter-cursor 0.75s step-end infinite;
+            font-weight: 600;
+            color: #ffffff;
+            background: none !important;
+            -webkit-background-clip: unset !important;
+            background-clip: unset !important;
+            -webkit-text-fill-color: #ffffff !important;
+        }
+
+        .typewriter-emoji {
+            font-size: 32px;
+            margin-left: 12px;
+            flex-shrink: 0;
+            color: #ffffff;
+            animation: emojiFloat 2s ease-in-out infinite;
+        }
+
+        @keyframes emojiFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-3px); }
+        }
+
+        @keyframes typewriter-cursor {
+            from, to { border-color: transparent; }
+            50% { border-color: #c7a44c; }
+        }
+
+        @keyframes fadeInOil {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .typewriter-oils .oil-name {
+            animation: fadeInOil 0.5s ease;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Nav Start -->
+    <header id="nav">
+        <div class="nav-container">
+            <div class="nav-left">
+                <div id="logo">
+                    <a href="index.html">
+                        <img src="img/aromansa-logo.png" alt="Aromansa Logo" class="navbar-logo-img">
+                    </a>
+                </div>
+            </div>
+
+            <nav id="nav-menu-container" aria-label="Main navigation">
+                <ul class="nav-menu">
+                    <li class="menu-active"><a href="index.html"><span class="nav-text">Home</span><span class="nav-indicator"></span></a></li>
+                    <li><a href="equipment.html"><span class="nav-text">Products</span><span class="nav-indicator"></span></a></li>
+                    <li><a href="ai-personalization.html"><span class="nav-text">AI Consultant</span><span class="nav-indicator"></span></a></li>
+                    <li><a href="contact.html"><span class="nav-text">Contact</span><span class="nav-indicator"></span></a></li>
+                </ul>
+            </nav>
+
+            <div class="nav-right">
+                <a href="https://shopee.co.id/aromansa_id" target="_blank" rel="noopener noreferrer" class="nav-cta">Shop Now</a>
+                <a href="#" id="mobile-nav-toggle" aria-label="Toggle mobile navigation">
+                    <span class="hamburger">
+                        <span class="hamburger-line"></span>
+                        <span class="hamburger-line"></span>
+                        <span class="hamburger-line"></span>
+                    </span>
+                </a>
+            </div>
+        </div>
+    </header>
+    <!-- Nav End -->
+
+    <main>
+        <!-- Stunning Hero Section -->
+        <section class="hero-stunning">
+            <div class="hero-particles-bg"></div>
+            <div class="hero-gradient-orbs"></div>
+            <div class="container">
+                <div class="hero-content-stunning">
+                    <div class="hero-badge-stunning">
+                        <i class="fa fa-leaf"></i>
+                        <span>100% Pure & Therapeutic Grade</span>
+                    </div>
+                    <h1 class="hero-title-stunning">
+                        Natural Wellness with<br>
+                        <span class="highlight-gold">Aromansa Essential Oils</span>
+                    </h1>
+                    <div class="typewriter-oils">
+                        <div class="typewriter-glass-bg">
+                            <span class="typewriter-text" id="oilTypewriter"></span>
+                            <span class="typewriter-emoji" id="oilEmoji"></span>
+                        </div>
+                    </div>
+                    <p class="hero-subtitle-stunning">
+                        Discover premium therapeutic grade essential oils for relaxation, energy, skincare, and natural living. Transform your home into a wellness sanctuary.
+                    </p>
+                    <div class="hero-buttons-stunning">
+                        <a href="equipment.html" class="btn-hero-primary">
+                            <i class="fa fa-shopping-bag"></i>
+                            <span>Shop Essential Oils</span>
+                        </a>
+                        <a href="ai-personalization.html" class="btn-hero-secondary">
+                            <i class="fa fa-robot"></i>
+                            <span>Get AI Recommendations</span>
+                        </a>
+                    </div>
+                    <div class="hero-stats-floating">
+                        <div class="hero-stat-pill">
+                            <i class="fa fa-flask"></i>
+                            <div>
+                                <div class="stat-number">14+</div>
+                                <div class="stat-label">Essential Oils</div>
+                            </div>
+                        </div>
+                        <div class="hero-stat-pill">
+                            <i class="fa fa-users"></i>
+                            <div>
+                                <div class="stat-number">100+</div>
+                                <div class="stat-label">Happy Customers</div>
+                            </div>
+                        </div>
+                        <div class="hero-stat-pill">
+                            <i class="fa fa-star"></i>
+                            <div>
+                                <div class="stat-number">100%</div>
+                                <div class="stat-label">Pure & Natural</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Our Journey & Purpose Section (Existing) -->
+        <section id="aromansa-story" class="aromansa-story">
+            <div class="container">
+                <div class="section-head">
+                    <span class="section-label">Our Story</span>
+                    <h2>Our Journey & Purpose</h2>
+                    <p>Discover our passion for natural wellness and the dedicated team behind every bottle</p>
+                </div>
+
+                <div class="story-layout-v2">
+                    <!-- Tab Navigation -->
+                    <div class="story-tabs">
+                        <button class="story-tab active" data-tab="story" id="tabStory">
+                            <i class="fa fa-image"></i>
+                            <span>Our Story</span>
+                            <div class="tab-indicator"></div>
+                        </button>
+                        <button class="story-tab" data-tab="journey" id="tabJourney">
+                            <i class="fa fa-road"></i>
+                            <span>Journey</span>
+                            <div class="tab-indicator"></div>
+                        </button>
+                    </div>
+
+                    <!-- Story Slideshow Panel -->
+                    <div class="story-panel active" id="storyPanel">
+                        <div class="story-slideshow">
+                        <div class="story-slide active" data-slide="0">
+                            <div class="story-card-large">
+                                <img src="img/aromansa-tim.jpg" alt="Aromansa Team" class="story-bg">
+                                <div class="story-kenburns"></div>
+                                <div class="story-content-large">
+                                    <div class="story-icon-large">
+                                        <i class="fa fa-users"></i>
+                                    </div>
+                                    <h3>Our Dedicated Team</h3>
+                                    <p>Passionate experts crafting nature's finest essential oils for your wellness journey</p>
+                                    <div class="story-line-large"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="story-slide" data-slide="1">
+                            <div class="story-card-large">
+                                <img src="https://media.discordapp.net/attachments/1251199758228262955/1493551781731631268/IMG_1905.jpg?ex=69e0b37d&is=69df61fd&hm=ac2c4523abe3a13689458363bc79da72238e5704e22da733486477e5723b234b&=&format=webp&width=1178&height=902" alt="Manawa Festival 2024" class="story-bg">
+                                <div class="story-kenburns"></div>
+                                <div class="story-content-large">
+                                    <div class="story-icon-large">
+                                        <i class="fa fa-award"></i>
+                                    </div>
+                                    <h3>Manawa Festival 2024</h3>
+                                    <p>We opened booth in Ciwalk 2024</p>
+                                    <div class="story-line-large"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="story-slide" data-slide="2">
+                            <div class="story-card-large">
+                                <img src="https://media.discordapp.net/attachments/1251199758228262955/1493551785829339216/XT5R4702.jpg?ex=69df61fe&is=69de107e&hm=7a5f5d2737c9281e6c95a6f0f37b64b35f8017e1e9523a80cf8807568eb0c721&=&format=webp&width=1215&height=810" alt="Aromansa Wellness Products" class="story-bg">
+                                <div class="story-kenburns"></div>
+                                <div class="story-content-large">
+                                    <div class="story-icon-large">
+                                        <i class="fa fa-leaf"></i>
+                                    </div>
+                                    <h3>Wellness Collection</h3>
+                                    <p>From Lavender to Eucalyptus - nature's most powerful healing blends</p>
+                                    <div class="story-line-large"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="story-slide" data-slide="3">
+                            <div class="story-card-large">
+                                <img src="https://media.discordapp.net/attachments/1251199758228262955/1493551783203835979/XT5R4922.jpg?ex=69df61fd&is=69de107d&hm=b0230b3eae8f51495be504a5c5273d7c45c5fa45274f1dba96c92a823508fe25&=&format=webp&width=1215&height=810" alt="Aromansa Daily Ritual" class="story-bg">
+                                <div class="story-kenburns"></div>
+                                <div class="story-content-large">
+                                    <div class="story-icon-large">
+                                        <i class="fa fa-seedling"></i>
+                                    </div>
+                                    <h3>Daily Rituals</h3>
+                                    <p>Simple wellness routines designed to support focus, calm, and emotional balance every day</p>
+                                    <div class="story-line-large"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="story-slide" data-slide="4">
+                            <div class="story-card-large">
+                                <img src="https://media.discordapp.net/attachments/1251199758228262955/1493551784394756218/XT5R4848.jpg?ex=69df61fe&is=69de107e&hm=b580c2c9b025a79eae570f119e7574c53334830cc278b879843184e8be6bfa80&=&format=webp&width=1215&height=810" alt="Aromansa Craftsmanship" class="story-bg">
+                                <div class="story-kenburns"></div>
+                                <div class="story-content-large">
+                                    <div class="story-icon-large">
+                                        <i class="fa fa-hand-holding-heart"></i>
+                                    </div>
+                                    <h3>Trusted Craftsmanship</h3>
+                                    <p>Every bottle is carefully crafted with quality ingredients and a passion for natural wellbeing</p>
+                                    <div class="story-line-large"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button class="story-prev" aria-label="Previous slide">
+                            <i class="fa fa-chevron-left"></i>
+                        </button>
+                        <button class="story-next" aria-label="Next slide">
+                            <i class="fa fa-chevron-right"></i>
+                        </button>
+
+                        <div class="story-dots">
+                            <span class="story-dot active" data-slide="0"></span>
+                            <span class="story-dot" data-slide="1"></span>
+                            <span class="story-dot" data-slide="2"></span>
+                            <span class="story-dot" data-slide="3"></span>
+                            <span class="story-dot" data-slide="4"></span>
+                        </div>
+
+                        <div class="story-progress">
+                            <div class="story-progress-bar"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Journey Panel -->
+                <div class="story-panel" id="journeyPanel">
+                    <div class="journey-timeline-wrapper">
+                        <div class="journey-header">
+                            <h3><i class="fa fa-clock"></i> Aromansa Journey</h3>
+                            <span class="journey-badge">8 Milestones</span>
+                        </div>
+
+                        <div class="zigzag-timeline" id="zigzagTimeline">
+                            <!-- Timeline Start -->
+                            <div class="timeline-start-marker">
+                                <div class="start-badge">
+                                    <i class="fa fa-flag-checkered"></i>
+                                    <span>The Beginning</span>
+                                </div>
+                            </div>
+
+                            <!-- Item 1 - Left -->
+                            <div class="zigzag-item left">
+                                <div class="zigzag-card">
+                                    <div class="zigzag-logo">
+                                        <img src="https://inspirenetwork.uk/wp-content/uploads/2025/03/Logo-BINUS-University_page-0001-1024x725.jpg" alt="Aromansa">
+                                    </div>
+                                    <div class="zigzag-content">
+                                        <span class="zigzag-year">2024</span>
+                                        <h4>Brand Beginnings</h4>
+                                        <p>Aromansa launched with a mission to provide premium natural wellness essentials to Indonesia.</p>
+                                        <div class="zigzag-tags">
+                                            <span class="zigzag-tag">Foundation</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="zigzag-connector left-connector"></div>
+                            </div>
+
+                            <!-- Item 2 - Right -->
+                            <div class="zigzag-item right">
+                                <div class="zigzag-connector right-connector"></div>
+                                <div class="zigzag-card">
+                                    <div class="zigzag-logo">
+                                        <img src="img/aromansa-logo.png" alt="Aromansa">
+                                    </div>
+                                    <div class="zigzag-content">
+                                        <span class="zigzag-year">2024</span>
+                                        <h4>First Product Line</h4>
+                                        <p>Launched 10 pure essential oils including Lavender, Tea Tree, Eucalyptus, and Peppermint.</p>
+                                        <div class="zigzag-tags">
+                                            <span class="zigzag-tag highlight">Products</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Item 3 - Left -->
+                            <div class="zigzag-item left">
+                                <div class="zigzag-card">
+                                    <div class="zigzag-logo">
+                                        <img src="img/aromansa-logo.png" alt="Aromansa">
+                                    </div>
+                                    <div class="zigzag-content">
+                                        <span class="zigzag-year">2025</span>
+                                        <h4>Growing Community</h4>
+                                        <p>Reached 100+ happy customers and built a loyal wellness enthusiast community.</p>
+                                        <div class="zigzag-tags">
+                                            <span class="zigzag-tag">Milestone</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="zigzag-connector left-connector"></div>
+                            </div>
+
+                            <!-- Item 4 - Right with BINUS logo -->
+                            <div class="zigzag-item right">
+                                <div class="zigzag-connector right-connector"></div>
+                                <div class="zigzag-card featured-card">
+                                    <div class="zigzag-logos">
+                                        <img src="img/aromansa-logo.png" alt="Aromansa" class="main-logo">
+                                        <span class="logo-plus">+</span>
+                                        <img src="img/binus-logo.svg" alt="BINUS University" class="partner-logo">
+                                    </div>
+                                    <div class="zigzag-content">
+                                        <span class="zigzag-year">2025</span>
+                                        <h4>Product Expansion</h4>
+                                        <p>Expanded into roll-on blends, spray collections, and specialized wellness blends.</p>
+                                        <div class="zigzag-tags">
+                                            <span class="zigzag-tag">Expansion</span>
+                                            <span class="zigzag-tag highlight">Partnership</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Item 5 - Left -->
+                            <div class="zigzag-item left">
+                                <div class="zigzag-card">
+                                    <div class="zigzag-logo">
+                                        <img src="img/aromansa-logo.png" alt="Aromansa">
+                                    </div>
+                                    <div class="zigzag-content">
+                                        <span class="zigzag-year">2025</span>
+                                        <h4>Shopee Store Launch</h4>
+                                        <p>Opened official Shopee store for accessible nationwide shipping across Indonesia.</p>
+                                        <div class="zigzag-tags">
+                                            <span class="zigzag-tag">E-Commerce</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="zigzag-connector left-connector"></div>
+                            </div>
+
+                            <!-- Item 6 - Right -->
+                            <div class="zigzag-item right">
+                                <div class="zigzag-connector right-connector"></div>
+                                <div class="zigzag-card">
+                                    <div class="zigzag-logo">
+                                        <img src="img/aromansa-logo.png" alt="Aromansa">
+                                    </div>
+                                    <div class="zigzag-content">
+                                        <span class="zigzag-year">2025</span>
+                                        <h4>Quality Certification</h4>
+                                        <p>Achieved therapeutic grade certification for all essential oils with third-party lab testing.</p>
+                                        <div class="zigzag-tags">
+                                            <span class="zigzag-tag highlight">Quality</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Item 7 - Left -->
+                            <div class="zigzag-item left">
+                                <div class="zigzag-card">
+                                    <div class="zigzag-logo">
+                                        <img src="img/aromansa-logo.png" alt="Aromansa">
+                                    </div>
+                                    <div class="zigzag-content">
+                                        <span class="zigzag-year">2026</span>
+                                        <h4>AI Consultant Launch</h4>
+                                        <p>Introduced AI-powered consultant for personalized essential oil recommendations.</p>
+                                        <div class="zigzag-tags">
+                                            <span class="zigzag-tag highlight">Innovation</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="zigzag-connector left-connector"></div>
+                            </div>
+
+                            <!-- Item 8 - Right -->
+                            <div class="zigzag-item right">
+                                <div class="zigzag-connector right-connector"></div>
+                                <div class="zigzag-card future-card">
+                                    <div class="zigzag-logo">
+                                        <img src="img/aromansa-logo.png" alt="Aromansa">
+                                    </div>
+                                    <div class="zigzag-content">
+                                        <span class="zigzag-year">2026</span>
+                                        <h4>Future Vision</h4>
+                                        <p>Building Indonesia's most trusted natural wellness brand with global standards.</p>
+                                        <div class="zigzag-tags">
+                                            <span class="zigzag-tag highlight">Vision</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Timeline End -->
+                            <div class="timeline-end-marker">
+                                <div class="end-badge">
+                                    <i class="fa fa-rocket"></i>
+                                    <span>To Be Continued...</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Wellness Categories -->
+        <section class="wellness-categories">
+            <div class="container">
+                <div class="section-head">
+                    <span class="section-label"><i class="fa fa-spa"></i> Wellness Solutions</span>
+                    <h2>Find Your Perfect Wellness Path</h2>
+                    <p>Explore our curated categories designed for your specific wellness needs</p>
+                </div>
+                <div class="categories-grid">
+                    <div class="category-card-stunning">
+                        <div class="category-icon-stunning">
+                            <i class="fa fa-bed"></i>
+                        </div>
+                        <h3>Sleep & Relaxation</h3>
+                        <p>Lavender, Chamomile, and Ylang-Ylang for deep relaxation and restful sleep</p>
+                    </div>
+                    <div class="category-card-stunning">
+                        <div class="category-icon-stunning">
+                            <i class="fa fa-bolt"></i>
+                        </div>
+                        <h3>Energy & Focus</h3>
+                        <p>Peppermint, Lemon, and Eucalyptus to boost energy and mental clarity</p>
+                    </div>
+                    <div class="category-card-stunning">
+                        <div class="category-icon-stunning">
+                            <i class="fa fa-heart"></i>
+                        </div>
+                        <h3>Skincare & Beauty</h3>
+                        <p>Tea Tree, Palmarosa, and Frankincense for natural skincare routines</p>
+                    </div>
+                    <div class="category-card-stunning">
+                        <div class="category-icon-stunning">
+                            <i class="fa fa-shield-alt"></i>
+                        </div>
+                        <h3>Immune Support</h3>
+                        <p>Sweet Orange, Lemongrass, and blends to strengthen your defenses</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bestsellers Section -->
+        <section class="bestsellers-section">
+            <div class="container">
+                <div class="section-head">
+                    <span class="section-label"><i class="fa fa-fire"></i> Bestsellers</span>
+                    <h2>Most Loved Products</h2>
+                    <p>Our customers' favorite essential oils that keep them coming back</p>
+                </div>
+                <div class="bestsellers-grid">
+                    <div class="bestseller-card">
+                        <div class="bestseller-badge">#1 Best Seller</div>
+                        <div class="bestseller-img">
+                            <i class="fa fa-flask"></i>
+                        </div>
+                        <div class="bestseller-info">
+                            <h3>Lavender Essential Oil</h3>
+                            <p>Premium therapeutic grade lavender oil for relaxation, sleep improvement, and stress relief</p>
+                            <div class="bestseller-price">Rp65.000/10ml</div>
+                            <div class="bestseller-cta">
+                                <a href="https://shopee.co.id/aromansa_id" target="_blank" class="btn-bestseller btn-bestseller-primary">Buy Now</a>
+                                <a href="equipment.html" class="btn-bestseller btn-bestseller-secondary">Details</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bestseller-card">
+                        <div class="bestseller-badge">Popular</div>
+                        <div class="bestseller-img">
+                            <i class="fa fa-leaf"></i>
+                        </div>
+                        <div class="bestseller-info">
+                            <h3>Peppermint Essential Oil</h3>
+                            <p>Energizing and focusing oil. Natural headache reliever, digestive aid, and energy booster</p>
+                            <div class="bestseller-price">Rp55.000/10ml</div>
+                            <div class="bestseller-cta">
+                                <a href="https://shopee.co.id/aromansa_id" target="_blank" class="btn-bestseller btn-bestseller-primary">Buy Now</a>
+                                <a href="equipment.html" class="btn-bestseller btn-bestseller-secondary">Details</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bestseller-card">
+                        <div class="bestseller-badge">New</div>
+                        <div class="bestseller-img">
+                            <i class="fa fa-seedling"></i>
+                        </div>
+                        <div class="bestseller-info">
+                            <h3>Frangipani Essential Oil</h3>
+                            <p>Powerful antimicrobial oil perfect for skincare, immune support, and natural cleaning</p>
+                            <div class="bestseller-price">Rp60.000/10ml</div>
+                            <div class="bestseller-cta">
+                                <a href="https://shopee.co.id/aromansa_id" target="_blank" class="btn-bestseller btn-bestseller-primary">Buy Now</a>
+                                <a href="equipment.html" class="btn-bestseller btn-bestseller-secondary">Details</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section class="testimonials-stunning">
+            <div class="container">
+                <div class="section-head">
+                    <span class="section-label" style="background: rgba(199, 164, 76, 0.2); border-color: rgba(199, 164, 76, 0.4); color: #c7a44c;"><i class="fa fa-quote-left"></i> Testimonials</span>
+                    <h2 style="color: #ffffff;">What Our Customers Say</h2>
+                    <p style="color: rgba(255, 255, 255, 0.8);">Real stories from real people who transformed their wellness journey</p>
+                </div>
+                <div class="testimonials-grid">
+                    <div class="testimonial-card-stunning">
+                        <div class="testimonial-stars">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                        </div>
+                        <p class="testimonial-text">"Lavender oil from Aromansa completely changed my sleep quality. I diffuse it every night and fall asleep so much faster. The quality is amazing!"</p>
+                        <div class="testimonial-author">
+                            <div class="testimonial-avatar">S</div>
+                            <div class="testimonial-author-info">
+                                <h4>Sarah M.</h4>
+                                <p>Jakarta, Indonesia</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card-stunning">
+                        <div class="testimonial-stars">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                        </div>
+                        <p class="testimonial-text">"I use Peppermint oil for my morning focus routine. Just one drop on my wrists and I'm ready to tackle the day. Pure quality at great prices!"</p>
+                        <div class="testimonial-author">
+                            <div class="testimonial-avatar">A</div>
+                            <div class="testimonial-author-info">
+                                <h4>Ahmad R.</h4>
+                                <p>Bandung, Indonesia</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card-stunning">
+                        <div class="testimonial-stars">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                        </div>
+                        <p class="testimonial-text">"Tea Tree oil is my go-to for skincare. Aromansa's quality is therapeutic grade and you can really tell the difference. Highly recommend!"</p>
+                        <div class="testimonial-author">
+                            <div class="testimonial-avatar">D</div>
+                            <div class="testimonial-author-info">
+                                <h4>Diana L.</h4>
+                                <p>Surabaya, Indonesia</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Benefits Section -->
+        <section class="benefits-stunning">
+            <div class="container">
+                <div class="section-head">
+                    <span class="section-label"><i class="fa fa-check-circle"></i> Why Aromansa</span>
+                    <h2>The Aromansa Difference</h2>
+                    <p>What makes our essential oils the preferred choice for wellness enthusiasts</p>
+                </div>
+                <div class="benefits-grid-stunning">
+                    <div class="benefit-card-stunning">
+                        <div class="benefit-icon-stunning">
+                            <i class="fa fa-certificate"></i>
+                        </div>
+                        <div class="benefit-content">
+                            <h3>Therapeutic Grade</h3>
+                            <p>Third-party tested for purity and potency. Only the highest quality oils make it to our collection</p>
+                        </div>
+                    </div>
+                    <div class="benefit-card-stunning">
+                        <div class="benefit-icon-stunning">
+                            <i class="fa fa-truck"></i>
+                        </div>
+                        <div class="benefit-content">
+                            <h3>Free Shipping</h3>
+                            <p>Free shipping on all orders over Rp 200.000. Delivered safely to your door across Indonesia</p>
+                        </div>
+                    </div>
+                    <div class="benefit-card-stunning">
+                        <div class="benefit-icon-stunning">
+                            <i class="fa fa-user-md"></i>
+                        </div>
+                        <div class="benefit-content">
+                            <h3>Expert Guidance</h3>
+                            <p>AI consultant and aromatherapy experts ready to help you find the perfect oils for your needs</p>
+                        </div>
+                    </div>
+                    <div class="benefit-card-stunning">
+                        <div class="benefit-icon-stunning">
+                            <i class="fa fa-hand-holding-heart"></i>
+                        </div>
+                        <div class="benefit-content">
+                            <h3>Satisfaction Guarantee</h3>
+                            <p>Love your essential oils or your money back. We stand behind the quality of every product</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-stunning">
+            <div class="container">
+                <h2>Ready to Start Your Wellness Journey?</h2>
+                <p>Get personalized essential oil recommendations from our AI consultant or explore our full product catalog</p>
+                <div class="cta-buttons-stunning">
+                    <a href="ai-personalization.html" class="btn-cta-stunning">
+                        <i class="fa fa-robot"></i>
+                        <span>Get AI Recommendations</span>
+                    </a>
+                    <a href="equipment.html" class="btn-cta-stunning btn-outline">
+                        <i class="fa fa-shopping-bag"></i>
+                        <span>View Products</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer Start -->
+    <footer id="footer">
+        <div class="footer-top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4 col-md-6 footer-info">
+                        <h3><span>Aromansa</span></h3>
+                        <p>Your trusted source for premium therapeutic grade essential oils, aromatherapy diffusers, and natural wellness products. Transform your home into a wellness sanctuary.</p>
+                        <div class="footer-social">
+                            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                            <a href="#" aria-label="Pinterest"><i class="fab fa-pinterest-p"></i></a>
+                            <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                            <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-6 footer-links">
+                        <h4>Quick Links</h4>
+                        <ul>
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="equipment.html">Products</a></li>
+                            <li><a href="ai-personalization.html">AI Consultant</a></li>
+                            <li><a href="contact.html">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-3 col-md-6 footer-contact">
+                        <h4>Contact Us</h4>
+                        <p><i class="fa fa-map-marker-alt"></i> <span>Jl. Raya Bandung KM 8.8, Cianjur, Jawa Barat (43281), Indonesia</span></p>
+                        <p><i class="fa fa-phone"></i> <a href="tel:+6285782909266">+62 857-8290-9266</a></p>
+                        <p><i class="fa fa-envelope"></i> <a href="mailto:aromansaofficial@gmail.com">aromansaofficial@gmail.com</a></p>
+                        <p><i class="fa fa-clock"></i> <span>Mon - Sat: 08:00 - 20:00</span></p>
+                    </div>
+                    <div class="col-lg-3 col-md-6 footer-newsletter">
+                        <h4>Wellness Newsletter</h4>
+                        <p>Subscribe for essential oil tips, wellness guides, and exclusive offers delivered to your inbox!</p>
+                        <form class="newsletter-form" action="#" method="post">
+                            <input type="email" name="email" placeholder="Your email address" required>
+                            <button type="submit" aria-label="Subscribe"><i class="fa fa-paper-plane"></i></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="footer-copyright">
+                    <p>&copy; 2026 <a href="index.html">Aromansa</a>. All Rights Reserved | Premium essential oils &amp; wellness products</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Footer End -->
+
+    <!-- Back to Top -->
+    <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+
+    <!-- Mobile Nav Overlay -->
+    <div id="mobile-body-overly"></div>
+    <nav id="mobile-nav">
+        <ul>
+            <li class="menu-active"><a href="index.html">Home</a></li>
+            <li><a href="equipment.html">Products</a></li>
+            <li><a href="ai-personalization.html">AI Consultant</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="js/main.js"></script>
+    
+    <!-- Typewriter Animation Script -->
+    <script>
+        (function() {
+            var oilData = [
+                { name: "Lavender", emoji: "💜" },
+                { name: "Peppermint", emoji: "🌱" },
+                { name: "Palmarosa", emoji: "🌾" },
+                { name: "Frangipani", emoji: "🌺" },
+                { name: "Lemon", emoji: "🍋" },
+                { name: "Sweet Orange", emoji: "🍊" },
+                { name: "Lemongrass", emoji: "🌿" },
+                { name: "Ylang-Ylang", emoji: "🌸" },
+                { name: "Spearmint", emoji: "🍃" },
+                { name: "Eucalyptus", emoji: "💨" },
+                { name: "Gandapura", emoji: "🌲" }
+            ];
+            
+            var currentIndex = 0;
+            var charIndex = 0;
+            var isDeleting = false;
+            var typewriterElement = document.getElementById('oilTypewriter');
+            var emojiElement = document.getElementById('oilEmoji');
+            
+            if (!typewriterElement || !emojiElement) return;
+            
+            function typeWriter() {
+                var currentData = oilData[currentIndex];
+                var currentText = currentData.name;
+                emojiElement.textContent = currentData.emoji;
+                
+                if (!isDeleting && charIndex <= currentText.length) {
+                    // Typing
+                    typewriterElement.textContent = currentText.substring(0, charIndex);
+                    charIndex++;
+                    setTimeout(typeWriter, 80);
+                } else if (!isDeleting && charIndex > currentText.length) {
+                    // Pause at end
+                    setTimeout(function() {
+                        isDeleting = true;
+                        typeWriter();
+                    }, 1500);
+                } else if (isDeleting && charIndex >= 0) {
+                    // Deleting
+                    typewriterElement.textContent = currentText.substring(0, charIndex);
+                    charIndex--;
+                    setTimeout(typeWriter, 40);
+                } else {
+                    // Move to next oil
+                    isDeleting = false;
+                    currentIndex = (currentIndex + 1) % oilData.length;
+                    setTimeout(typeWriter, 300);
+                }
+            }
+            
+            // Start animation
+            setTimeout(typeWriter, 1000);
+        })();
+    </script>
+</body>
+</html>
