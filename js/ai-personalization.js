@@ -146,6 +146,7 @@ Remember: Essential oils are natural but powerful. Always emphasize responsible 
             
             // If API fails, use fallback response generator
             console.warn('API failed, using fallback response:', error.message);
+            showDemoModeNotification();
             const fallbackResponse = generateFallbackResponse(message);
             addAIMessage(fallbackResponse);
             
@@ -468,6 +469,9 @@ Saya siap membantu! Ceritakan kebutuhan Anda:
         }
 
         const data = await response.json();
+        if (typeof data.response !== 'string' || !data.response.trim()) {
+            throw new Error('Backend AI mengembalikan jawaban kosong.');
+        }
         return data.response;
     }
 
@@ -497,10 +501,9 @@ Saya siap membantu! Ceritakan kebutuhan Anda:
             <div style="display: flex; align-items: start; gap: 10px;">
                 <div style="font-size: 24px;">ℹ️</div>
                 <div style="flex: 1;">
-                    <h5 style="margin: 0 0 5px 0; color: #856404; font-weight: 600;">Demo Mode Active</h5>
+                    <h5 style="margin: 0 0 5px 0; color: #856404; font-weight: 600;">Mode Respons Offline</h5>
                     <p style="margin: 0; font-size: 14px; color: #856404; line-height: 1.4;">
-                        AI API quota exceeded. Using demo mode with pre-built responses. 
-                        All features still work!
+                        Koneksi AI tidak tersedia. Jawaban ditampilkan dari panduan offline.
                     </p>
                 </div>
                 <button onclick="this.parentElement.parentElement.remove()" 

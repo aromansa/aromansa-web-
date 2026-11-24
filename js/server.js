@@ -1,10 +1,11 @@
-require('dotenv').config();
+require('dotenv').config({ path: require('path').join(__dirname, '..', '.env') });
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
 const fs = require('fs');
 const axios = require('axios');
 const { registerOrderRoutes } = require('./orders-service');
+const { createAIResponse } = require('./ai-chat-service');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -291,10 +292,11 @@ app.post('/api/ai-chat', async (req, res) => {
 
         if (!GROQ_API_KEY) {
             console.warn('Groq API Key tidak ditemukan di environment. Menggunakan fallback generator.');
-            return res.json({ response: generateFallbackResponse(message), isFallback: true });
+            return res.status(503).json({ response: generateFallbackResponse(message), isFallback: true });
         }
 
         let aiResponse = null;
+        let isFallback = false;
         let usedModel = GROQ_MODEL;
 
         try {
@@ -349,12 +351,14 @@ app.post('/api/ai-chat', async (req, res) => {
         if (!aiResponse) {
             console.warn('All Groq attempts failed, using grounded fallback response.');
             aiResponse = generateFallbackResponse(message);
+            isFallback = true;
         }
 
-        res.json({
+        res.status(isFallback ? 503 : 200).json({
             response: aiResponse,
             model: usedModel,
-            success: true
+            success: !isFallback,
+            isFallback
         });
 
     } catch (error) {
