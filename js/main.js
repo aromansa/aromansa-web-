@@ -8,6 +8,7 @@
             e.preventDefault();
             document.body.classList.toggle('mobile-nav-active');
             this.classList.toggle('active');
+            this.setAttribute('aria-expanded', String(document.body.classList.contains('mobile-nav-active')));
             
             // Toggle overlay
             var overlay = document.getElementById('mobile-body-overly');
@@ -21,12 +22,22 @@
         });
     }
 
+    var mobileNavClose = document.querySelector('.mobile-nav-close');
+    if (mobileNavClose && mobileNavToggle) {
+        mobileNavClose.addEventListener('click', function () {
+            mobileNavToggle.click();
+        });
+    }
+
     var mobileBodyOverly = document.getElementById('mobile-body-overly');
     if (mobileBodyOverly) {
         mobileBodyOverly.addEventListener('click', function () {
             document.body.classList.remove('mobile-nav-active');
             var toggle = document.getElementById('mobile-nav-toggle');
-            if (toggle) toggle.classList.remove('active');
+            if (toggle) {
+                toggle.classList.remove('active');
+                toggle.setAttribute('aria-expanded', 'false');
+            }
             this.classList.remove('show');
         });
     }
@@ -121,141 +132,147 @@
         });
     }
 
-    // ===== Floating WhatsApp Widget =====
+    // ===== Floating Quick Access Drop-Up Widget =====
     function initWhatsAppWidget() {
-        if (document.getElementById('whatsapp-widget')) return;
+        if (document.getElementById('whatsapp-widget') || document.body.classList.contains('ar-mood-page')) return;
 
-        var widgetHTML = '<div id="whatsapp-widget">' +
-            '<div class="whatsapp-popup" id="whatsapp-popup">' +
-                '<div class="whatsapp-header">' +
-                    '<div class="header-info">' +
-                        '<div class="agent-avatar"><i class="fa fa-headset"></i></div>' +
-                        '<div class="agent-details">' +
-                            '<h4>Aromansa Support</h4>' +
-                            '<span class="status-badge"><i class="fa fa-circle"></i> Online</span>' +
+        var widgetHTML = '<div id="whatsapp-widget" class="aromansa-hub">' +
+            '<!-- Drop-Up Menu Container -->' +
+            '<div class="aromansa-dropup" id="aromansa-dropup" role="dialog" aria-modal="true" aria-label="Menu Layanan & Toko Aromansa">' +
+                '<div class="aromansa-dropup-inner">' +
+                    '<div class="aromansa-dropup-header">' +
+                        '<div class="dropup-brand">' +
+                            '<div class="dropup-avatar">' +
+                                '<i class="fa fa-leaf"></i>' +
+                                '<span class="online-indicator"></span>' +
+                            '</div>' +
+                            '<div class="dropup-brand-text">' +
+                                '<h4>Layanan Aromansa</h4>' +
+                                '<span class="dropup-subtitle"><i class="fa fa-circle"></i> Online · 08.00–20.00 WIB</span>' +
+                            '</div>' +
+                        '</div>' +
+                        '<button type="button" class="dropup-close-btn" id="aromansa-dropup-close" aria-label="Tutup menu">' +
+                            '<i class="fa fa-times"></i>' +
+                        '</button>' +
+                    '</div>' +
+                    '<div class="aromansa-dropup-list">' +
+                        '<a href="ai-personalization.html" class="dropup-action-item item-ai" id="dropup-item-ai">' +
+                            '<div class="action-icon ai-icon">' +
+                                '<i class="fa fa-leaf"></i>' +
+                            '</div>' +
+                            '<div class="action-content">' +
+                                '<div class="action-title-row">' +
+                                    '<span class="action-title">Konsultan Aromansa</span>' +
+                                    '<span class="badge-quiz">AI Quiz</span>' +
+                                '</div>' +
+                                '<span class="action-desc">Rekomendasi aroma personal sesuai mood &amp; kebutuhan</span>' +
+                            '</div>' +
+                            '<div class="action-arrow">' +
+                                '<i class="fa fa-chevron-right"></i>' +
+                            '</div>' +
+                        '</a>' +
+                        '<a href="https://wa.me/6285782909266?text=Halo%20Aromansa%2C%20saya%20ingin%20konsultasi%20mengenai%20produk%20essential%20oil." target="_blank" rel="noopener noreferrer" class="dropup-action-item item-wa" id="dropup-item-wa">' +
+                            '<div class="action-icon wa-icon">' +
+                                '<i class="fab fa-whatsapp"></i>' +
+                            '</div>' +
+                            '<div class="action-content">' +
+                                '<div class="action-title-row">' +
+                                    '<span class="action-title">Chat CS WhatsApp</span>' +
+                                    '<span class="badge-online">Fast Response</span>' +
+                                '</div>' +
+                                '<span class="action-desc">Konsultasi langsung dengan admin official Aromansa</span>' +
+                            '</div>' +
+                            '<div class="action-arrow">' +
+                                '<i class="fa fa-chevron-right"></i>' +
+                            '</div>' +
+                        '</a>' +
+                        '<div class="dropup-action-item item-market" id="dropup-item-market">' +
+                            '<div class="action-icon market-icon">' +
+                                '<i class="fa fa-store"></i>' +
+                            '</div>' +
+                            '<div class="action-content">' +
+                                '<div class="action-title-row">' +
+                                    '<span class="action-title">Toko Online Resmi</span>' +
+                                '</div>' +
+                                '<span class="action-desc">Beli produk original dengan promo marketplace:</span>' +
+                                '<div class="market-quick-links">' +
+                                    '<a href="https://shopee.co.id/aromansa_id" target="_blank" rel="noopener noreferrer" class="market-chip shopee" aria-label="Beli di Shopee">' +
+                                        '<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Shopee.svg/1200px-Shopee.svg.png" alt="Shopee">' +
+                                        '<span>Shopee</span>' +
+                                        '<i class="fa fa-external-link-alt"></i>' +
+                                    '</a>' +
+                                    '<a href="https://www.tokopedia.com/aromansa" target="_blank" rel="noopener noreferrer" class="market-chip tokopedia" aria-label="Beli di Tokopedia">' +
+                                        '<img src="https://assets.tokopedia.net/assets-tokopedia-lite/v2/zeus/production/50438c64/tokopedia-logo.png" alt="Tokopedia">' +
+                                        '<span>Tokopedia</span>' +
+                                        '<i class="fa fa-external-link-alt"></i>' +
+                                    '</a>' +
+                                '</div>' +
+                            '</div>' +
                         '</div>' +
                     '</div>' +
-                    '<button class="close-popup" id="close-whatsapp" aria-label="Close chat">' +
-                        '<i class="fa fa-times"></i>' +
-                    '</button>' +
-                '</div>' +
-                '<div class="whatsapp-body">' +
-                    '<div class="chat-message">' +
-                        '<div class="message-bubble">' +
-                            '<p>Hello! Welcome to Aromansa support.</p>' +
-                            '<p>Need help choosing the right essential oils?</p>' +
-                            '<ul>' +
-                                '<li>Product recommendations</li>' +
-                                '<li>Usage and safety guidance</li>' +
-                                '<li>Order and delivery support</li>' +
-                            '</ul>' +
-                            '<span class="message-time">Just now</span>' +
-                        '</div>' +
-                    '</div>' +
-                '</div>' +
-                '<div class="whatsapp-footer">' +
-                    '<div class="shop-platforms">' +
-                        '<a href="https://shopee.co.id/aromansa_id" target="_blank" rel="noopener noreferrer" class="platform-btn shopee">' +
-                            '<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Shopee.svg/1200px-Shopee.svg.png" alt="Shopee" class="platform-logo">' +
-                            '<span class="platform-text">Shop on Shopee</span>' +
-                            '<i class="fa fa-external-link-alt"></i>' +
-                        '</a>' +
-                        '<a href="https://www.tokopedia.com/aromansa" target="_blank" rel="noopener noreferrer" class="platform-btn tokopedia">' +
-                            '<img src="https://assets.tokopedia.net/assets-tokopedia-lite/v2/zeus/production/50438c64/tokopedia-logo.png" alt="Tokopedia" class="platform-logo">' +
-                            '<span class="platform-text">Shop on Tokopedia</span>' +
-                            '<i class="fa fa-external-link-alt"></i>' +
-                        '</a>' +
-                        '<a href="https://wa.me/6285782909266?text=Hi%20Aromansa!%20I%27m%20interested%20in%20your%20essential%20oils%20products." target="_blank" rel="noopener noreferrer" class="platform-btn whatsapp">' +
-                            '<i class="fab fa-whatsapp platform-icon"></i>' +
-                            '<span class="platform-text">Chat on WhatsApp</span>' +
-                            '<i class="fa fa-external-link-alt"></i>' +
-                        '</a>' +
+                    '<div class="aromansa-dropup-footer">' +
+                        '<i class="fa fa-check-circle"></i>' +
+                        '<span>100% Pure Therapeutic Grade · Pengiriman Cianjur</span>' +
                     '</div>' +
                 '</div>' +
             '</div>' +
-            '<div class="ai-mini-popup" id="ai-popup">' +
-                '<a href="ai-personalization.html" class="mini-ai-btn" aria-label="Open AI Consultant">' +
-                    '<i class="fa fa-robot"></i>' +
-                    '<span>AI Consultant</span>' +
-                '</a>' +
-            '</div>' +
-            '<button class="ai-float-btn" id="ai-btn" aria-label="AI Personalization">' +
-                '<span class="notification-badge"></span>' +
-                '<i class="fa fa-robot"></i>' +
-                '<span class="tooltip-text">AI Personalization</span>' +
-            '</button>' +
-            '<div class="marketplace-mini-popup" id="marketplace-popup">' +
-                '<a href="https://shopee.co.id/aromansa_id" target="_blank" rel="noopener noreferrer" class="mini-market-btn shopee" aria-label="Shop on Shopee">' +
-                    '<i class="fa fa-shopping-bag"></i>' +
-                    '<span>Shopee</span>' +
-                '</a>' +
-                '<a href="https://www.tokopedia.com/aromansa" target="_blank" rel="noopener noreferrer" class="mini-market-btn tokopedia" aria-label="Shop on Tokopedia">' +
-                    '<i class="fa fa-store"></i>' +
-                    '<span>Tokopedia</span>' +
-                '</a>' +
-            '</div>' +
-            '<button class="marketplace-float-btn" id="marketplace-btn" aria-label="Marketplace links">' +
-                '<i class="fa fa-store"></i>' +
-                '<span class="tooltip-text">Marketplace</span>' +
-            '</button>' +
-            '<button class="whatsapp-float-btn" id="whatsapp-btn" aria-label="Chat with us">' +
-                '<i class="fab fa-whatsapp"></i>' +
-                '<span class="tooltip-text">Shop with us!</span>' +
+            '<!-- Single Main Circular Floating Button -->' +
+            '<button type="button" class="aromansa-fab-trigger whatsapp-float-btn" id="aromansa-fab-btn" aria-expanded="false" aria-haspopup="true" aria-label="Buka menu layanan Aromansa">' +
+                '<span class="fab-pulse-ring"></span>' +
+                '<span class="fab-icon-box">' +
+                    '<i class="fa fa-comment-dots icon-open" aria-hidden="true"></i>' +
+                    '<i class="fa fa-times icon-close" aria-hidden="true"></i>' +
+                '</span>' +
+                '<span class="fab-tooltip">Bantuan &amp; Toko</span>' +
             '</button>' +
         '</div>';
 
         document.body.insertAdjacentHTML('beforeend', widgetHTML);
 
-        var whatsappBtn = document.getElementById('whatsapp-btn');
-        var whatsappPopup = document.getElementById('whatsapp-popup');
-        var closeBtn = document.getElementById('close-whatsapp');
-        var aiBtn = document.getElementById('ai-btn');
-        var aiPopup = document.getElementById('ai-popup');
-        var marketplaceBtn = document.getElementById('marketplace-btn');
-        var marketplacePopup = document.getElementById('marketplace-popup');
+        var fabBtn = document.getElementById('aromansa-fab-btn');
+        var dropup = document.getElementById('aromansa-dropup');
+        var closeBtn = document.getElementById('aromansa-dropup-close');
 
-        if (whatsappBtn) {
-            whatsappBtn.addEventListener('click', function(e) {
-                e.stopPropagation();
-                whatsappPopup.classList.toggle('show');
-                if (aiPopup) aiPopup.classList.remove('show');
-                if (marketplacePopup) marketplacePopup.classList.remove('show');
-                if (aiBtn) {
-                    var badge = aiBtn.querySelector('.notification-badge');
-                    if (badge) badge.style.display = 'none';
-                }
-            });
+        function toggleDropup(forceState) {
+            if (!dropup || !fabBtn) return;
+            var shouldOpen = typeof forceState === 'boolean' ? forceState : !dropup.classList.contains('show');
+            if (shouldOpen) {
+                dropup.classList.add('show');
+                fabBtn.classList.add('active');
+                fabBtn.setAttribute('aria-expanded', 'true');
+            } else {
+                dropup.classList.remove('show');
+                fabBtn.classList.remove('active');
+                fabBtn.setAttribute('aria-expanded', 'false');
+            }
         }
 
-        if (aiBtn && aiPopup) {
-            aiBtn.addEventListener('click', function(e) {
+        if (fabBtn) {
+            fabBtn.addEventListener('click', function(e) {
                 e.stopPropagation();
-                aiPopup.classList.toggle('show');
-                if (marketplacePopup) marketplacePopup.classList.remove('show');
-                whatsappPopup.classList.remove('show');
-            });
-        }
-
-        if (marketplaceBtn && marketplacePopup) {
-            marketplaceBtn.addEventListener('click', function(e) {
-                e.stopPropagation();
-                marketplacePopup.classList.toggle('show');
-                if (aiPopup) aiPopup.classList.remove('show');
-                whatsappPopup.classList.remove('show');
+                toggleDropup();
             });
         }
 
         if (closeBtn) {
-            closeBtn.addEventListener('click', function() {
-                whatsappPopup.classList.remove('show');
+            closeBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                toggleDropup(false);
             });
         }
 
+        // Close when clicking outside the widget
         document.addEventListener('click', function(e) {
             if (!e.target.closest('#whatsapp-widget')) {
-                whatsappPopup.classList.remove('show');
-                if (aiPopup) aiPopup.classList.remove('show');
-                if (marketplacePopup) marketplacePopup.classList.remove('show');
+                toggleDropup(false);
+            }
+        });
+
+        // Close on Escape key press
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && dropup && dropup.classList.contains('show')) {
+                toggleDropup(false);
+                if (fabBtn) fabBtn.focus();
             }
         });
     }
@@ -1039,6 +1056,84 @@
     var journeyPanel = document.getElementById('journeyPanel');
     if (journeyPanel && journeyPanel.classList.contains('active')) {
         setTimeout(animateZigzagTimeline, 300);
+    }
+
+    // ===== Smart Animate: Luxury Botanical Scroll & Stagger Reveal =====
+    function initSmartAnimate() {
+        if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            return;
+        }
+
+        var revealSelectors = [
+            '.section-head',
+            '.section-header-modern',
+            '.routine-header',
+            '.faq-header-modern',
+            '.category-card-stunning',
+            '.bestseller-card',
+            '.discovery-copy',
+            '.discovery-visual',
+            '.testimonial-card-stunning',
+            '.benefit-card-stunning',
+            '.product-card-stunning',
+            '.routine-card',
+            '.chat-container-modern',
+            '.step-card-modern',
+            '.contact-info-card-modern',
+            '.contact-form-wrapper',
+            '.map-wrapper',
+            '.faq-item-modern',
+            '.mood-intro',
+            '.step-panel:not([hidden])',
+            '#footer .footer-grid > div'
+        ];
+
+        var revealObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-revealed');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -36px 0px'
+        });
+
+        function bindRevealElements(root) {
+            var scope = root || document;
+            var elements = scope.querySelectorAll(revealSelectors.join(','));
+            elements.forEach(function(el) {
+                if (el.classList.contains('smart-reveal')) return;
+                el.classList.add('smart-reveal');
+
+                // Calculate sibling index for natural stagger effect within grids
+                var parent = el.parentElement;
+                if (parent) {
+                    var siblings = Array.prototype.slice.call(parent.children);
+                    var idx = siblings.indexOf(el);
+                    el.style.setProperty('--stagger-idx', String(Math.max(0, idx % 6)));
+                }
+                revealObserver.observe(el);
+            });
+        }
+
+        bindRevealElements(document);
+
+        // Observe dynamic product catalog rendering on equipment.html
+        var catalogContainer = document.getElementById('equipment-container');
+        if (catalogContainer && window.MutationObserver) {
+            var mutObserver = new MutationObserver(function() {
+                bindRevealElements(catalogContainer);
+            });
+            mutObserver.observe(catalogContainer, { childList: true, subtree: true });
+        }
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initSmartAnimate);
+    } else {
+        initSmartAnimate();
     }
 
 })();

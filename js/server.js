@@ -1,309 +1,367 @@
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
+const fs = require('fs');
 const axios = require('axios');
+const { registerOrderRoutes } = require('./orders-service');
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
+const WEBSITE_ROOT = path.join(__dirname, '..');
+const CONTACT_DATA_DIR = path.join(WEBSITE_ROOT, '.private-contact-data');
+const CONTACT_DATA_FILE = path.join(CONTACT_DATA_DIR, 'submissions.jsonl');
+const MOOD_SCAN_DATA_FILE = path.join(CONTACT_DATA_DIR, 'mood-scan-submissions.jsonl');
 
 // Middleware
 app.use(cors());
 app.use(express.json({ limit: '50mb' }));
-app.use(express.static(path.join(__dirname)));
 
-// ===== Google Gemini API Configuration =====
-const GEMINI_API_KEY = 'AIzaSyBSmd2DBkgVKpZDhfnSHNXKME2f1G0r-NI';
-const GEMINI_API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent';
+// Protect sensitive files from static exposure
+app.use((req, res, next) => {
+    const p = req.path.toLowerCase();
+    if (p.includes('.env') || p.startsWith('/.private-contact-data')) {
+        return res.sendStatus(404);
+    }
+    next();
+});
 
-// ===== System Prompt =====
-const SYSTEM_PROMPT = `You are an AI aromatherapy and essential oil consultant for Aromansa, a premium essential oils retail brand in Indonesia.
+app.use(express.static(WEBSITE_ROOT));
 
-Your expertise includes:
-1. Recommending essential oils based on user needs (relaxation, energy, focus, sleep, skincare, etc.)
-2. Creating custom essential oil blends and recipes
-3. Providing safe usage guidelines and dilution ratios
-4. Suggesting aromatherapy techniques (diffusion, topical application, inhalation)
-5. Answering questions about essential oil properties and benefits
+app.post('/api/mood-scan-submissions', async (req, res) => {
+    const body = req.body;
+    if (!body || typeof body !== 'object' || Array.isArray(body)) {
+        return res.status(400).json({ error: 'Data formulir tidak valid.' });
+    }
 
-Popular essential oils and their benefits:
-- Lavender: Relaxation, sleep, stress relief, calming (Rp 85,000 - 150,000 / 10ml)
-- Tea Tree: Antimicrobial, acne treatment, immune support (Rp 75,000 - 135,000 / 10ml)
-- Eucalyptus: Respiratory health, congestion relief, fresh air (Rp 70,000 - 125,000 / 10ml)
-- Peppermint: Energy, focus, headache relief, digestion (Rp 80,000 - 145,000 / 10ml)
-- Lemon: Uplifting, cleansing, immune support, fresh scent (Rp 65,000 - 120,000 / 10ml)
-- Rosemary: Memory, focus, hair growth, circulation (Rp 90,000 - 160,000 / 10ml)
-- Frankincense: Meditation, skincare, anti-aging, spiritual (Rp 180,000 - 350,000 / 10ml)
-- Ylang Ylang: Mood enhancer, romantic, stress relief (Rp 95,000 - 170,000 / 10ml)
-- Chamomile: Calming, sleep, sensitive skin, children (Rp 120,000 - 220,000 / 10ml)
-- Sweet Orange: Joy, energy, immune support, uplifting (Rp 70,000 - 130,000 / 10ml)
+    const nickname = typeof body.nickname === 'string' ? body.nickname.trim() : '';
+    const phone = typeof body.phone === 'string' ? body.phone.trim() : '';
+    const phoneDigits = phone.replace(/\D/g, '');
+    const age = typeof body.age === 'string' ? body.age : '';
+    const concerns = body.concerns;
+    const stress = body.stress;
+    const sleep = typeof body.sleep === 'string' ? body.sleep : '';
+    const scents = body.scents;
+    const allergies = typeof body.allergies === 'string' ? body.allergies.trim() : '';
+    const allowedAges = ['under-18', '18-25', '26-35', '36-45', '46-plus'];
+    const allowedConcerns = [
+        'stress', 'sleep-deprived', 'anxious', 'tired',
+        'unfocused', 'low-mood', 'headache', 'relax'
+    ];
+    const allowedScents = ['floral', 'citrus', 'woody', 'herbal', 'sweet'];
+    const allowedSleep = ['under-4', '4-6', '6-8', 'over-8'];
+    const validChoices = (value, allowed) => Array.isArray(value)
+        && value.length > 0
+        && value.length <= allowed.length
+        && value.every(choice => typeof choice === 'string' && allowed.includes(choice))
+        && new Set(value).size === value.length;
 
-Carrier oils and accessories:
-- Jojoba Oil: Carrier oil, moisturizer (Rp 85,000 / 30ml)
-- Coconut Oil: Carrier oil, skin & hair care (Rp 65,000 / 100ml)
-- Sweet Almond Oil: Carrier oil, massage, skincare (Rp 75,000 / 30ml)
-- Essential Oil Diffuser: Various models (Rp 150,000 - 500,000)
-- Roller Bottles: For topical blends (Rp 25,000 - 45,000)
+    if (typeof body.website === 'string' && body.website.trim()) {
+        return res.status(400).json({ error: 'Permintaan tidak valid.' });
+    }
+    if (nickname.length < 2 || nickname.length > 40) {
+        return res.status(400).json({ error: 'Nama panggilan harus terdiri dari 2 hingga 40 karakter.' });
+    }
+    if (!/^[+0-9() .-]{7,30}$/.test(phone) || phoneDigits.length < 7 || phoneDigits.length > 15) {
+        return res.status(400).json({ error: 'Masukkan nomor telepon yang valid.' });
+    }
+    if (!allowedAges.includes(age)) {
+        return res.status(400).json({ error: 'Pilih rentang usia yang valid.' });
+    }
+    if (!validChoices(concerns, allowedConcerns) || !validChoices(scents, allowedScents)) {
+        return res.status(400).json({ error: 'Pilih kondisi dan aroma yang valid.' });
+    }
+    if (!Number.isInteger(stress) || stress < 1 || stress > 10) {
+        return res.status(400).json({ error: 'Tingkat stres harus berupa angka dari 1 hingga 10.' });
+    }
+    if (!allowedSleep.includes(sleep)) {
+        return res.status(400).json({ error: 'Pilih durasi tidur yang valid.' });
+    }
+    if (allergies.length > 160) {
+        return res.status(400).json({ error: 'Informasi sensitivitas maksimal 160 karakter.' });
+    }
+    if (body.dataConsent !== true || body.cameraConsent !== true) {
+        return res.status(400).json({ error: 'Persetujuan penyimpanan data dan penggunaan kamera wajib diberikan.' });
+    }
 
-Guidelines:
-- Always prioritize safety: recommend patch tests and proper dilution (typically 2-3% for adults)
-- Ask about user's specific needs, health conditions, and preferences
-- Suggest beginner-friendly options for newcomers
-- Provide specific product recommendations with quantities and prices
-- Explain the difference between therapeutic grade and regular oils
-- Warn about oils that are phototoxic or not safe for children/pregnancy
-- Create custom blend recipes with exact drops and ratios
-- Be warm, knowledgeable, and passionate about aromatherapy
-- Respond in Indonesian (Bahasa Indonesia) or English based on user's language
-- Always include a call-to-action to shop at Aromansa for quality products
-- Keep responses educational, friendly, and comprehensive
-
-Remember: Essential oils are natural but powerful. Always emphasize responsible usage.`;
-
-// ===== Fallback Response Generator (when API is unavailable) =====
-function generateFallbackResponse(userMessage, chatHistory) {
-    const message = userMessage.toLowerCase();
-    
-    let oilType = 'general';
-    if (message.includes('relax') || message.includes('sleep') || message.includes('tidur') || message.includes('stress')) oilType = 'relaxation';
-    else if (message.includes('energy') || message.includes('focus') || message.includes('energi') || message.includes('konsentrasi')) oilType = 'energy';
-    else if (message.includes('skin') || message.includes('kulit') || message.includes('acne') || message.includes('jerawat')) oilType = 'skincare';
-    else if (message.includes('headache') || message.includes('sakit kepala') || message.includes('pain')) oilType = 'pain relief';
-    else if (message.includes('immune') || message.includes('immunity') || message.includes('kekebalan')) oilType = 'immunity';
-    else if (message.includes('diffuser') || message.includes('aromatherapy')) oilType = 'diffuser';
-    
-    const responses = {
-        relaxation: `**🌿 Rekomendasi Aromansa untuk Relaksasi & Tidur Nyenyak**
-
-Terima kasih telah bertanya! Berikut rekomendasi kami:
-
-**✨ Essential Oil Terbaik:**
-
-1. **Lavender** (10ml) - Rp 125.000 - #1 untuk relaksasi & tidur
-2. **Chamomile** (10ml) - Rp 185.000 - Menenangkan anxiety
-3. **Ylang Ylang** (10ml) - Rp 135.000 - Mood enhancer
-
-**🎁 Paket Relaksasi:** Lavender + Chamomile + Diffuser = Rp 378.000 (Hemat 15%)
-
-**💡 Tips:**
-✓ Diffuse 30 menit sebelum tidur
-✓ 3 tetes lavender + 10ml jojoba oil untuk minyak pijat
-✓ Patch test terlebih dahulu
-
-🛒 WhatsApp: +62 812-3456-7890`,
-
-        energy: `**⚡ Rekomendasi Aromansa untuk Energi & Fokus**
-
-**🌟 Essential Oil Terbaik:**
-
-1. **Peppermint** (10ml) - Rp 110.000 - Instant energy
-2. **Lemon** (10ml) - Rp 95.000 - Uplifting & cleansing
-3. **Rosemary** (10ml) - Rp 135.000 - Memory & focus
-
-**🎁 Paket Produktivitas:** Rp 310.000 (Hemat 15%)
-
-**💡 Focus Roller Blend:** 3 drops Peppermint + 3 Lemon + 4 Rosemary + Jojoba Oil
-
-🛒 Order: +62 812-3456-7890`,
-
-        skincare: `**🌸 Rekomendasi Aromansa untuk Skincare**
-
-**✨ Essential Oil Terbaik:**
-
-1. **Tea Tree** (10ml) - Rp 105.000 - #1 untuk acne
-2. **Lavender** (10ml) - Rp 125.000 - Healing & soothing
-3. **Frankincense** (10ml) - Rp 285.000 - Anti-aging
-
-**🎁 Paket Glowing Skin:** Rp 505.000 (Hemat 15%)
-
-**⚠️ Selalu dilute dengan carrier oil! Patch test 24 jam!**
-
-🛒 WhatsApp: +62 812-3456-7890`,
-
-        'pain relief': `**💆 Rekomendasi Aromansa untuk Pain Relief**
-
-**🌟 Essential Oil:**
-
-1. **Peppermint** (10ml) - Rp 110.000 - Headache relief
-2. **Eucalyptus** (10ml) - Rp 95.000 - Joint pain
-3. **Lavender** (10ml) - Rp 125.000 - Muscle relaxant
-
-**🎁 Paket Pain Relief:** Rp 323.000
-
-🛒 Order: +62 812-3456-7890`,
-
-        immunity: `**🛡️ Rekomendasi Aromansa untuk Immune Support**
-
-**🌟 Essential Oil:**
-
-1. **Tea Tree** (10ml) - Rp 105.000 - Antimicrobial
-2. **Lemon** (10ml) - Rp 95.000 - Antioxidants
-3. **Eucalyptus** (10ml) - Rp 95.000 - Respiratory
-
-**🎁 Paket Immunity Shield:** Rp 357.000
-
-🛒 WhatsApp: +62 812-3456-7890`,
-
-        diffuser: `**🌈 Panduan Diffuser Aromansa**
-
-**📦 Diffuser:**
-• Basic (300ml) - Rp 175.000
-• Premium (500ml, timer) - Rp 285.000
-• Nebulizing (no water) - Rp 450.000
-
-**🎁 Starter Bundle:** Diffuser + 5 Oils = Rp 658.000 (Hemat 15%)
-
-🛒 Order: +62 812-3456-7890`,
-
-        general: `**🌿 Selamat datang di Aromansa!**
-
-Saya siap membantu! Ceritakan kebutuhan Anda:
-
-• Relaksasi & tidur?
-• Energi & fokus?
-• Skincare natural?
-• Pain relief?
-• Immune support?
-
-**🌟 Popular:** Lavender, Lemon, Tea Tree, Peppermint, Eucalyptus
-
-🛒 WhatsApp: +62 812-3456-7890`
+    const submission = {
+        nickname,
+        phone,
+        age,
+        concerns,
+        stress,
+        sleep,
+        scents,
+        allergies,
+        dataConsent: true,
+        cameraConsent: true,
+        submittedAt: new Date().toISOString()
     };
+
+    try {
+        await fs.promises.mkdir(CONTACT_DATA_DIR, { recursive: true, mode: 0o700 });
+        await fs.promises.chmod(CONTACT_DATA_DIR, 0o700);
+        const file = await fs.promises.open(MOOD_SCAN_DATA_FILE, 'a', 0o600);
+        try {
+            await file.chmod(0o600);
+            await file.writeFile(`${JSON.stringify(submission)}\n`, 'utf8');
+        } finally {
+            await file.close();
+        }
+    } catch (error) {
+        console.error('Unable to save mood scan submission:', error);
+        return res.status(500).json({ error: 'Data belum dapat disimpan. Silakan coba kembali nanti.' });
+    }
+
+    return res.status(201).json({ message: 'Data Scan Mood AR berhasil disimpan.' });
+});
+
+app.post('/api/contact-submissions', async (req, res) => {
+    const body = req.body;
+    if (!body || typeof body !== 'object' || Array.isArray(body)) {
+        return res.status(400).json({ error: 'Data formulir tidak valid.' });
+    }
+
+    const name = typeof body.name === 'string' ? body.name.trim() : '';
+    const phone = typeof body.phone === 'string' ? body.phone.trim() : '';
+    const email = typeof body.email === 'string' ? body.email.trim() : '';
+    const subject = typeof body.subject === 'string' ? body.subject : '';
+    const message = typeof body.message === 'string' ? body.message.trim() : '';
+    const allowedSubjects = [
+        'product-inquiry',
+        'wholesale-order',
+        'wellness-consultation',
+        'general-question'
+    ];
+
+    if (typeof body.website === 'string' && body.website.trim()) {
+        return res.status(400).json({ error: 'Permintaan tidak valid.' });
+    }
+    if (name.length < 2 || name.length > 100) {
+        return res.status(400).json({ error: 'Nama harus terdiri dari 2 hingga 100 karakter.' });
+    }
+    if (!/^[+0-9() .-]{7,30}$/.test(phone) || phone.replace(/\D/g, '').length < 7) {
+        return res.status(400).json({ error: 'Masukkan nomor telepon yang valid.' });
+    }
+    if (email.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        return res.status(400).json({ error: 'Masukkan alamat email yang valid.' });
+    }
+    if (!allowedSubjects.includes(subject)) {
+        return res.status(400).json({ error: 'Pilih topik pesan yang valid.' });
+    }
+    if (!message || message.length > 5000) {
+        return res.status(400).json({ error: 'Pesan wajib diisi dan maksimal 5000 karakter.' });
+    }
+    if (body.consent !== true) {
+        return res.status(400).json({ error: 'Persetujuan penyimpanan data wajib diberikan.' });
+    }
+
+    const submission = {
+        name,
+        phone,
+        email,
+        subject,
+        message,
+        consent: true,
+        submittedAt: new Date().toISOString()
+    };
+
+    try {
+        await fs.promises.mkdir(CONTACT_DATA_DIR, { recursive: true, mode: 0o700 });
+        await fs.promises.chmod(CONTACT_DATA_DIR, 0o700);
+        const file = await fs.promises.open(CONTACT_DATA_FILE, 'a', 0o600);
+        try {
+            await file.chmod(0o600);
+            await file.writeFile(`${JSON.stringify(submission)}\n`, 'utf8');
+        } finally {
+            await file.close();
+        }
+    } catch (error) {
+        console.error('Unable to save contact submission:', error);
+        return res.status(500).json({ error: 'Pesan belum dapat disimpan. Silakan coba kembali nanti.' });
+    }
+
+    return res.status(201).json({ message: 'Pesan berhasil disimpan.' });
+});
+
+// ===== Groq API Configuration =====
+const GROQ_API_KEY = process.env.GROQ_API_KEY || '';
+const GROQ_MODEL = process.env.GROQ_MODEL || 'openai/gpt-oss-120b';
+const GROQ_FALLBACK_MODEL = 'qwen/qwen3.8-27b';
+const GROQ_API_URL = 'https://api.groq.com/openai/v1/chat/completions';
+
+// ===== Aromansa Grounded Database & Knowledge Base =====
+const SYSTEM_PROMPT = `Anda adalah Konsultan Aromansa, brand aromaterapi botani murni asal Cianjur, Jawa Barat, Indonesia.
+Tugas Anda: Menjawab pertanyaan pelanggan, memberikan rekomendasi aroma yang akurat, membuatkan resep racikan blend, dan memberikan panduan cara pakai yang aman berdasarkan data resmi Aromansa.
+
+=== PRINSIP UTAMA & KEAMANAN (WAJIB DIIKUTI) ===
+1. Aromaterapi mendukung kenyamanan suasana, relaksasi, dan fokus. BUKAN pengobatan atau obat penyembuh penyakit. DILARANG memakai kata "menyembuhkan" atau "mengobati".
+2. Jangan memberikan klaim medis absolut. Bila pengguna menyampaikan keluhan medis serius, sarankan periksa ke tenaga medis/dokter.
+3. Keamanan Kulit: Minyak esensial murni (dropper 10ml) konsentrasinya tinggi, TIDAK BOLEH dioleskan langsung ke kulit tanpa minyak pembawa (carrier oil seperti jojoba/almond/coconut oil).
+   - Rasio dilusi dewasa sehat: 1% - 2% (3-6 tetes per 10ml carrier oil).
+   - Selalu anjurkan uji tempel (patch test) 24 jam sebelum pemakaian rutin.
+4. Jangan menelan essential oil (tidak untuk diminum).
+5. Aturan Khusus:
+   - Lemon: Jika dioleskan ke kulit, hindari sinar matahari langsung minimal 12 jam (fototoksik).
+   - Peppermint & Eucalyptus: Mengandung mentol/sineol tinggi; jangan dioleskan dekat area wajah/hidung bayi atau anak di bawah 5 tahun. Pada malam hari kurangi karena aromanya membangunkan kesegaran.
+   - Lemongrass: Hindari pada ibu hamil.
+   - Gandapura: Mengandung metil salisilat, khusus untuk pegal otot dan persendian badan, BUKAN untuk sakit kepala atau mood.
+
+=== DATABASE PRODUK LENGKAP AROMANSA ===
+1. Single Essential Oil (Botol Kaca Dropper 10 ml):
+   - Lavender Essential Oil (10ml, Rp65.000) — Floral lembut, sedikit herbal. Rekomendasi #1 untuk relaksasi, melepas stres, dan menemani tidur malam yang lelap.
+   - Peppermint Essential Oil (10ml, Rp55.000) — Mint herbal dingin tajam. Segar untuk kepala berat, penat, dan menjaga fokus kerja.
+   - Sweet Orange Essential Oil (10ml, Rp45.000) — Citrus manis hangat. Mencerahkan suasana hati (mood booster), membangkitkan keceriaan ruang keluarga.
+   - Lemon Essential Oil (10ml, Rp45.000) — Citrus bersih segar. Menetralkan bau ruangan dan membangkitkan energi pagi.
+   - Eucalyptus Essential Oil (10ml, Rp40.000) — Uap herbal hangat menyegarkan. Sensasi lega di pernapasan saat hidung tersumbat atau cuaca dingin.
+   - Spearmint Essential Oil (10ml, Rp55.000) — Mint manis yang lebih ramah & lembut dibanding peppermint untuk kesegaran pikiran.
+   - Lemongrass Essential Oil (10ml, Rp45.000) — Sulingan serai wangi segar tajam. Menghilangkan bau apek ruangan dan membantu menghalau nyamuk.
+   - Palmarosa Essential Oil (10ml, Rp75.000) — Perpaduan wangi rumput botanikal & mawar lembut. Nyaman untuk ritual spa sore dan relaksasi alami.
+   - Ylang-Ylang Essential Oil (10ml, Rp70.000) — Ekstrak bunga kenanga eksotis pekat. Membantu meredakan ketegangan emosi mendalam di penghujung hari.
+   - Frangipani Essential Oil (10ml, Rp75.000) — Harum bunga kamboja tropis anggun. Menghadirkan nuansa spa alami mewah di kamar tidur.
+
+2. Roll-On Siap Oles (10 ml):
+   - Peppermint Roll-On (10ml, Rp30.000) — Kemasan roll-on saku praktis untuk dioleskan di pelipis dan tengkuk saat butuh kesegaran instan atau kepala tegang.
+   - Gandapura Roll-On (10ml, Rp30.000) — Formula hangat untuk pundak pegal, leher kaku, dan persendian (bukan untuk sakit kepala/mood).
+
+3. Linen & Room Spray (100 ml):
+   - Lavender Linen Deep Sleep Spray (100ml, Rp60.000) — Semprotan praktis beraroma lavender untuk bantal dan sprei agar istirahat malam lebih tenang.
+   - Peppermint Linen & Room Spray (100ml, Rp60.000) — Semprotan ruangan beraroma peppermint segar untuk menjernihkan udara ruang kerja.
+
+=== RESEP RACIKAN BLEND POPULER AROMANSA ===
+- Deep Sleep (Tidur Pulas): 3 tetes Lavender + 2 tetes Sweet Orange di diffuser 30 menit sebelum tidur.
+- Work Focus (Fokus Kerja): 2 tetes Peppermint + 3 tetes Lemon di diffuser ruang kerja.
+- Stress Relief (Pelepas Penat): 2 tetes Ylang-Ylang + 3 tetes Lavender + 1 tetes Sweet Orange.
+- Breathe Easy (Napas Lega): 3 tetes Eucalyptus + 2 tetes Peppermint di mangkuk air hangat atau diffuser.
+
+=== CARA PEMBELIAN DI AROMANSA ===
+- Pembelian langsung di Web: Pengunjung bisa klik tombol "+ Keranjang" di katalog produk atau hasil Scan Mood AR, lalu checkout dengan Pembayaran QRIS (disetujui langsung oleh Admin Aromansa).
+- Toko Resmi Shopee: shopee.co.id/aromansa_id
+- Toko Resmi Tokopedia: tokopedia.com/aromansa
+- WhatsApp Admin: +62 857-8290-9266
+- Lokasi & Pengiriman: Cianjur, Jawa Barat, Indonesia.
+
+GAYA JAWABAN:
+Gunakan Bahasa Indonesia yang ramah, hangat, luwes, to-the-point, dan berstandar profesional (bebas bahasa robotik AI). Sebutkan nama produk, ukuran, dan harga secara spesifik saat merekomendasikan.`;
+
+// ===== Fallback Generator (jika API Groq offline/timeout) =====
+function generateFallbackResponse(userMessage) {
+    const message = (userMessage || '').toLowerCase();
     
-    return responses[oilType] || responses.general;
+    if (message.includes('tidur') || message.includes('sleep') || message.includes('insomnia') || message.includes('lelap')) {
+        return `🌿 **Rekomendasi Aromansa untuk Istirahat & Tidur Tenang:**\n\n1. **Lavender Essential Oil (10ml - Rp65.000)** — Pilihan utama untuk meredakan ketegangan dan menemani waktu istirahat.\n2. **Lavender Linen Deep Sleep Spray (100ml - Rp60.000)** — Praktis disemprotkan ke bantal 15 menit sebelum tidur.\n3. **Sweet Orange Essential Oil (10ml - Rp45.000)** — Cocok dipadukan dengan lavender (3 tetes lavender + 2 tetes orange) untuk suasana kamar yang hangat dan menenangkan.\n\n🛒 Anda bisa memesan langsung via Keranjang Belanja web Aromansa atau toko resmi kami di Shopee & Tokopedia.`;
+    }
+    
+    if (message.includes('fokus') || message.includes('kerja') || message.includes('ngantuk') || message.includes('energi') || message.includes('segar')) {
+        return `⚡ **Rekomendasi Aromansa untuk Fokus Kerja & Kesegaran:**\n\n1. **Peppermint Essential Oil (10ml - Rp55.000)** — Aroma mint dingin tajam yang menyegarkan pikiran dan membantu menjaga konsentrasi.\n2. **Peppermint Roll-On (10ml - Rp30.000)** — Praktis dioleskan di pelipis atau tengkuk saat kepala terasa penat di kantor.\n3. **Lemon Essential Oil (10ml - Rp45.000)** — Padukan 2 tetes peppermint + 3 tetes lemon di diffuser untuk ruang kerja yang berenergi.\n\n🛒 Bisa langsung klik "+ Keranjang" di website kami atau WhatsApp ke +62 857-8290-9266.`;
+    }
+
+    if (message.includes('pegal') || message.includes('otot') || message.includes('sendi') || message.includes('kaku')) {
+        return `💆 **Rekomendasi Aromansa untuk Pegal Otot & Sendi:**\n\n• **Gandapura Roll-On (10ml - Rp30.000)** — Formula minyak gandapura asli yang memberikan sensasi hangat meresap untuk pundak pegal, leher kaku, dan persendian.\n• Oleskan secukupnya pada area tubuh yang membutuhkan (bukan untuk sakit kepala atau area wajah).\n\n🛒 Tersedia di katalog web Aromansa dan Toko Shopee/Tokopedia.`;
+    }
+
+    return `🌿 **Halo, selamat datang di Aromansa!**\n\nSaya Konsultan Aromansa. Ceritakan apa yang sedang Anda butuhkan hari ini:\n• Membantu rileks & istirahat tidur lelap (Lavender, Ylang-Ylang)?\n• Menjaga fokus kerja & mengusir kantuk (Peppermint, Lemon)?\n• Meredakan pegal otot (Gandapura Roll-On)?\n• Melegakan pernapasan saat flu (Eucalyptus)?\n\nSilakan ceritakan aroma favorit atau suasana yang ingin Anda hadirkan!`;
 }
 
-// ===== API Endpoint =====
+// ===== API Endpoint AI Chat (Groq API) =====
 app.post('/api/ai-chat', async (req, res) => {
     try {
         const { message, chatHistory = [] } = req.body;
 
-        if (!message) {
-            return res.status(400).json({ error: 'Message is required' });
+        if (!message || typeof message !== 'string' || !message.trim()) {
+            return res.status(400).json({ error: 'Pesan pertanyaan tidak boleh kosong.' });
         }
 
-        // Build conversation context from chat history
-        const contents = [];
+        const messages = [
+            { role: 'system', content: SYSTEM_PROMPT }
+        ];
 
-        // Add system prompt as first message
-        contents.push({
-            role: 'user',
-            parts: [{ text: SYSTEM_PROMPT }]
-        });
-        contents.push({
-            role: 'model',
-            parts: [{ text: 'I understand. I will help users with personalized essential oil recommendations from Aromansa.' }]
-        });
-
-        // Add chat history (last 10 messages for context)
-        const recentHistory = chatHistory.slice(-10);
-        for (const msg of recentHistory) {
-            if (msg.role === 'user') {
-                contents.push({
-                    role: 'user',
-                    parts: [{ text: msg.content }]
-                });
-            } else if (msg.role === 'ai') {
-                contents.push({
-                    role: 'model',
-                    parts: [{ text: msg.content }]
-                });
+        // Append recent conversation context
+        if (Array.isArray(chatHistory)) {
+            const recent = chatHistory.slice(-8);
+            for (const item of recent) {
+                if (!item || !item.content) continue;
+                const role = (item.role === 'user') ? 'user' : 'assistant';
+                messages.push({ role, content: String(item.content) });
             }
         }
 
-        // Add current message
-        contents.push({
-            role: 'user',
-            parts: [{ text: message }]
-        });
+        // Add user message
+        messages.push({ role: 'user', content: message.trim() });
 
-        const requestBody = {
-            contents: contents,
-            generationConfig: {
-                temperature: 0.7,
-                maxOutputTokens: 2048,
-                topK: 40,
-                topP: 0.95
-            }
-        };
+        if (!GROQ_API_KEY) {
+            console.warn('Groq API Key tidak ditemukan di environment. Menggunakan fallback generator.');
+            return res.json({ response: generateFallbackResponse(message), isFallback: true });
+        }
 
-        console.log('Calling Gemini API...');
+        let aiResponse = null;
+        let usedModel = GROQ_MODEL;
 
-        let aiResponse;
-        let isDemoMode = false;
-        
         try {
-            // Retry logic with exponential backoff
-            const maxRetries = 2;
-            let lastError = null;
-            
-            for (let attempt = 0; attempt <= maxRetries; attempt++) {
-                try {
-                    const response = await axios.post(
-                        `${GEMINI_API_URL}?key=${GEMINI_API_KEY}`,
-                        requestBody,
-                        {
-                            headers: {
-                                'Content-Type': 'application/json',
-                            },
-                            timeout: 30000
-                        }
-                    );
-
-                    console.log('Gemini API response received');
-                    aiResponse = response.data.candidates[0].content.parts[0].text;
-                    break; // Success, exit retry loop
-                } catch (apiError) {
-                    lastError = apiError;
-                    
-                    // Check if it's a quota/rate limit error
-                    const isQuotaError = apiError.response?.data?.error?.message?.includes('quota') ||
-                                         apiError.response?.data?.error?.message?.includes('rate limit') ||
-                                         apiError.response?.status === 429 ||
-                                         apiError.response?.status === 403;
-                    
-                    if (isQuotaError) {
-                        console.warn(`⚠️  Gemini API quota exceeded on attempt ${attempt + 1}/${maxRetries + 1}`);
-                        
-                        // If we have retries left, wait and try again
-                        if (attempt < maxRetries) {
-                            const waitTime = Math.pow(2, attempt) * 1000; // Exponential backoff: 1s, 2s
-                            console.log(`⏳ Waiting ${waitTime}ms before retry...`);
-                            await new Promise(resolve => setTimeout(resolve, waitTime));
-                            continue;
-                        }
-                        
-                        // All retries exhausted, use fallback
-                        console.warn('💡 All retries exhausted. Using fallback response generator.');
-                        console.warn('💡 To fix permanently: Update your Google Cloud billing or get a new API key');
-                        
-                        aiResponse = generateFallbackResponse(message, chatHistory);
-                        isDemoMode = true;
-                        break;
-                    } else {
-                        // Not a quota error, re-throw immediately
-                        throw apiError;
-                    }
+            console.log(`Calling Groq API with model: ${GROQ_MODEL}...`);
+            const groqRes = await axios.post(
+                GROQ_API_URL,
+                {
+                    model: GROQ_MODEL,
+                    messages: messages,
+                    temperature: 0.6,
+                    max_tokens: 1200
+                },
+                {
+                    headers: {
+                        'Authorization': `Bearer ${GROQ_API_KEY}`,
+                        'Content-Type': 'application/json'
+                    },
+                    timeout: 25000
                 }
+            );
+
+            aiResponse = groqRes.data?.choices?.[0]?.message?.content;
+        } catch (apiErr) {
+            console.warn(`Groq primary model (${GROQ_MODEL}) error:`, apiErr.response?.data?.error?.message || apiErr.message);
+
+            // Attempt fallback model
+            try {
+                console.log(`Trying Groq fallback model: ${GROQ_FALLBACK_MODEL}...`);
+                usedModel = GROQ_FALLBACK_MODEL;
+                const fallbackRes = await axios.post(
+                    GROQ_API_URL,
+                    {
+                        model: GROQ_FALLBACK_MODEL,
+                        messages: messages,
+                        temperature: 0.6,
+                        max_tokens: 1200
+                    },
+                    {
+                        headers: {
+                            'Authorization': `Bearer ${GROQ_API_KEY}`,
+                            'Content-Type': 'application/json'
+                        },
+                        timeout: 20000
+                    }
+                );
+                aiResponse = fallbackRes.data?.choices?.[0]?.message?.content;
+            } catch (fallbackErr) {
+                console.error('Groq fallback model also failed:', fallbackErr.response?.data?.error?.message || fallbackErr.message);
             }
-        } catch (error) {
-            // Unexpected error (not quota-related)
-            console.error('Unexpected API error:', error.response?.data || error.message);
-            throw error;
         }
 
-        res.json({ response: aiResponse, isDemoMode: isDemoMode });
+        if (!aiResponse) {
+            console.warn('All Groq attempts failed, using grounded fallback response.');
+            aiResponse = generateFallbackResponse(message);
+        }
+
+        res.json({
+            response: aiResponse,
+            model: usedModel,
+            success: true
+        });
 
     } catch (error) {
-        console.error('Error calling Gemini API:', error.response?.data || error.message);
-        
-        // More detailed error logging
-        if (error.response?.data) {
-            console.error('API Error Details:', JSON.stringify(error.response.data, null, 2));
-        }
-
-        res.status(500).json({ 
-            error: 'Failed to get AI response',
-            details: error.response?.data?.error?.message || error.message
+        console.error('Unexpected error in /api/ai-chat:', error);
+        res.status(500).json({
+            error: 'Gagal memproses jawaban AI.',
+            details: error.message
         });
     }
 });
@@ -315,8 +373,11 @@ app.get('/api/health', (req, res) => {
 
 // Serve the website
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'ai-personalization.html'));
+    res.sendFile(path.join(WEBSITE_ROOT, 'index.html'));
 });
+
+// Orders and Admin routes
+registerOrderRoutes(app);
 
 // Start server
 app.listen(PORT, () => {

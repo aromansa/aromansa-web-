@@ -1,14 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="utf-8">
-    <title>Contact Us - Aromansa Essential Oils</title>
+    <title>Kontak - Aromansa</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="aromansa contact, essential oil consultation, wholesale inquiry, customer support, wellness help" name="keywords">
     <meta content="Get in touch with Aromansa for essential oil consultations, wholesale inquiries, and customer support" name="description">
 
     <!-- Favicon -->
-    <link href="img/favicon.ico" rel="icon">
+    <link href="img/favicon.png?v=3" rel="icon" type="image/png">
+    <link href="img/favicon.ico?v=3" rel="shortcut icon">
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
@@ -21,6 +22,7 @@
     <link href="css/style.css" rel="stylesheet">
     <link href="css/clean-professional.css" rel="stylesheet">
     <link href="css/footer-stunning.css" rel="stylesheet">
+    <link href="css/cart.css?v=6" rel="stylesheet">
     <style>
         /* ===== CONTACT HERO SECTION ===== */
         .contact-hero-section {
@@ -502,6 +504,42 @@
             box-shadow: 0 10px 30px rgba(199, 164, 76, 0.4);
         }
 
+        .contact-consent {
+            position: static !important;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            color: #4a5568;
+            font-size: 14px;
+            line-height: 1.5;
+            pointer-events: auto !important;
+            cursor: pointer;
+        }
+
+        .contact-consent input {
+            width: 18px;
+            height: 18px;
+            margin: 2px 0 0;
+            flex: 0 0 auto;
+            accent-color: #494c35;
+            pointer-events: auto !important;
+        }
+
+        .contact-form-honeypot {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            overflow: hidden;
+            clip-path: inset(50%);
+            white-space: nowrap;
+        }
+
+        .contact-form-status {
+            min-height: 1.5em;
+            margin: 0 0 14px;
+            color: #494c35;
+        }
+
         /* ===== MAP SECTION ===== */
         .contact-map-section {
             padding: 80px 0;
@@ -929,6 +967,7 @@
             }
         }
     </style>
+    <link href="css/aromansa-theme.css?v=8" rel="stylesheet">
 </head>
 
 <body>
@@ -938,29 +977,34 @@
             <div class="nav-left">
                 <div id="logo">
                     <a href="index.html">
-                        <img src="img/aromansa-logo.png" alt="Aromansa Logo" class="navbar-logo-img">
+                        <img src="img/aromansa-logo-baru.png?v=3" alt="Logo Aromansa" class="navbar-logo-img">
                     </a>
                 </div>
             </div>
 
             <nav id="nav-menu-container" aria-label="Main navigation">
                 <ul class="nav-menu">
-                    <li><a href="index.html"><span class="nav-text">Home</span><span class="nav-indicator"></span></a></li>
-                    <li><a href="equipment.html"><span class="nav-text">Products</span><span class="nav-indicator"></span></a></li>
-                    <li><a href="ai-personalization.html"><span class="nav-text">AI Consultant</span><span class="nav-indicator"></span></a></li>
-                    <li class="menu-active"><a href="contact.html"><span class="nav-text">Contact</span><span class="nav-indicator"></span></a></li>
+                    <li><a href="index.html"><span class="nav-text">Beranda</span><span class="nav-indicator"></span></a></li>
+                    <li><a href="equipment.html"><span class="nav-text">Produk</span><span class="nav-indicator"></span></a></li>
+                    <li><a href="ai-personalization.html"><span class="nav-text">Konsultan AI</span><span class="nav-indicator"></span></a></li>
+                    <li><a href="ar-mood-scan.html"><span class="nav-text">Scan Mood AR</span><span class="nav-indicator"></span></a></li>
+                    <li class="menu-active"><a href="contact.html"><span class="nav-text">Kontak</span><span class="nav-indicator"></span></a></li>
                 </ul>
             </nav>
 
             <div class="nav-right">
-                <a href="https://shopee.co.id/aromansa_id" target="_blank" rel="noopener noreferrer" class="nav-cta">Shop Now</a>
-                <a href="#" id="mobile-nav-toggle" aria-label="Toggle mobile navigation">
+                <button type="button" class="nav-cart-btn" id="open-cart-btn" aria-label="Buka Keranjang Belanja">
+                    <i class="fa fa-shopping-bag" aria-hidden="true"></i>
+                    <span class="cart-badge" id="cart-badge">0</span>
+                </button>
+                <a href="https://shopee.co.id/aromansa_id" target="_blank" rel="noopener noreferrer" class="nav-cta">Belanja</a>
+                <button type="button" id="mobile-nav-toggle" aria-label="Buka navigasi" aria-expanded="false" aria-controls="mobile-nav">
                     <span class="hamburger">
                         <span class="hamburger-line"></span>
                         <span class="hamburger-line"></span>
                         <span class="hamburger-line"></span>
                     </span>
-                </a>
+                </button>
             </div>
         </div>
     </header>
@@ -973,25 +1017,9 @@
             <div class="contact-hero-glow"></div>
             <div class="container">
                 <div class="contact-hero-content">
-                    <div class="hero-icon-badge">
-                        <i class="fa fa-comments"></i>
-                    </div>
-                    <h1>Get In Touch</h1>
-                    <p>Have questions about essential oils? Need wellness consultation? We're here to help you on your natural wellness journey!</p>
-                    <div class="hero-contact-badges">
-                        <div class="hero-badge-item">
-                            <i class="fa fa-clock"></i>
-                            <span>Mon - Sat: 08:00 - 20:00</span>
-                        </div>
-                        <div class="hero-badge-item">
-                            <i class="fa fa-headset"></i>
-                            <span>24/7 WhatsApp Support</span>
-                        </div>
-                        <div class="hero-badge-item">
-                            <i class="fa fa-check-circle"></i>
-                            <span>Fast Response</span>
-                        </div>
-                    </div>
+                    <span class="hero-eyebrow">Layanan Pelanggan</span>
+                    <h1>Hubungi Tim Aromansa.</h1>
+                    <p>Butuh saran varian untuk ruang keluarga, informasi pesanan dalam jumlah banyak, atau bantuan pengiriman? Kami siap melayani Anda setiap Senin hingga Sabtu.</p>
                 </div>
             </div>
         </section>
@@ -1003,26 +1031,26 @@
                     <!-- Left: Contact Info -->
                     <div class="contact-info-column">
                         <div class="contact-info-card-modern">
-                            <h3>Contact Information</h3>
-                            <p class="contact-info-subtitle">Reach out to us through any of these channels</p>
+                            <h3>Alamat &amp; Kontak</h3>
+                            <p class="contact-info-subtitle">Silakan hubungi kami langsung melalui kanal di bawah ini.</p>
 
                             <div class="contact-info-item-modern" onclick="window.open('https://maps.google.com/?q=Jl.+Raya+Bandung+KM+8.8+Cianjur+Jawa+Barat', '_blank')">
                                 <div class="contact-info-icon">
                                     <i class="fa fa-map-marker-alt"></i>
                                 </div>
                                 <div class="contact-info-content">
-                                    <h4>Our Location</h4>
-                                    <p>Jl. Raya Bandung KM 8.8, Cianjur, Jawa Barat (43281), Indonesia</p>
+                                    <h4>Studio &amp; Pengiriman</h4>
+                                    <p>Jl. Raya Bandung KM 8.8, Cianjur, Jawa Barat 43281</p>
                                 </div>
                             </div>
 
-                            <div class="contact-info-item-modern" onclick="window.open('tel:+6285782909266')">
+                            <div class="contact-info-item-modern" onclick="window.open('https://wa.me/6285782909266', '_blank')">
                                 <div class="contact-info-icon">
-                                    <i class="fa fa-phone"></i>
+                                    <i class="fab fa-whatsapp"></i>
                                 </div>
                                 <div class="contact-info-content">
-                                    <h4>Phone Number</h4>
-                                    <p><a href="tel:+6285782909266">+62 857-8290-9266</a></p>
+                                    <h4>WhatsApp &amp; Telepon</h4>
+                                    <p><a href="https://wa.me/6285782909266" target="_blank" rel="noopener noreferrer">+62 857-8290-9266</a></p>
                                 </div>
                             </div>
 
@@ -1031,7 +1059,7 @@
                                     <i class="fa fa-envelope"></i>
                                 </div>
                                 <div class="contact-info-content">
-                                    <h4>Email Address</h4>
+                                    <h4>Email</h4>
                                     <p><a href="mailto:aromansaofficial@gmail.com">aromansaofficial@gmail.com</a></p>
                                 </div>
                             </div>
@@ -1041,30 +1069,30 @@
                                     <i class="fa fa-clock"></i>
                                 </div>
                                 <div class="contact-info-content">
-                                    <h4>Working Hours</h4>
-                                    <p>Mon - Sat: 08:00 - 20:00</p>
+                                    <h4>Jam Operasional</h4>
+                                    <p>Senin – Sabtu, 08.00 – 20.00 WIB</p>
                                 </div>
                             </div>
 
-                            <!-- Social Links -->
+                            <!-- Direct Store & Channel Links -->
                             <div class="contact-social-section">
-                                <h4>Follow Us</h4>
+                                <h4>Kanal Belanja &amp; Layanan</h4>
                                 <div class="social-grid">
-                                    <a href="#" class="social-btn whatsapp">
+                                    <a href="https://wa.me/6285782909266" target="_blank" rel="noopener noreferrer" class="social-btn whatsapp">
                                         <i class="fab fa-whatsapp"></i>
                                         <span>WhatsApp</span>
                                     </a>
-                                    <a href="#" class="social-btn instagram">
-                                        <i class="fab fa-instagram"></i>
-                                        <span>Instagram</span>
+                                    <a href="https://shopee.co.id/aromansa_id" target="_blank" rel="noopener noreferrer" class="social-btn instagram">
+                                        <i class="fa fa-shopping-bag"></i>
+                                        <span>Shopee</span>
                                     </a>
-                                    <a href="#" class="social-btn facebook">
-                                        <i class="fab fa-facebook-f"></i>
-                                        <span>Facebook</span>
+                                    <a href="https://www.tokopedia.com/aromansa" target="_blank" rel="noopener noreferrer" class="social-btn facebook">
+                                        <i class="fa fa-store"></i>
+                                        <span>Tokopedia</span>
                                     </a>
-                                    <a href="#" class="social-btn youtube">
-                                        <i class="fab fa-youtube"></i>
-                                        <span>YouTube</span>
+                                    <a href="mailto:aromansaofficial@gmail.com" class="social-btn youtube">
+                                        <i class="fa fa-envelope"></i>
+                                        <span>Email</span>
                                     </a>
                                 </div>
                             </div>
@@ -1075,23 +1103,23 @@
                     <div class="contact-form-column">
                         <div class="contact-form-wrapper">
                             <div class="contact-form-header">
-                                <h3>Send Us a Message</h3>
-                                <p>Fill out the form below and we'll get back to you as soon as possible</p>
+                                <h3>Kirim Pesan</h3>
+                                <p>Tuliskan pertanyaan atau kebutuhan pesanan Anda pada formulir berikut.</p>
                             </div>
 
                             <!-- Quick Contact Buttons -->
                             <div class="quick-contact-options">
                                 <a href="https://wa.me/6285782909266" target="_blank" rel="noopener noreferrer" class="quick-contact-btn">
                                     <i class="fab fa-whatsapp"></i>
-                                    <span>WhatsApp Us</span>
+                                    <span>Chat WhatsApp</span>
                                 </a>
                                 <a href="tel:+6285782909266" class="quick-contact-btn">
                                     <i class="fa fa-phone"></i>
-                                    <span>Call Now</span>
+                                    <span>Telepon Langsung</span>
                                 </a>
                                 <a href="mailto:aromansaofficial@gmail.com" class="quick-contact-btn">
                                     <i class="fa fa-envelope"></i>
-                                    <span>Email Us</span>
+                                    <span>Kirim Email</span>
                                 </a>
                             </div>
 
@@ -1099,30 +1127,45 @@
                             <form id="contactForm" action="#" method="POST" class="modern-form">
                                 <div class="form-row-modern">
                                     <div class="form-group-modern">
-                                        <input type="text" name="name" placeholder=" " required>
-                                        <label>Your Name</label>
+                                        <input id="contactName" type="text" name="name" placeholder=" " maxlength="100" autocomplete="name" required>
+                                        <label for="contactName">Nama Lengkap</label>
                                     </div>
                                     <div class="form-group-modern">
-                                        <input type="email" name="email" placeholder=" " required>
-                                        <label>Your Email</label>
+                                        <input id="contactPhone" type="tel" name="phone" placeholder=" " maxlength="30" autocomplete="tel" inputmode="tel" required>
+                                        <label for="contactPhone">Nomor WhatsApp / Telepon</label>
                                     </div>
                                 </div>
                                 <div class="form-group-modern">
-                                    <select name="subject" required>
-                                        <option value="" disabled selected></option>
-                                        <option value="product-inquiry">Product Inquiry</option>
-                                        <option value="wholesale-order">Wholesale Order</option>
-                                        <option value="wellness-consultation">Wellness Consultation</option>
-                                        <option value="general-question">General Question</option>
-                                    </select>
-                                    <label>Select a Subject</label>
+                                    <input id="contactEmail" type="email" name="email" placeholder=" " maxlength="254" autocomplete="email" required>
+                                    <label for="contactEmail">Alamat Email</label>
                                 </div>
                                 <div class="form-group-modern">
-                                    <textarea name="message" placeholder=" " required></textarea>
-                                    <label>Your Message</label>
+                                    <select id="contactSubject" name="subject" required>
+                                        <option value="" disabled selected></option>
+                                        <option value="product-inquiry">Tanya Varian &amp; Ketersediaan Produk</option>
+                                        <option value="wholesale-order">Pemesanan Jumlah Banyak / Souvenir</option>
+                                        <option value="wellness-consultation">Konsultasi Pemakaian Aromaterapi</option>
+                                        <option value="general-question">Pertanyaan Lainnya</option>
+                                    </select>
+                                    <label for="contactSubject">Topik Pesan</label>
                                 </div>
+                                <div class="form-group-modern">
+                                    <textarea id="contactMessage" name="message" placeholder=" " maxlength="5000" required></textarea>
+                                    <label for="contactMessage">Tulis pesan Anda</label>
+                                </div>
+                                <div class="form-group-modern">
+                                    <label class="contact-consent">
+                                        <input type="checkbox" name="consent" value="yes" required>
+                                        Saya menyetujui data kontak ini digunakan untuk membalas pesan saya.
+                                    </label>
+                                </div>
+                                <div class="contact-form-honeypot" aria-hidden="true">
+                                    <label for="contactWebsite">Website</label>
+                                    <input id="contactWebsite" type="text" name="website" tabindex="-1" autocomplete="off">
+                                </div>
+                                <p id="contactFormStatus" class="contact-form-status" role="status" aria-live="polite"></p>
                                 <button type="submit" class="form-submit-btn">
-                                    <span>Send Message</span>
+                                    <span>Kirim Pesan</span>
                                     <i class="fa fa-paper-plane"></i>
                                 </button>
                             </form>
@@ -1141,11 +1184,11 @@
                             <div class="map-icon">
                                 <i class="fa fa-map-marked-alt"></i>
                             </div>
-                            <h3>Visit Our Office</h3>
-                            <p>Jl. Raya Bandung KM 8.8, Cianjur, Jawa Barat (43281), Indonesia</p>
+                            <h3>Lokasi Aromansa di Cianjur</h3>
+                            <p>Jl. Raya Bandung KM 8.8, Cianjur, Jawa Barat 43281</p>
                             <a href="https://maps.google.com/?q=Jl.+Raya+Bandung+KM+8.8+Cianjur+Jawa+Barat" target="_blank" rel="noopener noreferrer" class="map-link">
                                 <i class="fa fa-directions"></i>
-                                <span>Get Directions</span>
+                                <span>Buka di Google Maps</span>
                             </a>
                         </div>
                     </div>
@@ -1157,9 +1200,9 @@
         <section class="faq-section-modern">
             <div class="container">
                 <div class="faq-header-modern">
-                    <span class="faq-label"><i class="fa fa-question-circle"></i> FAQs</span>
-                    <h2>Quick FAQs</h2>
-                    <p>Common questions about essential oils and Aromansa products</p>
+                    <span class="faq-label">Tanya Jawab</span>
+                    <h2>Hal yang sering ditanyakan</h2>
+                    <p>Panduan singkat seputar pemakaian, penyimpanan, dan pengiriman produk Aromansa.</p>
                 </div>
 
                 <div class="faq-grid-modern">
@@ -1167,14 +1210,14 @@
                         <div class="faq-question-modern">
                             <div class="faq-question-left">
                                 <div class="faq-number">1</div>
-                                <h3>How do I use essential oils safely?</h3>
+                                <h3>Bagaimana cara menggunakan essential oil di diffuser dan di kulit?</h3>
                             </div>
                             <div class="faq-icon-modern">
                                 <i class="fa fa-chevron-down"></i>
                             </div>
                         </div>
                         <div class="faq-answer-modern">
-                            <p>Always dilute essential oils with a carrier oil (like coconut or jojoba oil) before applying to skin. Perform a patch test first to check for sensitivity. Avoid direct sunlight after using citrus oils, as they can cause photosensitivity. Keep out of reach of children and never ingest unless under professional guidance.</p>
+                            <p>Untuk diffuser ukuran 100–200 ml air, cukup teteskan 3 hingga 5 tetes essential oil. Jika ingin dioleskan ke kulit, encerkan terlebih dahulu menggunakan carrier oil (seperti jojoba atau sweet almond oil) atau pilih varian Roll-On Aromansa yang sudah siap oles.</p>
                         </div>
                     </div>
 
@@ -1182,14 +1225,14 @@
                         <div class="faq-question-modern">
                             <div class="faq-question-left">
                                 <div class="faq-number">2</div>
-                                <h3>What's the difference between therapeutic grade and regular?</h3>
+                                <h3>Apa bedanya Essential Oil 10ml, Roll-On, dan Linen Spray?</h3>
                             </div>
                             <div class="faq-icon-modern">
                                 <i class="fa fa-chevron-down"></i>
                             </div>
                         </div>
                         <div class="faq-answer-modern">
-                            <p>Therapeutic grade essential oils are pure, unadulterated extracts that have been tested for potency and quality. They contain no synthetic additives or fillers. Regular-grade oils may be diluted or contain synthetic compounds, making them less effective for aromatherapy and wellness purposes. Aromansa only offers therapeutic grade oils.</p>
+                            <p>Essential Oil 10ml adalah ekstrak murni pekat untuk diteteskan ke diffuser atau bahan campuran pijat. Roll-On 10ml sudah diencerkan sehingga aman langsung dioles ke pelipis atau pergelangan tangan. Sedangkan Linen Spray 100ml dirancang praktis untuk disemprotkan ke bantal, sprei, dan udara kamar.</p>
                         </div>
                     </div>
 
@@ -1197,14 +1240,14 @@
                         <div class="faq-question-modern">
                             <div class="faq-question-left">
                                 <div class="faq-number">3</div>
-                                <h3>Can I use essential oils for my children?</h3>
+                                <h3>Apakah aromaterapi aman digunakan di kamar anak atau bayi?</h3>
                             </div>
                             <div class="faq-icon-modern">
                                 <i class="fa fa-chevron-down"></i>
                             </div>
                         </div>
                         <div class="faq-answer-modern">
-                            <p>Yes, but with caution. Always use kid-safe oils like lavender, chamomile, or sweet orange in highly diluted forms. Avoid strong oils like peppermint and eucalyptus for children under 6. We recommend consulting a pediatric aromatherapist and always diffusing in well-ventilated areas with shorter exposure times for kids.</p>
+                            <p>Untuk ruangan yang terdapat anak-anak, gunakan takaran lebih ringan (1–2 tetes Lavender atau Spearmint pada diffuser) dengan sirkulasi udara kamar yang baik. Hindari mengoleskan essential oil murni langsung ke kulit anak.</p>
                         </div>
                     </div>
 
@@ -1212,14 +1255,14 @@
                         <div class="faq-question-modern">
                             <div class="faq-question-left">
                                 <div class="faq-number">4</div>
-                                <h3>How should I store essential oils?</h3>
+                                <h3>Bagaimana cara menyimpan botol agar wanginya tidak cepat berubah?</h3>
                             </div>
                             <div class="faq-icon-modern">
                                 <i class="fa fa-chevron-down"></i>
                             </div>
                         </div>
                         <div class="faq-answer-modern">
-                            <p>Store essential oils in a cool, dark place away from direct sunlight and heat. Keep bottles tightly closed to prevent oxidation. Most oils last 2-3 years when stored properly, though citrus oils have a shorter shelf life of about 1-2 years. Original dark glass bottles are designed to protect the oils from UV damage.</p>
+                            <p>Simpan botol di tempat sejuk dan kering, jauh dari sorotan matahari langsung atau sumber panas. Pastikan tutup botol selalu diputar rapat selesai digunakan agar minyak tidak mudah menguap dan teroksidasi.</p>
                         </div>
                     </div>
 
@@ -1227,14 +1270,14 @@
                         <div class="faq-question-modern">
                             <div class="faq-question-left">
                                 <div class="faq-number">5</div>
-                                <h3>Do you offer international shipping?</h3>
+                                <h3>Bagaimana cara memesan untuk pengiriman ke luar kota?</h3>
                             </div>
                             <div class="faq-icon-modern">
                                 <i class="fa fa-chevron-down"></i>
                             </div>
                         </div>
                         <div class="faq-answer-modern">
-                            <p>Currently, we ship domestically across Indonesia with free shipping on orders over Rp 200.000. For international shipping, please contact our team at aromansaofficial@gmail.com with your location and desired products. We are expanding our delivery network and will accommodate international orders on a case-by-case basis.</p>
+                            <p>Seluruh pesanan dikirim dari Cianjur, Jawa Barat ke seluruh wilayah Indonesia dengan pelindung bubble wrap berlapis. Anda dapat memesan langsung melalui Shopee, Tokopedia, atau menghubungi WhatsApp kami di +62 857-8290-9266.</p>
                         </div>
                     </div>
                 </div>
@@ -1256,49 +1299,55 @@
     <footer id="footer">
         <div class="footer-top">
             <div class="container">
-                <div class="row">
-                    <div class="col-lg-4 col-md-6 footer-info">
-                        <h3><span>Aromansa</span></h3>
-                        <p>Your trusted source for premium therapeutic grade essential oils, aromatherapy diffusers, and natural wellness products. Transform your home into a wellness sanctuary.</p>
+                <div class="footer-grid">
+                    <div class="footer-info">
+                        <a href="index.html" class="footer-brand">
+                            <img src="img/aromansa-logo-baru.png?v=3" alt="Logo Aromansa" class="footer-brand-logo">
+                            <span>Aromansa</span>
+                        </a>
+                        <p>Essential oil murni, roll-on, dan spray aromaterapi yang diracik untuk menemani waktu istirahat dan keseharian Anda.</p>
                         <div class="footer-social">
-                            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                            <a href="#" aria-label="Pinterest"><i class="fab fa-pinterest-p"></i></a>
-                            <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-                            <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                            <a href="https://wa.me/6285782909266" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp Aromansa"><i class="fab fa-whatsapp"></i></a>
+                            <a href="https://shopee.co.id/aromansa_id" target="_blank" rel="noopener noreferrer" aria-label="Shopee Aromansa"><i class="fa fa-shopping-bag"></i></a>
+                            <a href="https://www.tokopedia.com/aromansa" target="_blank" rel="noopener noreferrer" aria-label="Tokopedia Aromansa"><i class="fa fa-store"></i></a>
+                            <a href="mailto:aromansaofficial@gmail.com" aria-label="Email Aromansa"><i class="fa fa-envelope"></i></a>
                         </div>
                     </div>
-                    <div class="col-lg-2 col-md-6 footer-links">
-                        <h4>Quick Links</h4>
+                    <div class="footer-links">
+                        <h4>Navigasi</h4>
                         <ul>
-                            <li><a href="index.html">Home</a></li>
-                            <li><a href="equipment.html">Products</a></li>
-                            <li><a href="ai-personalization.html">AI Consultant</a></li>
-                            <li><a href="contact.html">Contact</a></li>
+                            <li><a href="index.html">Beranda</a></li>
+                            <li><a href="equipment.html">Produk</a></li>
+                            <li><a href="ai-personalization.html">Konsultan AI</a></li>
+                            <li><a href="ar-mood-scan.html">Scan Mood AR</a></li>
+                            <li><a href="contact.html">Kontak</a></li>
                         </ul>
                     </div>
-                    <div class="col-lg-3 col-md-6 footer-contact">
-                        <h4>Contact Us</h4>
-                        <p><i class="fa fa-map-marker-alt"></i> <span>Jl. Raya Bandung KM 8.8, Cianjur, Jawa Barat (43281), Indonesia</span></p>
-                        <p><i class="fa fa-phone"></i> <a href="tel:+6285782909266">+62 857-8290-9266</a></p>
-                        <p><i class="fa fa-envelope"></i> <a href="mailto:aromansaofficial@gmail.com">aromansaofficial@gmail.com</a></p>
-                        <p><i class="fa fa-clock"></i> <span>Mon - Sat: 08:00 - 20:00</span></p>
+                    <div class="footer-links">
+                        <h4>Koleksi</h4>
+                        <ul>
+                            <li><a href="equipment.html">Essential Oil</a></li>
+                            <li><a href="equipment.html">Roll-On Aromaterapi</a></li>
+                            <li><a href="equipment.html">Linen &amp; Room Spray</a></li>
+                            <li><a href="ai-personalization.html">Panduan Racikan</a></li>
+                            <li><a href="https://shopee.co.id/aromansa_id" target="_blank" rel="noopener noreferrer">Toko Resmi Shopee</a></li>
+                        </ul>
                     </div>
-                    <div class="col-lg-3 col-md-6 footer-newsletter">
-                        <h4>Wellness Newsletter</h4>
-                        <p>Subscribe for essential oil tips, wellness guides, and exclusive offers delivered to your inbox!</p>
-                        <form class="newsletter-form" action="#" method="post">
-                            <input type="email" name="email" placeholder="Your email address" required>
-                            <button type="submit" aria-label="Subscribe"><i class="fa fa-paper-plane"></i></button>
-                        </form>
+                    <div class="footer-contact">
+                        <h4>Hubungi Kami</h4>
+                        <p><i class="fa fa-map-marker-alt" aria-hidden="true"></i> <span>Jl. Raya Bandung KM 8.8, Cianjur, Jawa Barat 43281</span></p>
+                        <p><i class="fa fa-phone" aria-hidden="true"></i> <a href="tel:+6285782909266">+62 857-8290-9266</a></p>
+                        <p><i class="fa fa-envelope" aria-hidden="true"></i> <a href="mailto:aromansaofficial@gmail.com">aromansaofficial@gmail.com</a></p>
+                        <p><i class="fa fa-clock" aria-hidden="true"></i> <span>Senin – Sabtu, 08.00 – 20.00 WIB</span></p>
                     </div>
                 </div>
             </div>
         </div>
         <div class="footer-bottom">
             <div class="container">
-                <div class="footer-copyright">
-                    <p>&copy; 2026 <a href="index.html">Aromansa</a>. All Rights Reserved | Premium essential oils &amp; wellness products</p>
+                <div class="footer-bottom-inner">
+                    <p>&copy; 2026 <a href="index.html">Aromansa</a>. Hak cipta dilindungi.</p>
+                    <p class="footer-origin">Cianjur, Jawa Barat · Indonesia</p>
                 </div>
             </div>
         </div>
@@ -1311,11 +1360,13 @@
     <!-- Mobile Nav Overlay -->
     <div id="mobile-body-overly"></div>
     <nav id="mobile-nav">
+        <button class="mobile-nav-close" type="button" aria-label="Tutup navigasi"><i class="fa fa-times" aria-hidden="true"></i></button>
         <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="equipment.html">Products</a></li>
-            <li><a href="ai-personalization.html">AI Consultant</a></li>
-            <li class="menu-active"><a href="contact.html">Contact</a></li>
+            <li><a href="index.html">Beranda</a></li>
+            <li><a href="equipment.html">Produk</a></li>
+            <li><a href="ai-personalization.html">Konsultan AI</a></li>
+            <li><a href="ar-mood-scan.html">Scan Mood AR</a></li>
+            <li class="menu-active"><a href="contact.html">Kontak</a></li>
         </ul>
     </nav>
 
@@ -1324,7 +1375,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
 
     <!-- Template Javascript -->
-    <script src="js/main.js"></script>
+    <script src="js/main.js?theme=1"></script>
     
     <!-- Contact Page Interactive Scripts -->
     <script>
@@ -1358,6 +1409,19 @@
                 });
             }
             
+            function getApiBaseUrl() {
+                if (typeof window !== 'undefined') {
+                    const { protocol, hostname, port } = window.location;
+                    if (protocol === 'file:') return 'http://localhost:3000';
+                    if (hostname === 'localhost' || hostname === '127.0.0.1') {
+                        if (port && port !== '3000') {
+                            return `http://${hostname}:3000`;
+                        }
+                    }
+                }
+                return '';
+            }
+
             // ===== Contact Form Submission =====
             function initContactForm() {
                 const form = document.getElementById('contactForm');
@@ -1366,31 +1430,35 @@
                 
                 form.addEventListener('submit', function(e) {
                     e.preventDefault();
-                    
-                    const formData = new FormData(form);
+
                     const submitBtn = form.querySelector('.form-submit-btn');
+                    const status = document.getElementById('contactFormStatus');
                     const originalContent = submitBtn.innerHTML;
-                    
-                    // Show loading state
-                    submitBtn.innerHTML = '<i class="fa fa-spinner fa-spin"></i> <span>Sending...</span>';
+                    const data = Object.fromEntries(new FormData(form).entries());
+                    data.consent = data.consent === 'yes';
+                    if (status) status.textContent = '';
+                    submitBtn.innerHTML = '<i class="fa fa-spinner fa-spin" aria-hidden="true"></i> <span>Mengirim...</span>';
                     submitBtn.disabled = true;
-                    
-                    // Simulate sending (replace with actual form submission)
-                    setTimeout(function() {
-                        // Show success state
-                        submitBtn.innerHTML = '<i class="fa fa-check-circle"></i> <span>Message Sent!</span>';
-                        submitBtn.style.background = 'linear-gradient(135deg, #48bb78, #38a169)';
-                        
-                        // Reset form
+
+                    fetch(`${getApiBaseUrl()}/api/contact-submissions`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(data)
+                    }).then(async function(response) {
+                        const result = await response.json();
+                        if (!response.ok) {
+                            throw new Error(result.error || 'Pesan tidak dapat dikirim. Silakan coba lagi.');
+                        }
+
+                        submitBtn.innerHTML = '<i class="fa fa-check-circle" aria-hidden="true"></i> <span>Pesan terkirim</span>';
+                        if (status) status.textContent = 'Terima kasih. Pesan Anda sudah tersimpan dan akan kami tindak lanjuti.';
                         form.reset();
-                        
-                        // Reset button after 3 seconds
-                        setTimeout(function() {
-                            submitBtn.innerHTML = originalContent;
-                            submitBtn.style.background = '';
-                            submitBtn.disabled = false;
-                        }, 3000);
-                    }, 1500);
+                    }).catch(function(error) {
+                        if (status) status.textContent = error.message || 'Terjadi kendala saat mengirim pesan. Silakan coba kembali.';
+                        submitBtn.innerHTML = originalContent;
+                    }).finally(function() {
+                        submitBtn.disabled = false;
+                    });
                 });
             }
             
@@ -1440,5 +1508,6 @@
             }
         })();
     </script>
+    <script src="js/cart.js?v=6"></script>
 </body>
 </html>

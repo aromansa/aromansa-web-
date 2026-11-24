@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="utf-8">
+    <title>Scan Mood AR - Aromansa</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Temukan rekomendasi aroma Aromansa berdasarkan suasana hati dan preferensi Anda.">
+    <link href="img/favicon.png?v=3" rel="icon" type="image/png">
+    <link href="img/favicon.ico?v=3" rel="shortcut icon">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/clean-professional.css" rel="stylesheet">
+    <link href="css/footer-stunning.css" rel="stylesheet">
+    <link href="css/ar-mood-scan.css" rel="stylesheet">
+    <link href="css/cart.css?v=6" rel="stylesheet">
+    <link href="css/aromansa-theme.css?v=8" rel="stylesheet">
+</head>
+<body class="ar-mood-page">
+    <header id="nav">
+        <div class="nav-container">
+            <div class="nav-left">
+                <div id="logo"><a href="index.html"><img src="img/aromansa-logo-baru.png?v=3" alt="Logo Aromansa" class="navbar-logo-img"></a></div>
+            </div>
+            <nav id="nav-menu-container" aria-label="Navigasi utama">
+                <ul class="nav-menu">
+                    <li><a href="index.html"><span class="nav-text">Beranda</span><span class="nav-indicator"></span></a></li>
+                    <li><a href="equipment.html"><span class="nav-text">Produk</span><span class="nav-indicator"></span></a></li>
+                    <li><a href="ai-personalization.html"><span class="nav-text">Konsultan AI</span><span class="nav-indicator"></span></a></li>
+                    <li class="menu-active"><a href="ar-mood-scan.html" aria-current="page"><span class="nav-text">Scan Mood AR</span><span class="nav-indicator"></span></a></li>
+                    <li><a href="contact.html"><span class="nav-text">Kontak</span><span class="nav-indicator"></span></a></li>
+                </ul>
+            </nav>
+            <div class="nav-right">
+                <button type="button" class="nav-cart-btn" id="open-cart-btn" aria-label="Buka Keranjang Belanja">
+                    <i class="fa fa-shopping-bag" aria-hidden="true"></i>
+                    <span class="cart-badge" id="cart-badge">0</span>
+                </button>
+                <a href="https://shopee.co.id/aromansa_id" target="_blank" rel="noopener noreferrer" class="nav-cta">Belanja</a>
+                <button type="button" id="mobile-nav-toggle" aria-label="Buka navigasi" aria-expanded="false" aria-controls="mobile-nav">
+                    <span class="hamburger"><span class="hamburger-line"></span><span class="hamburger-line"></span><span class="hamburger-line"></span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="mood-page">
+        <section class="mood-intro" aria-labelledby="page-title">
+            <span class="hero-eyebrow">Eksplorasi Interaktif</span>
+            <h1 id="page-title">Scan Mood &amp; Kondisi Harian.</h1>
+            <p class="intro-copy">Jawab beberapa pertanyaan singkat lalu pindai ekspresi wajah Anda untuk menemukan racikan aroma yang paling pas hari ini.</p>
+        </section>
+
+        <div class="scan-steps" aria-label="Tahapan pemindaian">
+            <div class="scan-step is-current" data-step-indicator="form"><span>01</span><span>Profil</span></div>
+            <span class="step-rule" aria-hidden="true"></span>
+            <div class="scan-step" data-step-indicator="scan"><span>02</span><span>Scan</span></div>
+            <span class="step-rule" aria-hidden="true"></span>
+            <div class="scan-step" data-step-indicator="results"><span>03</span><span>Rekomendasi</span></div>
+        </div>
+
+        <div id="app-message" class="app-message" role="status" aria-live="polite" hidden></div>
+
+        <section id="form-step" class="step-panel form-panel" aria-labelledby="form-title">
+            <div class="panel-heading">
+                <div><p class="eyebrow">SEBELUM MEMULAI</p><h2 id="form-title" aria-live="polite">Siapa nama panggilanmu?</h2><p id="onboarding-hint" class="onboarding-hint">Kami akan memakai nama ini untuk menyapa di hasil scan.</p></div>
+                <span class="required-note">* Wajib diisi</span>
+            </div>
+            <form id="mood-form" novalidate>
+                <div class="onboarding-progress" role="progressbar" aria-label="Progres pengisian profil" aria-valuemin="1" aria-valuemax="10" aria-valuenow="1">
+                    <div class="onboarding-progress-top"><span id="onboarding-step-label">LANGKAH 1 DARI 10</span><span id="onboarding-percent">10%</span></div>
+                    <div class="onboarding-progress-track"><span id="onboarding-progress-fill"></span></div>
+                </div>
+
+                <div class="onboarding-stage is-active" data-onboarding-stage data-title="Siapa nama panggilanmu?" data-hint="Kami akan memakai nama ini untuk menyapa di hasil scan.">
+                    <label class="field-group">
+                        <span>Nama panggilan <span class="required-mark">*</span></span>
+                        <input type="text" name="nickname" autocomplete="given-name" maxlength="40" placeholder="Contoh: Rani" required>
+                    </label>
+                </div>
+
+                <div class="onboarding-stage" data-onboarding-stage data-title="Ke mana kami bisa menghubungimu?" data-hint="Nomor ini hanya untuk tindak lanjut terkait rekomendasi Aromansa." hidden>
+                    <label class="field-group">
+                        <span>Nomor telepon <span class="required-mark">*</span></span>
+                        <input type="tel" name="phone" autocomplete="tel" inputmode="tel" minlength="7" maxlength="30" placeholder="Contoh: +62 812 3456 7890" required>
+                    </label>
+                </div>
+
+                <div class="onboarding-stage" data-onboarding-stage data-title="Pilih rentang usiamu" data-hint="Informasi usia membantu kami menyaring rekomendasi dengan lebih aman." hidden>
+                    <label class="field-group">
+                        <span>Rentang usia <span class="required-mark">*</span></span>
+                        <select name="age" required>
+                            <option value="" selected disabled>Pilih rentang usia</option>
+                            <option value="under-18">Di bawah 18</option>
+                            <option value="18-25">18-25</option>
+                            <option value="26-35">26-35</option>
+                            <option value="36-45">36-45</option>
+                            <option value="46-plus">46+</option>
+                        </select>
+                    </label>
+                </div>
+
+                <div class="onboarding-stage" data-onboarding-stage data-title="Bagaimana perasaanmu hari ini?" data-hint="Pilih satu atau beberapa yang terasa paling sesuai." hidden>
+                    <fieldset class="choice-fieldset" data-required-group="concerns">
+                        <legend>Kondisi yang dirasakan hari ini <span class="required-mark">*</span><small>Pilih setidaknya satu</small></legend>
+                        <div class="choice-grid">
+                            <label class="choice-option"><input type="checkbox" name="concerns" value="stress"><span>Stres</span></label>
+                            <label class="choice-option"><input type="checkbox" name="concerns" value="sleep-deprived"><span>Kurang tidur</span></label>
+                            <label class="choice-option"><input type="checkbox" name="concerns" value="anxious"><span>Cemas</span></label>
+                            <label class="choice-option"><input type="checkbox" name="concerns" value="tired"><span>Lelah / kurang energi</span></label>
+                            <label class="choice-option"><input type="checkbox" name="concerns" value="unfocused"><span>Sulit fokus</span></label>
+                            <label class="choice-option"><input type="checkbox" name="concerns" value="low-mood"><span>Sedih / mood turun</span></label>
+                            <label class="choice-option"><input type="checkbox" name="concerns" value="headache"><span>Sakit kepala ringan</span></label>
+                            <label class="choice-option"><input type="checkbox" name="concerns" value="relax"><span>Ingin rileks</span></label>
+                        </div>
+                        <span class="field-error" data-error-for="concerns" hidden>Pilih minimal satu kondisi.</span>
+                    </fieldset>
+                </div>
+
+                <div class="onboarding-stage" data-onboarding-stage data-title="Seberapa tinggi tingkat stresmu?" data-hint="Geser penanda ke angka yang paling mendekati kondisi saat ini." hidden>
+                    <div class="field-group range-group">
+                        <label for="stress-level">Tingkat stres saat ini <span class="required-mark">*</span></label>
+                        <div class="range-labels"><span>1 · Rendah</span><output id="stress-output" for="stress-level">5</output><span>10 · Tinggi</span></div>
+                        <input type="range" id="stress-level" name="stress" min="1" max="10" value="5">
+                    </div>
+                </div>
+
+                <div class="onboarding-stage" data-onboarding-stage data-title="Bagaimana kualitas tidurmu?" data-hint="Pilih durasi tidurmu semalam." hidden>
+                    <label class="field-group">
+                        <span>Jam tidur semalam <span class="required-mark">*</span></span>
+                        <select name="sleep" required>
+                            <option value="" selected disabled>Pilih durasi tidur</option>
+                            <option value="under-4">Di bawah 4 jam</option>
+                            <option value="4-6">4-6 jam</option>
+                            <option value="6-8">6-8 jam</option>
+                            <option value="over-8">Lebih dari 8 jam</option>
+                        </select>
+                    </label>
+                </div>
+
+                <div class="onboarding-stage" data-onboarding-stage data-title="Aroma seperti apa yang kamu suka?" data-hint="Pilih satu atau beberapa keluarga aroma favoritmu." hidden>
+                    <fieldset class="choice-fieldset" data-required-group="scents">
+                        <legend>Aroma yang disukai <span class="required-mark">*</span><small>Pilih setidaknya satu</small></legend>
+                        <div class="choice-grid scent-grid">
+                            <label class="choice-option"><input type="checkbox" name="scents" value="floral"><span>Floral</span></label>
+                            <label class="choice-option"><input type="checkbox" name="scents" value="citrus"><span>Citrus</span></label>
+                            <label class="choice-option"><input type="checkbox" name="scents" value="woody"><span>Woody</span></label>
+                            <label class="choice-option"><input type="checkbox" name="scents" value="herbal"><span>Herbal / Mint</span></label>
+                            <label class="choice-option"><input type="checkbox" name="scents" value="sweet"><span>Manis / Vanilla</span></label>
+                        </div>
+                        <span class="field-error" data-error-for="scents" hidden>Pilih minimal satu aroma.</span>
+                    </fieldset>
+                </div>
+
+                <div class="onboarding-stage" data-onboarding-stage data-title="Bantu kami menyaring aroma dengan aman" data-hint="Pilih yang berlaku. Lewati jika tidak ada yang sesuai." hidden>
+                    <fieldset class="choice-fieldset">
+                        <legend>Apakah salah satu berlaku? <small>Opsional</small></legend>
+                        <div class="choice-grid">
+                            <label class="choice-option"><input type="checkbox" name="safety" value="pregnancy"><span>Hamil atau menyusui</span></label>
+                            <label class="choice-option"><input type="checkbox" name="safety" value="respiratory"><span>Asma atau gangguan napas</span></label>
+                            <label class="choice-option"><input type="checkbox" name="safety" value="epilepsy"><span>Epilepsi</span></label>
+                            <label class="choice-option"><input type="checkbox" name="safety" value="children"><span>Ada bayi/balita di rumah</span></label>
+                            <label class="choice-option"><input type="checkbox" name="safety" value="pets"><span>Ada kucing/anjing</span></label>
+                            <label class="choice-option"><input type="checkbox" name="safety" value="sensitive-skin"><span>Kulit sangat sensitif/eksim</span></label>
+                            <label class="choice-option"><input type="checkbox" name="safety" value="anticoagulants"><span>Minum pengencer darah atau alergi aspirin</span></label>
+                        </div>
+                    </fieldset>
+                </div>
+
+                <div class="onboarding-stage" data-onboarding-stage data-title="Ada aroma yang perlu dihindari?" data-hint="Opsional. Tuliskan alergi atau sensitivitas yang perlu kami perhatikan." hidden>
+                    <label class="field-group allergy-field">
+                        <span>Alergi atau sensitivitas aroma <span class="optional-note">Opsional</span></span>
+                        <input type="text" name="allergies" maxlength="160" placeholder="Contoh: lavender, jeruk, mint">
+                    </label>
+                </div>
+
+                <div class="onboarding-stage" data-onboarding-stage data-title="Satu langkah lagi sebelum scan" data-hint="Periksa persetujuan dan cara kami menjaga privasimu." hidden>
+                    <label class="consent-option">
+                        <input type="checkbox" name="data-consent" required>
+                        <span>Saya setuju nama, nomor telepon, rentang usia, jawaban, dan sensitivitas aroma yang saya isi disimpan secara privat untuk evaluasi Scan Mood AR dan tindak lanjut Aromansa. <span class="required-mark">*</span></span>
+                    </label>
+                    <label class="consent-option">
+                        <input type="checkbox" name="consent" required>
+                        <span>Saya setuju kamera digunakan untuk analisis ekspresi. Video tidak direkam dan tidak dikirim ke server. <span class="required-mark">*</span></span>
+                    </label>
+                    <p class="privacy-note"><i class="fas fa-shield-alt" aria-hidden="true"></i> Data formulir dikirim ke Google Sheets. Video kamera dan hasil analisis ekspresi hanya diproses di browser dan tidak disimpan.</p>
+                </div>
+
+                <div class="onboarding-navigation">
+                    <button class="secondary-button onboarding-back" type="button" id="onboarding-back"><i class="fas fa-arrow-left" aria-hidden="true"></i> Kembali</button>
+                    <button class="primary-button onboarding-next" type="button" id="onboarding-next">Lanjut <i class="fas fa-arrow-right" aria-hidden="true"></i></button>
+                    <button class="primary-button start-button" type="submit" disabled hidden><span>Mulai Scan</span><i class="fas fa-camera" aria-hidden="true"></i></button>
+                </div>
+                <p class="onboarding-shortcut" id="onboarding-shortcut">Tekan Enter untuk melanjutkan</p>
+                <input type="text" name="website" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true">
+            </form>
+        </section>
+
+        <section id="scan-step" class="step-panel scan-panel" aria-labelledby="scan-title" hidden>
+            <div class="panel-heading scan-heading">
+                <div><p class="eyebrow">ANALISIS DI PERANGKAT ANDA</p><h2 id="scan-title">Arahkan wajah ke kamera</h2></div>
+                <span class="live-indicator"><span></span> LIVE</span>
+            </div>
+            <div class="camera-frame" id="camera-frame">
+                <video id="camera-video" autoplay playsinline muted aria-label="Tampilan kamera langsung"></video>
+                <canvas id="face-overlay" aria-hidden="true"></canvas>
+                <div class="camera-guide" aria-hidden="true"><span></span></div>
+                <div class="camera-status" id="camera-status">Menyiapkan kamera...</div>
+                <div class="scan-progress" aria-label="Progres scan">
+                    <svg viewBox="0 0 64 64" aria-hidden="true"><circle class="progress-track" cx="32" cy="32" r="27"></circle><circle class="progress-value" id="progress-ring" cx="32" cy="32" r="27"></circle></svg>
+                    <span id="progress-label">0%</span>
+                </div>
+            </div>
+            <p class="camera-hint" id="camera-hint">Pastikan wajah terlihat jelas dan berada di tengah bingkai.</p>
+            <div class="scan-actions"><button class="secondary-button" id="cancel-scan" type="button"><i class="fas fa-times" aria-hidden="true"></i> Batalkan scan</button></div>
+        </section>
+
+        <section id="results-step" class="step-panel results-panel" aria-labelledby="results-title" hidden>
+            <div class="results-header">
+                <p class="eyebrow">HASIL PERKIRAAN EKSPRESI</p>
+                <h2 id="results-title">Terima kasih, <span id="result-name"></span></h2>
+                <p id="mood-summary" class="mood-summary"></p>
+            </div>
+            <div class="mood-chart" id="mood-chart" aria-label="Ringkasan ekspresi terdeteksi"></div>
+            <div class="recommendation-heading"><div><p class="eyebrow">AROMA PILIHAN UNTUKMU</p><h3>Rekomendasi personal</h3></div><span class="blend-label">Form utama · ekspresi pendukung</span></div>
+            <div id="recommendation-notices" class="recommendation-notices" aria-live="polite"></div>
+            <div id="recommendation-list" class="recommendation-list"></div>
+            <p class="disclaimer">Hasil ini berupa rekomendasi aroma berdasarkan preferensi dan perkiraan ekspresi wajah, bukan diagnosis atau saran medis. Essential oil bukan pengganti perawatan medis. Lakukan uji tempel sebelum dipakai di kulit dan hentikan pemakaian bila muncul reaksi.</p>
+            <button class="secondary-button rescan-button" id="scan-again" type="button"><i class="fas fa-redo-alt" aria-hidden="true"></i> Scan Ulang</button>
+        </section>
+    </main>
+
+    <footer id="footer">
+        <div class="footer-top">
+            <div class="container">
+                <div class="footer-grid">
+                    <div class="footer-info">
+                        <a href="index.html" class="footer-brand">
+                            <img src="img/aromansa-logo-baru.png?v=3" alt="Logo Aromansa" class="footer-brand-logo">
+                            <span>Aromansa</span>
+                        </a>
+                        <p>Essential oil murni, roll-on, dan spray aromaterapi yang diracik untuk menemani waktu istirahat dan keseharian Anda.</p>
+                        <div class="footer-social">
+                            <a href="https://wa.me/6285782909266" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp Aromansa"><i class="fab fa-whatsapp"></i></a>
+                            <a href="https://shopee.co.id/aromansa_id" target="_blank" rel="noopener noreferrer" aria-label="Shopee Aromansa"><i class="fa fa-shopping-bag"></i></a>
+                            <a href="https://www.tokopedia.com/aromansa" target="_blank" rel="noopener noreferrer" aria-label="Tokopedia Aromansa"><i class="fa fa-store"></i></a>
+                            <a href="mailto:aromansaofficial@gmail.com" aria-label="Email Aromansa"><i class="fa fa-envelope"></i></a>
+                        </div>
+                    </div>
+                    <div class="footer-links">
+                        <h4>Navigasi</h4>
+                        <ul>
+                            <li><a href="index.html">Beranda</a></li>
+                            <li><a href="equipment.html">Produk</a></li>
+                            <li><a href="ai-personalization.html">Konsultan AI</a></li>
+                            <li><a href="ar-mood-scan.html">Scan Mood AR</a></li>
+                            <li><a href="contact.html">Kontak</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-links">
+                        <h4>Koleksi</h4>
+                        <ul>
+                            <li><a href="equipment.html">Essential Oil</a></li>
+                            <li><a href="equipment.html">Roll-On Aromaterapi</a></li>
+                            <li><a href="equipment.html">Linen &amp; Room Spray</a></li>
+                            <li><a href="ai-personalization.html">Panduan Racikan</a></li>
+                            <li><a href="https://shopee.co.id/aromansa_id" target="_blank" rel="noopener noreferrer">Toko Resmi Shopee</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-contact">
+                        <h4>Hubungi Kami</h4>
+                        <p><i class="fa fa-map-marker-alt" aria-hidden="true"></i> <span>Jl. Raya Bandung KM 8.8, Cianjur, Jawa Barat 43281</span></p>
+                        <p><i class="fa fa-phone" aria-hidden="true"></i> <a href="tel:+6285782909266">+62 857-8290-9266</a></p>
+                        <p><i class="fa fa-envelope" aria-hidden="true"></i> <a href="mailto:aromansaofficial@gmail.com">aromansaofficial@gmail.com</a></p>
+                        <p><i class="fa fa-clock" aria-hidden="true"></i> <span>Senin – Sabtu, 08.00 – 20.00 WIB</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="footer-bottom-inner">
+                    <p>&copy; 2026 <a href="index.html">Aromansa</a>. Hak cipta dilindungi.</p>
+                    <p class="footer-origin">Cianjur, Jawa Barat · Indonesia</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <div id="mobile-body-overly"></div>
+    <nav id="mobile-nav" aria-label="Navigasi mobile">
+        <button class="mobile-nav-close" type="button" aria-label="Tutup navigasi"><i class="fas fa-times" aria-hidden="true"></i></button>
+        <ul>
+            <li><a href="index.html">Beranda</a></li>
+            <li><a href="equipment.html">Produk</a></li>
+            <li><a href="ai-personalization.html">Konsultan AI</a></li>
+            <li class="menu-active"><a href="ar-mood-scan.html" aria-current="page">Scan Mood AR</a></li>
+            <li><a href="contact.html">Kontak</a></li>
+        </ul>
+    </nav>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="js/main.js?ar-mood-scan=1&theme=1"></script>
+    <script src="js/cart.js?v=6"></script>
+    <script type="module" src="js/ar-mood-scan.js?v=6"></script>
+</body>
+</html>

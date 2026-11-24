@@ -1,14 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="utf-8">
-    <title>Aromansa - Premium Essential Oils & Natural Wellness</title>
+    <title>Aromansa - Essential Oil dan Aromaterapi</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="essential oils, aromatherapy, natural wellness, lavender oil, tea tree oil, diffusers, organic oils" name="keywords">
-    <meta content="Aromansa provides premium therapeutic grade essential oils, aromatherapy diffusers, and natural wellness products for relaxation, skincare, and holistic health." name="description">
+    <meta content="essential oil, aromaterapi, lavender, peppermint, perawatan alami, Aromansa" name="keywords">
+    <meta content="Temukan essential oil pilihan, rekomendasi personal, dan ritual aromaterapi dari Aromansa." name="description">
 
     <!-- Favicon -->
-    <link href="img/favicon.ico" rel="icon">
+    <link href="img/favicon.png?v=3" rel="icon" type="image/png">
+    <link href="img/favicon.ico?v=3" rel="shortcut icon">
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
@@ -21,6 +22,7 @@
     <link href="css/style.css" rel="stylesheet">
     <link href="css/clean-professional.css" rel="stylesheet">
     <link href="css/footer-stunning.css" rel="stylesheet">
+    <link href="css/cart.css?v=6" rel="stylesheet">
     <style>
         /* ===== STUNNING HERO SECTION ===== */
         .hero-stunning {
@@ -129,11 +131,11 @@
 
         .hero-title-stunning {
             font-size: 64px;
-            font-weight: 900;
+            font-weight: 700;
             color: #ffffff;
             margin: 0 0 25px 0;
-            font-family: 'Inter', sans-serif;
-            line-height: 1.1;
+            font-family: 'Playfair Display', Georgia, serif;
+            line-height: 1.15;
             text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
         }
 
@@ -944,398 +946,93 @@
             animation: fadeInOil 0.5s ease;
         }
     </style>
+    <link href="css/aromansa-theme.css?v=8" rel="stylesheet">
 </head>
 
-<body>
+<body class="home-page">
     <!-- Nav Start -->
     <header id="nav">
         <div class="nav-container">
             <div class="nav-left">
                 <div id="logo">
                     <a href="index.html">
-                        <img src="img/aromansa-logo.png" alt="Aromansa Logo" class="navbar-logo-img">
+                        <img src="img/aromansa-logo-baru.png?v=3" alt="Logo Aromansa" class="navbar-logo-img">
                     </a>
                 </div>
             </div>
 
             <nav id="nav-menu-container" aria-label="Main navigation">
                 <ul class="nav-menu">
-                    <li class="menu-active"><a href="index.html"><span class="nav-text">Home</span><span class="nav-indicator"></span></a></li>
-                    <li><a href="equipment.html"><span class="nav-text">Products</span><span class="nav-indicator"></span></a></li>
-                    <li><a href="ai-personalization.html"><span class="nav-text">AI Consultant</span><span class="nav-indicator"></span></a></li>
-                    <li><a href="contact.html"><span class="nav-text">Contact</span><span class="nav-indicator"></span></a></li>
+                    <li class="menu-active"><a href="index.html"><span class="nav-text">Beranda</span><span class="nav-indicator"></span></a></li>
+                    <li><a href="equipment.html"><span class="nav-text">Produk</span><span class="nav-indicator"></span></a></li>
+                    <li><a href="ai-personalization.html"><span class="nav-text">Konsultan AI</span><span class="nav-indicator"></span></a></li>
+                    <li><a href="ar-mood-scan.html"><span class="nav-text">Scan Mood AR</span><span class="nav-indicator"></span></a></li>
+                    <li><a href="contact.html"><span class="nav-text">Kontak</span><span class="nav-indicator"></span></a></li>
                 </ul>
             </nav>
 
             <div class="nav-right">
-                <a href="https://shopee.co.id/aromansa_id" target="_blank" rel="noopener noreferrer" class="nav-cta">Shop Now</a>
-                <a href="#" id="mobile-nav-toggle" aria-label="Toggle mobile navigation">
+                <button type="button" class="nav-cart-btn" id="open-cart-btn" aria-label="Buka Keranjang Belanja">
+                    <i class="fa fa-shopping-bag" aria-hidden="true"></i>
+                    <span class="cart-badge" id="cart-badge">0</span>
+                </button>
+                <a href="https://shopee.co.id/aromansa_id" target="_blank" rel="noopener noreferrer" class="nav-cta">Belanja</a>
+                <button type="button" id="mobile-nav-toggle" aria-label="Toggle mobile navigation" aria-expanded="false" aria-controls="mobile-nav">
                     <span class="hamburger">
                         <span class="hamburger-line"></span>
                         <span class="hamburger-line"></span>
                         <span class="hamburger-line"></span>
                     </span>
-                </a>
+                </button>
             </div>
         </div>
     </header>
     <!-- Nav End -->
 
     <main>
-        <!-- Stunning Hero Section -->
+        <!-- Hero -->
         <section class="hero-stunning">
             <div class="hero-particles-bg"></div>
             <div class="hero-gradient-orbs"></div>
-            <div class="container">
+            <div class="container hero-main-container">
                 <div class="hero-content-stunning">
-                    <div class="hero-badge-stunning">
-                        <i class="fa fa-leaf"></i>
-                        <span>100% Pure & Therapeutic Grade</span>
-                    </div>
-                    <h1 class="hero-title-stunning">
-                        Natural Wellness with<br>
-                        <span class="highlight-gold">Aromansa Essential Oils</span>
-                    </h1>
-                    <div class="typewriter-oils">
-                        <div class="typewriter-glass-bg">
-                            <span class="typewriter-text" id="oilTypewriter"></span>
-                            <span class="typewriter-emoji" id="oilEmoji"></span>
-                        </div>
-                    </div>
+                    <span class="hero-eyebrow">Aromaterapi</span>
+                    <h1 class="hero-title-stunning">Satu Tetes Hening di Tengah Hari yang Riuh.</h1>
                     <p class="hero-subtitle-stunning">
-                        Discover premium therapeutic grade essential oils for relaxation, energy, skincare, and natural living. Transform your home into a wellness sanctuary.
+                        Minyak esensial murni dari sulingan bunga, daun, dan kulit jeruk pilihan—diracik untuk menemani waktu istirahat, kerja fokus, hingga tidur malam yang lelap.
                     </p>
                     <div class="hero-buttons-stunning">
                         <a href="equipment.html" class="btn-hero-primary">
-                            <i class="fa fa-shopping-bag"></i>
-                            <span>Shop Essential Oils</span>
+                            <span>Lihat Koleksi</span>
                         </a>
                         <a href="ai-personalization.html" class="btn-hero-secondary">
-                            <i class="fa fa-robot"></i>
-                            <span>Get AI Recommendations</span>
+                            <span>Tanya Konsultan Aromansa <i class="fa fa-arrow-right" aria-hidden="true"></i></span>
                         </a>
                     </div>
-                    <div class="hero-stats-floating">
-                        <div class="hero-stat-pill">
-                            <i class="fa fa-flask"></i>
-                            <div>
-                                <div class="stat-number">14+</div>
-                                <div class="stat-label">Essential Oils</div>
-                            </div>
-                        </div>
-                        <div class="hero-stat-pill">
-                            <i class="fa fa-users"></i>
-                            <div>
-                                <div class="stat-number">100+</div>
-                                <div class="stat-label">Happy Customers</div>
-                            </div>
-                        </div>
-                        <div class="hero-stat-pill">
-                            <i class="fa fa-star"></i>
-                            <div>
-                                <div class="stat-number">100%</div>
-                                <div class="stat-label">Pure & Natural</div>
-                            </div>
-                        </div>
+                    <div class="hero-product-visual">
+                        <img src="img/lavender-essential-oil.png" alt="Botol essential oil Lavender Aromansa" fetchpriority="high">
                     </div>
                 </div>
-            </div>
-        </section>
-
-        <!-- Our Journey & Purpose Section (Existing) -->
-        <section id="aromansa-story" class="aromansa-story">
-            <div class="container">
-                <div class="section-head">
-                    <span class="section-label">Our Story</span>
-                    <h2>Our Journey & Purpose</h2>
-                    <p>Discover our passion for natural wellness and the dedicated team behind every bottle</p>
-                </div>
-
-                <div class="story-layout-v2">
-                    <!-- Tab Navigation -->
-                    <div class="story-tabs">
-                        <button class="story-tab active" data-tab="story" id="tabStory">
-                            <i class="fa fa-image"></i>
-                            <span>Our Story</span>
-                            <div class="tab-indicator"></div>
-                        </button>
-                        <button class="story-tab" data-tab="journey" id="tabJourney">
-                            <i class="fa fa-road"></i>
-                            <span>Journey</span>
-                            <div class="tab-indicator"></div>
-                        </button>
-                    </div>
-
-                    <!-- Story Slideshow Panel -->
-                    <div class="story-panel active" id="storyPanel">
-                        <div class="story-slideshow">
-                        <div class="story-slide active" data-slide="0">
-                            <div class="story-card-large">
-                                <img src="img/aromansa-tim.jpg" alt="Aromansa Team" class="story-bg">
-                                <div class="story-kenburns"></div>
-                                <div class="story-content-large">
-                                    <div class="story-icon-large">
-                                        <i class="fa fa-users"></i>
-                                    </div>
-                                    <h3>Our Dedicated Team</h3>
-                                    <p>Passionate experts crafting nature's finest essential oils for your wellness journey</p>
-                                    <div class="story-line-large"></div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="story-slide" data-slide="1">
-                            <div class="story-card-large">
-                                <img src="https://media.discordapp.net/attachments/1251199758228262955/1493551781731631268/IMG_1905.jpg?ex=69e0b37d&is=69df61fd&hm=ac2c4523abe3a13689458363bc79da72238e5704e22da733486477e5723b234b&=&format=webp&width=1178&height=902" alt="Manawa Festival 2024" class="story-bg">
-                                <div class="story-kenburns"></div>
-                                <div class="story-content-large">
-                                    <div class="story-icon-large">
-                                        <i class="fa fa-award"></i>
-                                    </div>
-                                    <h3>Manawa Festival 2024</h3>
-                                    <p>We opened booth in Ciwalk 2024</p>
-                                    <div class="story-line-large"></div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="story-slide" data-slide="2">
-                            <div class="story-card-large">
-                                <img src="https://media.discordapp.net/attachments/1251199758228262955/1493551785829339216/XT5R4702.jpg?ex=69df61fe&is=69de107e&hm=7a5f5d2737c9281e6c95a6f0f37b64b35f8017e1e9523a80cf8807568eb0c721&=&format=webp&width=1215&height=810" alt="Aromansa Wellness Products" class="story-bg">
-                                <div class="story-kenburns"></div>
-                                <div class="story-content-large">
-                                    <div class="story-icon-large">
-                                        <i class="fa fa-leaf"></i>
-                                    </div>
-                                    <h3>Wellness Collection</h3>
-                                    <p>From Lavender to Eucalyptus - nature's most powerful healing blends</p>
-                                    <div class="story-line-large"></div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="story-slide" data-slide="3">
-                            <div class="story-card-large">
-                                <img src="https://media.discordapp.net/attachments/1251199758228262955/1493551783203835979/XT5R4922.jpg?ex=69df61fd&is=69de107d&hm=b0230b3eae8f51495be504a5c5273d7c45c5fa45274f1dba96c92a823508fe25&=&format=webp&width=1215&height=810" alt="Aromansa Daily Ritual" class="story-bg">
-                                <div class="story-kenburns"></div>
-                                <div class="story-content-large">
-                                    <div class="story-icon-large">
-                                        <i class="fa fa-seedling"></i>
-                                    </div>
-                                    <h3>Daily Rituals</h3>
-                                    <p>Simple wellness routines designed to support focus, calm, and emotional balance every day</p>
-                                    <div class="story-line-large"></div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="story-slide" data-slide="4">
-                            <div class="story-card-large">
-                                <img src="https://media.discordapp.net/attachments/1251199758228262955/1493551784394756218/XT5R4848.jpg?ex=69df61fe&is=69de107e&hm=b580c2c9b025a79eae570f119e7574c53334830cc278b879843184e8be6bfa80&=&format=webp&width=1215&height=810" alt="Aromansa Craftsmanship" class="story-bg">
-                                <div class="story-kenburns"></div>
-                                <div class="story-content-large">
-                                    <div class="story-icon-large">
-                                        <i class="fa fa-hand-holding-heart"></i>
-                                    </div>
-                                    <h3>Trusted Craftsmanship</h3>
-                                    <p>Every bottle is carefully crafted with quality ingredients and a passion for natural wellbeing</p>
-                                    <div class="story-line-large"></div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <button class="story-prev" aria-label="Previous slide">
-                            <i class="fa fa-chevron-left"></i>
-                        </button>
-                        <button class="story-next" aria-label="Next slide">
-                            <i class="fa fa-chevron-right"></i>
-                        </button>
-
-                        <div class="story-dots">
-                            <span class="story-dot active" data-slide="0"></span>
-                            <span class="story-dot" data-slide="1"></span>
-                            <span class="story-dot" data-slide="2"></span>
-                            <span class="story-dot" data-slide="3"></span>
-                            <span class="story-dot" data-slide="4"></span>
-                        </div>
-
-                        <div class="story-progress">
-                            <div class="story-progress-bar"></div>
+                <div class="hero-editorial-bar" aria-label="Keunggulan Aromansa">
+                    <div class="hero-editorial-item">
+                        <span class="editorial-num">01</span>
+                        <div>
+                            <strong>Ekstrak Botani Murni</strong>
+                            <small>Tanpa pewangi sintetis berlebih</small>
                         </div>
                     </div>
-                </div>
-
-                <!-- Journey Panel -->
-                <div class="story-panel" id="journeyPanel">
-                    <div class="journey-timeline-wrapper">
-                        <div class="journey-header">
-                            <h3><i class="fa fa-clock"></i> Aromansa Journey</h3>
-                            <span class="journey-badge">8 Milestones</span>
+                    <div class="hero-editorial-item">
+                        <span class="editorial-num">02</span>
+                        <div>
+                            <strong>14 Varian Aroma</strong>
+                            <small>Floral, citrus, herbal, hingga woody</small>
                         </div>
-
-                        <div class="zigzag-timeline" id="zigzagTimeline">
-                            <!-- Timeline Start -->
-                            <div class="timeline-start-marker">
-                                <div class="start-badge">
-                                    <i class="fa fa-flag-checkered"></i>
-                                    <span>The Beginning</span>
-                                </div>
-                            </div>
-
-                            <!-- Item 1 - Left -->
-                            <div class="zigzag-item left">
-                                <div class="zigzag-card">
-                                    <div class="zigzag-logo">
-                                        <img src="https://inspirenetwork.uk/wp-content/uploads/2025/03/Logo-BINUS-University_page-0001-1024x725.jpg" alt="Aromansa">
-                                    </div>
-                                    <div class="zigzag-content">
-                                        <span class="zigzag-year">2024</span>
-                                        <h4>Brand Beginnings</h4>
-                                        <p>Aromansa launched with a mission to provide premium natural wellness essentials to Indonesia.</p>
-                                        <div class="zigzag-tags">
-                                            <span class="zigzag-tag">Foundation</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="zigzag-connector left-connector"></div>
-                            </div>
-
-                            <!-- Item 2 - Right -->
-                            <div class="zigzag-item right">
-                                <div class="zigzag-connector right-connector"></div>
-                                <div class="zigzag-card">
-                                    <div class="zigzag-logo">
-                                        <img src="img/aromansa-logo.png" alt="Aromansa">
-                                    </div>
-                                    <div class="zigzag-content">
-                                        <span class="zigzag-year">2024</span>
-                                        <h4>First Product Line</h4>
-                                        <p>Launched 10 pure essential oils including Lavender, Tea Tree, Eucalyptus, and Peppermint.</p>
-                                        <div class="zigzag-tags">
-                                            <span class="zigzag-tag highlight">Products</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Item 3 - Left -->
-                            <div class="zigzag-item left">
-                                <div class="zigzag-card">
-                                    <div class="zigzag-logo">
-                                        <img src="img/aromansa-logo.png" alt="Aromansa">
-                                    </div>
-                                    <div class="zigzag-content">
-                                        <span class="zigzag-year">2025</span>
-                                        <h4>Growing Community</h4>
-                                        <p>Reached 100+ happy customers and built a loyal wellness enthusiast community.</p>
-                                        <div class="zigzag-tags">
-                                            <span class="zigzag-tag">Milestone</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="zigzag-connector left-connector"></div>
-                            </div>
-
-                            <!-- Item 4 - Right with BINUS logo -->
-                            <div class="zigzag-item right">
-                                <div class="zigzag-connector right-connector"></div>
-                                <div class="zigzag-card featured-card">
-                                    <div class="zigzag-logos">
-                                        <img src="img/aromansa-logo.png" alt="Aromansa" class="main-logo">
-                                        <span class="logo-plus">+</span>
-                                        <img src="img/binus-logo.svg" alt="BINUS University" class="partner-logo">
-                                    </div>
-                                    <div class="zigzag-content">
-                                        <span class="zigzag-year">2025</span>
-                                        <h4>Product Expansion</h4>
-                                        <p>Expanded into roll-on blends, spray collections, and specialized wellness blends.</p>
-                                        <div class="zigzag-tags">
-                                            <span class="zigzag-tag">Expansion</span>
-                                            <span class="zigzag-tag highlight">Partnership</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Item 5 - Left -->
-                            <div class="zigzag-item left">
-                                <div class="zigzag-card">
-                                    <div class="zigzag-logo">
-                                        <img src="img/aromansa-logo.png" alt="Aromansa">
-                                    </div>
-                                    <div class="zigzag-content">
-                                        <span class="zigzag-year">2025</span>
-                                        <h4>Shopee Store Launch</h4>
-                                        <p>Opened official Shopee store for accessible nationwide shipping across Indonesia.</p>
-                                        <div class="zigzag-tags">
-                                            <span class="zigzag-tag">E-Commerce</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="zigzag-connector left-connector"></div>
-                            </div>
-
-                            <!-- Item 6 - Right -->
-                            <div class="zigzag-item right">
-                                <div class="zigzag-connector right-connector"></div>
-                                <div class="zigzag-card">
-                                    <div class="zigzag-logo">
-                                        <img src="img/aromansa-logo.png" alt="Aromansa">
-                                    </div>
-                                    <div class="zigzag-content">
-                                        <span class="zigzag-year">2025</span>
-                                        <h4>Quality Certification</h4>
-                                        <p>Achieved therapeutic grade certification for all essential oils with third-party lab testing.</p>
-                                        <div class="zigzag-tags">
-                                            <span class="zigzag-tag highlight">Quality</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Item 7 - Left -->
-                            <div class="zigzag-item left">
-                                <div class="zigzag-card">
-                                    <div class="zigzag-logo">
-                                        <img src="img/aromansa-logo.png" alt="Aromansa">
-                                    </div>
-                                    <div class="zigzag-content">
-                                        <span class="zigzag-year">2026</span>
-                                        <h4>AI Consultant Launch</h4>
-                                        <p>Introduced AI-powered consultant for personalized essential oil recommendations.</p>
-                                        <div class="zigzag-tags">
-                                            <span class="zigzag-tag highlight">Innovation</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="zigzag-connector left-connector"></div>
-                            </div>
-
-                            <!-- Item 8 - Right -->
-                            <div class="zigzag-item right">
-                                <div class="zigzag-connector right-connector"></div>
-                                <div class="zigzag-card future-card">
-                                    <div class="zigzag-logo">
-                                        <img src="img/aromansa-logo.png" alt="Aromansa">
-                                    </div>
-                                    <div class="zigzag-content">
-                                        <span class="zigzag-year">2026</span>
-                                        <h4>Future Vision</h4>
-                                        <p>Building Indonesia's most trusted natural wellness brand with global standards.</p>
-                                        <div class="zigzag-tags">
-                                            <span class="zigzag-tag highlight">Vision</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Timeline End -->
-                            <div class="timeline-end-marker">
-                                <div class="end-badge">
-                                    <i class="fa fa-rocket"></i>
-                                    <span>To Be Continued...</span>
-                                </div>
-                            </div>
+                    </div>
+                    <div class="hero-editorial-item">
+                        <span class="editorial-num">03</span>
+                        <div>
+                            <strong>Tiga Format Praktis</strong>
+                            <small>Dropper 10ml, Roll-On &amp; Linen Spray</small>
                         </div>
                     </div>
                 </div>
@@ -1346,38 +1043,42 @@
         <section class="wellness-categories">
             <div class="container">
                 <div class="section-head">
-                    <span class="section-label"><i class="fa fa-spa"></i> Wellness Solutions</span>
-                    <h2>Find Your Perfect Wellness Path</h2>
-                    <p>Explore our curated categories designed for your specific wellness needs</p>
+                    <span class="section-label">Kebutuhan Harian</span>
+                    <h2>Pilih Aroma Sesuai Kondisi Tubuh</h2>
+                    <p>Setiap bahan tanaman memiliki karakter wangi yang bekerja berbeda untuk pikiran dan tubuh.</p>
                 </div>
                 <div class="categories-grid">
                     <div class="category-card-stunning">
-                        <div class="category-icon-stunning">
-                            <i class="fa fa-bed"></i>
+                        <div class="category-card-top">
+                            <span class="category-num">01</span>
+                            <span class="category-tag-sub">Malam</span>
                         </div>
-                        <h3>Sleep & Relaxation</h3>
-                        <p>Lavender, Chamomile, and Ylang-Ylang for deep relaxation and restful sleep</p>
+                        <h3>Tidur Lebih Lelap</h3>
+                        <p>Lavender, Frangipani, dan Ylang-Ylang membantu meredakan pikiran yang penuh sebelum tidur.</p>
                     </div>
                     <div class="category-card-stunning">
-                        <div class="category-icon-stunning">
-                            <i class="fa fa-bolt"></i>
+                        <div class="category-card-top">
+                            <span class="category-num">02</span>
+                            <span class="category-tag-sub">Pagi</span>
                         </div>
-                        <h3>Energy & Focus</h3>
-                        <p>Peppermint, Lemon, and Eucalyptus to boost energy and mental clarity</p>
+                        <h3>Fokus &amp; Kesegaran Pagi</h3>
+                        <p>Peppermint, Lemon, dan Spearmint memberi sensasi segar saat memulai jam kerja atau belajar.</p>
                     </div>
                     <div class="category-card-stunning">
-                        <div class="category-icon-stunning">
-                            <i class="fa fa-heart"></i>
+                        <div class="category-card-top">
+                            <span class="category-num">03</span>
+                            <span class="category-tag-sub">Pemulihan</span>
                         </div>
-                        <h3>Skincare & Beauty</h3>
-                        <p>Tea Tree, Palmarosa, and Frankincense for natural skincare routines</p>
+                        <h3>Relaksasi Otot &amp; Napas Lega</h3>
+                        <p>Eucalyptus dan Gandapura menghangatkan tubuh sekaligus menyegarkan pernapasan saat cuaca dingin.</p>
                     </div>
                     <div class="category-card-stunning">
-                        <div class="category-icon-stunning">
-                            <i class="fa fa-shield-alt"></i>
+                        <div class="category-card-top">
+                            <span class="category-num">04</span>
+                            <span class="category-tag-sub">Ruangan</span>
                         </div>
-                        <h3>Immune Support</h3>
-                        <p>Sweet Orange, Lemongrass, and blends to strengthen your defenses</p>
+                        <h3>Suasana Rumah Bersih</h3>
+                        <p>Sweet Orange, Lemongrass, dan Palmarosa menjaga udara ruangan tetap segar dan bebas bau pengap.</p>
                     </div>
                 </div>
             </div>
@@ -1387,56 +1088,353 @@
         <section class="bestsellers-section">
             <div class="container">
                 <div class="section-head">
-                    <span class="section-label"><i class="fa fa-fire"></i> Bestsellers</span>
-                    <h2>Most Loved Products</h2>
-                    <p>Our customers' favorite essential oils that keep them coming back</p>
+                    <span class="section-label">Koleksi Pilihan</span>
+                    <h2>Koleksi Lengkap Aromansa</h2>
+                    <p>Minyak esensial murni, roll-on praktis, dan spray aromaterapi yang diracik untuk menemani hari Anda.</p>
+                </div>
+                <div class="carousel-controls" aria-label="Navigasi koleksi produk">
+                    <button type="button" data-carousel-target=".bestsellers-grid" data-direction="-1" aria-label="Produk sebelumnya"><i class="fa fa-angle-left" aria-hidden="true"></i></button>
+                    <button type="button" data-carousel-target=".bestsellers-grid" data-direction="1" aria-label="Produk berikutnya"><i class="fa fa-angle-right" aria-hidden="true"></i></button>
                 </div>
                 <div class="bestsellers-grid">
+                    <!-- 1. Lavender -->
                     <div class="bestseller-card">
-                        <div class="bestseller-badge">#1 Best Seller</div>
+                        <div class="bestseller-badge">Terlaris</div>
                         <div class="bestseller-img">
-                            <i class="fa fa-flask"></i>
+                            <img src="https://down-id.img.susercontent.com/file/id-11134207-81ztc-muiy4o5hhr0j8a@resize_w900_nl.webp" alt="Lavender Essential Oil Aromansa" loading="lazy" onerror="this.src='img/aromansa-logo-baru.png'">
                         </div>
                         <div class="bestseller-info">
+                            <span class="bestseller-note">Floral · Menenangkan</span>
                             <h3>Lavender Essential Oil</h3>
-                            <p>Premium therapeutic grade lavender oil for relaxation, sleep improvement, and stress relief</p>
-                            <div class="bestseller-price">Rp65.000/10ml</div>
+                            <p>Sulingan bunga lavender murni dengan wangi floral lembut untuk meredakan penat dan menemani tidur malam yang lelap.</p>
+                            <div class="bestseller-price">Rp65.000 <span>/ 10 ml</span></div>
                             <div class="bestseller-cta">
-                                <a href="https://shopee.co.id/aromansa_id" target="_blank" class="btn-bestseller btn-bestseller-primary">Buy Now</a>
-                                <a href="equipment.html" class="btn-bestseller btn-bestseller-secondary">Details</a>
+                                <button type="button" class="btn-bestseller btn-bestseller-primary" data-add-to-cart data-product-id="1" data-product-name="Lavender Essential Oil" data-product-price="65000" data-product-size="10ml" data-product-category="Single Oils" data-product-image="https://down-id.img.susercontent.com/file/id-11134207-81ztc-muiy4o5hhr0j8a@resize_w900_nl.webp">
+                                    <i class="fa fa-cart-plus"></i> + Keranjang
+                                </button>
+                                <div class="bestseller-market-row">
+                                    <a href="https://shopee.co.id/aromansa_id" target="_blank" rel="noopener noreferrer" class="btn-bestseller btn-bestseller-secondary"><i class="fa fa-shopping-bag"></i> Shopee</a>
+                                    <a href="https://www.tokopedia.com/aromansa" target="_blank" rel="noopener noreferrer" class="btn-bestseller btn-bestseller-secondary"><i class="fa fa-store"></i> Tokopedia</a>
+                                </div>
                             </div>
                         </div>
                     </div>
+
+                    <!-- 2. Peppermint -->
                     <div class="bestseller-card">
-                        <div class="bestseller-badge">Popular</div>
+                        <div class="bestseller-badge">Fokus Kerja</div>
                         <div class="bestseller-img">
-                            <i class="fa fa-leaf"></i>
+                            <img src="https://down-id.img.susercontent.com/file/id-11134207-81ztp-muiy4o5hc4qr32@resize_w900_nl.webp" alt="Peppermint Essential Oil Aromansa" loading="lazy" onerror="this.src='img/aromansa-logo-baru.png'">
                         </div>
                         <div class="bestseller-info">
+                            <span class="bestseller-note">Mint · Dingin &amp; Segar</span>
                             <h3>Peppermint Essential Oil</h3>
-                            <p>Energizing and focusing oil. Natural headache reliever, digestive aid, and energy booster</p>
-                            <div class="bestseller-price">Rp55.000/10ml</div>
+                            <p>Ekstrak daun peppermint beraroma mint dingin yang menyegarkan kepala berat dan membantu menjaga fokus kerja.</p>
+                            <div class="bestseller-price">Rp55.000 <span>/ 10 ml</span></div>
                             <div class="bestseller-cta">
-                                <a href="https://shopee.co.id/aromansa_id" target="_blank" class="btn-bestseller btn-bestseller-primary">Buy Now</a>
-                                <a href="equipment.html" class="btn-bestseller btn-bestseller-secondary">Details</a>
+                                <button type="button" class="btn-bestseller btn-bestseller-primary" data-add-to-cart data-product-id="2" data-product-name="Peppermint Essential Oil" data-product-price="55000" data-product-size="10ml" data-product-category="Single Oils" data-product-image="https://down-id.img.susercontent.com/file/id-11134207-81ztp-muiy4o5hc4qr32@resize_w900_nl.webp">
+                                    <i class="fa fa-cart-plus"></i> + Keranjang
+                                </button>
+                                <div class="bestseller-market-row">
+                                    <a href="https://shopee.co.id/aromansa_id" target="_blank" rel="noopener noreferrer" class="btn-bestseller btn-bestseller-secondary"><i class="fa fa-shopping-bag"></i> Shopee</a>
+                                    <a href="https://www.tokopedia.com/aromansa" target="_blank" rel="noopener noreferrer" class="btn-bestseller btn-bestseller-secondary"><i class="fa fa-store"></i> Tokopedia</a>
+                                </div>
                             </div>
                         </div>
                     </div>
+
+                    <!-- 3. Sweet Orange -->
                     <div class="bestseller-card">
-                        <div class="bestseller-badge">New</div>
+                        <div class="bestseller-badge">Ceria &amp; Hangat</div>
                         <div class="bestseller-img">
-                            <i class="fa fa-seedling"></i>
+                            <img src="https://down-id.img.susercontent.com/file/id-11134207-81ztn-muixuin3hyiw3c@resize_w900_nl.webp" alt="Sweet Orange Essential Oil Aromansa" loading="lazy" onerror="this.src='img/aromansa-logo-baru.png'">
                         </div>
                         <div class="bestseller-info">
-                            <h3>Frangipani Essential Oil</h3>
-                            <p>Powerful antimicrobial oil perfect for skincare, immune support, and natural cleaning</p>
-                            <div class="bestseller-price">Rp60.000/10ml</div>
+                            <span class="bestseller-note">Citrus · Manis Alami</span>
+                            <h3>Sweet Orange Essential Oil</h3>
+                            <p>Perasan kulit jeruk manis dengan aroma segar dan hangat yang mencerahkan suasana ruang keluarga.</p>
+                            <div class="bestseller-price">Rp45.000 <span>/ 10 ml</span></div>
                             <div class="bestseller-cta">
-                                <a href="https://shopee.co.id/aromansa_id" target="_blank" class="btn-bestseller btn-bestseller-primary">Buy Now</a>
-                                <a href="equipment.html" class="btn-bestseller btn-bestseller-secondary">Details</a>
+                                <button type="button" class="btn-bestseller btn-bestseller-primary" data-add-to-cart data-product-id="3" data-product-name="Sweet Orange Essential Oil" data-product-price="45000" data-product-size="10ml" data-product-category="Single Oils" data-product-image="https://down-id.img.susercontent.com/file/id-11134207-81ztn-muixuin3hyiw3c@resize_w900_nl.webp">
+                                    <i class="fa fa-cart-plus"></i> + Keranjang
+                                </button>
+                                <div class="bestseller-market-row">
+                                    <a href="https://shopee.co.id/aromansa_id" target="_blank" rel="noopener noreferrer" class="btn-bestseller btn-bestseller-secondary"><i class="fa fa-shopping-bag"></i> Shopee</a>
+                                    <a href="https://www.tokopedia.com/aromansa" target="_blank" rel="noopener noreferrer" class="btn-bestseller btn-bestseller-secondary"><i class="fa fa-store"></i> Tokopedia</a>
+                                </div>
                             </div>
                         </div>
                     </div>
+
+                    <!-- 4. Frangipani -->
+                    <div class="bestseller-card">
+                        <div class="bestseller-badge">Khas Bali</div>
+                        <div class="bestseller-img">
+                            <img src="https://down-id.img.susercontent.com/file/id-11134207-81zto-muiy4o5hkk5fae@resize_w900_nl.webp" alt="Frangipani Essential Oil Aromansa" loading="lazy" onerror="this.src='img/aromansa-logo-baru.png'">
+                        </div>
+                        <div class="bestseller-info">
+                            <span class="bestseller-note">Tropis · Nuansa Spa</span>
+                            <h3>Frangipani Essential Oil</h3>
+                            <p>Harum bunga kamboja tropis yang anggun dan menenangkan, menghadirkan nuansa spa alami di kamar tidur.</p>
+                            <div class="bestseller-price">Rp75.000 <span>/ 10 ml</span></div>
+                            <div class="bestseller-cta">
+                                <button type="button" class="btn-bestseller btn-bestseller-primary" data-add-to-cart data-product-id="4" data-product-name="Frangipani Essential Oil" data-product-price="75000" data-product-size="10ml" data-product-category="Single Oils" data-product-image="https://down-id.img.susercontent.com/file/id-11134207-81zto-muiy4o5hkk5fae@resize_w900_nl.webp">
+                                    <i class="fa fa-cart-plus"></i> + Keranjang
+                                </button>
+                                <div class="bestseller-market-row">
+                                    <a href="https://shopee.co.id/aromansa_id" target="_blank" rel="noopener noreferrer" class="btn-bestseller btn-bestseller-secondary"><i class="fa fa-shopping-bag"></i> Shopee</a>
+                                    <a href="https://www.tokopedia.com/aromansa" target="_blank" rel="noopener noreferrer" class="btn-bestseller btn-bestseller-secondary"><i class="fa fa-store"></i> Tokopedia</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 5. Lemon -->
+                    <div class="bestseller-card">
+                        <div class="bestseller-badge">Udara Bersih</div>
+                        <div class="bestseller-img">
+                            <img src="https://down-id.img.susercontent.com/file/id-11134207-81zte-muixuin3f5e083@resize_w900_nl.webp" alt="Lemon Essential Oil Aromansa" loading="lazy" onerror="this.src='img/aromansa-logo-baru.png'">
+                        </div>
+                        <div class="bestseller-info">
+                            <span class="bestseller-note">Citrus · Bersih Segar</span>
+                            <h3>Lemon Essential Oil</h3>
+                            <p>Aroma citrus bersih dari kulit lemon segar untuk menetralkan bau ruangan dan membangkitkan energi pagi.</p>
+                            <div class="bestseller-price">Rp45.000 <span>/ 10 ml</span></div>
+                            <div class="bestseller-cta">
+                                <button type="button" class="btn-bestseller btn-bestseller-primary" data-add-to-cart data-product-id="5" data-product-name="Lemon Essential Oil" data-product-price="45000" data-product-size="10ml" data-product-category="Single Oils" data-product-image="https://down-id.img.susercontent.com/file/id-11134207-81zte-muixuin3f5e083@resize_w900_nl.webp">
+                                    <i class="fa fa-cart-plus"></i> + Keranjang
+                                </button>
+                                <div class="bestseller-market-row">
+                                    <a href="https://shopee.co.id/aromansa_id" target="_blank" rel="noopener noreferrer" class="btn-bestseller btn-bestseller-secondary"><i class="fa fa-shopping-bag"></i> Shopee</a>
+                                    <a href="https://www.tokopedia.com/aromansa" target="_blank" rel="noopener noreferrer" class="btn-bestseller btn-bestseller-secondary"><i class="fa fa-store"></i> Tokopedia</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 6. Palmarosa -->
+                    <div class="bestseller-card">
+                        <div class="bestseller-badge">Relaksasi Sore</div>
+                        <div class="bestseller-img">
+                            <img src="https://down-id.img.susercontent.com/file/id-11134207-81ztc-muiy4o5hexvna9@resize_w900_nl.webp" alt="Palmarosa Essential Oil Aromansa" loading="lazy" onerror="this.src='img/aromansa-logo-baru.png'">
+                        </div>
+                        <div class="bestseller-info">
+                            <span class="bestseller-note">Herbal · Mawar Lembut</span>
+                            <h3>Palmarosa Essential Oil</h3>
+                            <p>Perpaduan wangi rumput botanikal dan mawar lembut yang nyaman untuk relaksasi sore maupun campuran perawatan kulit.</p>
+                            <div class="bestseller-price">Rp75.000 <span>/ 10 ml</span></div>
+                            <div class="bestseller-cta">
+                                <button type="button" class="btn-bestseller btn-bestseller-primary" data-add-to-cart data-product-id="6" data-product-name="Palmarosa Essential Oil" data-product-price="75000" data-product-size="10ml" data-product-category="Single Oils" data-product-image="https://down-id.img.susercontent.com/file/id-11134207-81ztc-muiy4o5hexvna9@resize_w900_nl.webp">
+                                    <i class="fa fa-cart-plus"></i> + Keranjang
+                                </button>
+                                <div class="bestseller-market-row">
+                                    <a href="https://shopee.co.id/aromansa_id" target="_blank" rel="noopener noreferrer" class="btn-bestseller btn-bestseller-secondary"><i class="fa fa-shopping-bag"></i> Shopee</a>
+                                    <a href="https://www.tokopedia.com/aromansa" target="_blank" rel="noopener noreferrer" class="btn-bestseller btn-bestseller-secondary"><i class="fa fa-store"></i> Tokopedia</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 7. Lemongrass -->
+                    <div class="bestseller-card">
+                        <div class="bestseller-badge">Antinyamuk</div>
+                        <div class="bestseller-img">
+                            <img src="https://down-id.img.susercontent.com/file/id-11134207-81ztk-muixuin3krns17@resize_w900_nl.webp" alt="Lemongrass Essential Oil Aromansa" loading="lazy" onerror="this.src='img/aromansa-logo-baru.png'">
+                        </div>
+                        <div class="bestseller-info">
+                            <span class="bestseller-note">Serai Wangi · Higienis</span>
+                            <h3>Lemongrass Essential Oil</h3>
+                            <p>Sulingan serai wangi yang segar dan bersih untuk menyegarkan udara rumah sekaligus membantu menghalau nyamuk.</p>
+                            <div class="bestseller-price">Rp45.000 <span>/ 10 ml</span></div>
+                            <div class="bestseller-cta">
+                                <button type="button" class="btn-bestseller btn-bestseller-primary" data-add-to-cart data-product-id="7" data-product-name="Lemongrass Essential Oil" data-product-price="45000" data-product-size="10ml" data-product-category="Single Oils" data-product-image="https://down-id.img.susercontent.com/file/id-11134207-81ztk-muixuin3krns17@resize_w900_nl.webp">
+                                    <i class="fa fa-cart-plus"></i> + Keranjang
+                                </button>
+                                <div class="bestseller-market-row">
+                                    <a href="https://shopee.co.id/aromansa_id" target="_blank" rel="noopener noreferrer" class="btn-bestseller btn-bestseller-secondary"><i class="fa fa-shopping-bag"></i> Shopee</a>
+                                    <a href="https://www.tokopedia.com/aromansa" target="_blank" rel="noopener noreferrer" class="btn-bestseller btn-bestseller-secondary"><i class="fa fa-store"></i> Tokopedia</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 8. Spearmint -->
+                    <div class="bestseller-card">
+                        <div class="bestseller-badge">Pikiran Jernih</div>
+                        <div class="bestseller-img">
+                            <img src="https://down-id.img.susercontent.com/file/id-11134207-81ztm-muiy4o5j4qv9dc@resize_w900_nl.webp" alt="Spearmint Essential Oil Aromansa" loading="lazy" onerror="this.src='img/aromansa-logo-baru.png'">
+                        </div>
+                        <div class="bestseller-info">
+                            <span class="bestseller-note">Mint Manis · Lembut</span>
+                            <h3>Spearmint Essential Oil</h3>
+                            <p>Karakter mint yang lebih lembut dan manis dibanding peppermint, nyaman dihirup untuk menyegarkan pikiran.</p>
+                            <div class="bestseller-price">Rp55.000 <span>/ 10 ml</span></div>
+                            <div class="bestseller-cta">
+                                <button type="button" class="btn-bestseller btn-bestseller-primary" data-add-to-cart data-product-id="8" data-product-name="Spearmint Essential Oil" data-product-price="55000" data-product-size="10ml" data-product-category="Single Oils" data-product-image="https://down-id.img.susercontent.com/file/id-11134207-81ztm-muiy4o5j4qv9dc@resize_w900_nl.webp">
+                                    <i class="fa fa-cart-plus"></i> + Keranjang
+                                </button>
+                                <div class="bestseller-market-row">
+                                    <a href="https://shopee.co.id/aromansa_id" target="_blank" rel="noopener noreferrer" class="btn-bestseller btn-bestseller-secondary"><i class="fa fa-shopping-bag"></i> Shopee</a>
+                                    <a href="https://www.tokopedia.com/aromansa" target="_blank" rel="noopener noreferrer" class="btn-bestseller btn-bestseller-secondary"><i class="fa fa-store"></i> Tokopedia</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 9. Eucalyptus -->
+                    <div class="bestseller-card">
+                        <div class="bestseller-badge">Melegakan Napas</div>
+                        <div class="bestseller-img">
+                            <img src="https://down-id.img.susercontent.com/file/id-11134207-81ztq-muixuin3nksode@resize_w900_nl.webp" alt="Eucalyptus Essential Oil Aromansa" loading="lazy" onerror="this.src='img/aromansa-logo-baru.png'">
+                        </div>
+                        <div class="bestseller-info">
+                            <span class="bestseller-note">Herbal · Uap Hangat</span>
+                            <h3>Eucalyptus Essential Oil</h3>
+                            <p>Uap herbal hangat dari daun eucalyptus yang melegakan tarikan napas saat cuaca dingin atau hidung tersumbat.</p>
+                            <div class="bestseller-price">Rp40.000 <span>/ 10 ml</span></div>
+                            <div class="bestseller-cta">
+                                <button type="button" class="btn-bestseller btn-bestseller-primary" data-add-to-cart data-product-id="9" data-product-name="Eucalyptus Essential Oil" data-product-price="40000" data-product-size="10ml" data-product-category="Single Oils" data-product-image="https://down-id.img.susercontent.com/file/id-11134207-81ztq-muixuin3nksode@resize_w900_nl.webp">
+                                    <i class="fa fa-cart-plus"></i> + Keranjang
+                                </button>
+                                <div class="bestseller-market-row">
+                                    <a href="https://shopee.co.id/aromansa_id" target="_blank" rel="noopener noreferrer" class="btn-bestseller btn-bestseller-secondary"><i class="fa fa-shopping-bag"></i> Shopee</a>
+                                    <a href="https://www.tokopedia.com/aromansa" target="_blank" rel="noopener noreferrer" class="btn-bestseller btn-bestseller-secondary"><i class="fa fa-store"></i> Tokopedia</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 10. Ylang-Ylang -->
+                    <div class="bestseller-card">
+                        <div class="bestseller-badge">Redakan Tegang</div>
+                        <div class="bestseller-img">
+                            <img src="https://down-id.img.susercontent.com/file/id-11134207-81ztg-muixuin3qdxk27@resize_w900_nl.webp" alt="Ylang-Ylang Essential Oil Aromansa" loading="lazy" onerror="this.src='img/aromansa-logo-baru.png'">
+                        </div>
+                        <div class="bestseller-info">
+                            <span class="bestseller-note">Kenanga · Eksotis</span>
+                            <h3>Ylang-Ylang Essential Oil</h3>
+                            <p>Ekstrak bunga kenanga dengan wangi floral eksotis yang membantu meredakan ketegangan emosi di penghujung hari.</p>
+                            <div class="bestseller-price">Rp70.000 <span>/ 10 ml</span></div>
+                            <div class="bestseller-cta">
+                                <button type="button" class="btn-bestseller btn-bestseller-primary" data-add-to-cart data-product-id="10" data-product-name="Ylang-Ylang Essential Oil" data-product-price="70000" data-product-size="10ml" data-product-category="Single Oils" data-product-image="https://down-id.img.susercontent.com/file/id-11134207-81ztg-muixuin3qdxk27@resize_w900_nl.webp">
+                                    <i class="fa fa-cart-plus"></i> + Keranjang
+                                </button>
+                                <div class="bestseller-market-row">
+                                    <a href="https://shopee.co.id/aromansa_id" target="_blank" rel="noopener noreferrer" class="btn-bestseller btn-bestseller-secondary"><i class="fa fa-shopping-bag"></i> Shopee</a>
+                                    <a href="https://www.tokopedia.com/aromansa" target="_blank" rel="noopener noreferrer" class="btn-bestseller btn-bestseller-secondary"><i class="fa fa-store"></i> Tokopedia</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 11. Gandapura Roll-On -->
+                    <div class="bestseller-card">
+                        <div class="bestseller-badge">Hangat Otot</div>
+                        <div class="bestseller-img">
+                            <img src="https://down-id.img.susercontent.com/file/id-11134207-81zte-muiy8d4xqjur36@resize_w900_nl.webp" alt="Gandapura Roll-On Aromansa" loading="lazy" onerror="this.src='img/aromansa-logo-baru.png'">
+                        </div>
+                        <div class="bestseller-info">
+                            <span class="bestseller-note">Roll-On · 10ml</span>
+                            <h3>Gandapura Roll-On</h3>
+                            <p>Roll-on siap oles dengan minyak gandapura hangat untuk meredakan pegal di pundak, tengkuk, dan persendian.</p>
+                            <div class="bestseller-price">Rp30.000 <span>/ 10 ml</span></div>
+                            <div class="bestseller-cta">
+                                <button type="button" class="btn-bestseller btn-bestseller-primary" data-add-to-cart data-product-id="11" data-product-name="Gandapura Roll-On" data-product-price="30000" data-product-size="10ml" data-product-category="Roll-On" data-product-image="https://down-id.img.susercontent.com/file/id-11134207-81zte-muiy8d4xqjur36@resize_w900_nl.webp">
+                                    <i class="fa fa-cart-plus"></i> + Keranjang
+                                </button>
+                                <div class="bestseller-market-row">
+                                    <a href="https://shopee.co.id/aromansa_id" target="_blank" rel="noopener noreferrer" class="btn-bestseller btn-bestseller-secondary"><i class="fa fa-shopping-bag"></i> Shopee</a>
+                                    <a href="https://www.tokopedia.com/aromansa" target="_blank" rel="noopener noreferrer" class="btn-bestseller btn-bestseller-secondary"><i class="fa fa-store"></i> Tokopedia</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 12. Peppermint Roll-On -->
+                    <div class="bestseller-card">
+                        <div class="bestseller-badge">Praktis Saku</div>
+                        <div class="bestseller-img">
+                            <img src="https://down-id.img.susercontent.com/file/id-11134207-81ztm-muiy8d4xnqpvf7@resize_w900_nl.webp" alt="Peppermint Roll-On Aromansa" loading="lazy" onerror="this.src='img/aromansa-logo-baru.png'">
+                        </div>
+                        <div class="bestseller-info">
+                            <span class="bestseller-note">Roll-On · 10ml</span>
+                            <h3>Peppermint Roll-On</h3>
+                            <p>Kemasan roll-on saku praktis untuk dioleskan di pelipis dan pergelangan tangan saat butuh kesegaran instan.</p>
+                            <div class="bestseller-price">Rp30.000 <span>/ 10 ml</span></div>
+                            <div class="bestseller-cta">
+                                <button type="button" class="btn-bestseller btn-bestseller-primary" data-add-to-cart data-product-id="12" data-product-name="Peppermint Roll-On" data-product-price="30000" data-product-size="10ml" data-product-category="Roll-On" data-product-image="https://down-id.img.susercontent.com/file/id-11134207-81ztm-muiy8d4xnqpvf7@resize_w900_nl.webp">
+                                    <i class="fa fa-cart-plus"></i> + Keranjang
+                                </button>
+                                <div class="bestseller-market-row">
+                                    <a href="https://shopee.co.id/aromansa_id" target="_blank" rel="noopener noreferrer" class="btn-bestseller btn-bestseller-secondary"><i class="fa fa-shopping-bag"></i> Shopee</a>
+                                    <a href="https://www.tokopedia.com/aromansa" target="_blank" rel="noopener noreferrer" class="btn-bestseller btn-bestseller-secondary"><i class="fa fa-store"></i> Tokopedia</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 13. Lavender Spray -->
+                    <div class="bestseller-card">
+                        <div class="bestseller-badge">Semprot Bantal</div>
+                        <div class="bestseller-img">
+                            <img src="https://down-id.img.susercontent.com/file/id-11134207-81ztq-muiy8d4xkxkz1a@resize_w900_nl.webp" alt="Lavender Linen &amp; Room Spray Aromansa" loading="lazy" onerror="this.src='img/aromansa-logo-baru.png'">
+                        </div>
+                        <div class="bestseller-info">
+                            <span class="bestseller-note">Linen Spray · 100ml</span>
+                            <h3>Lavender Linen &amp; Room Spray</h3>
+                            <p>Semprotan praktis beraroma lavender lembut untuk bantal, sprei, dan udara kamar agar istirahat malam lebih tenang.</p>
+                            <div class="bestseller-price">Rp60.000 <span>/ 100 ml</span></div>
+                            <div class="bestseller-cta">
+                                <button type="button" class="btn-bestseller btn-bestseller-primary" data-add-to-cart data-product-id="13" data-product-name="Lavender Linen &amp; Room Spray" data-product-price="60000" data-product-size="100ml" data-product-category="Spray" data-product-image="https://down-id.img.susercontent.com/file/id-11134207-81ztq-muiy8d4xkxkz1a@resize_w900_nl.webp">
+                                    <i class="fa fa-cart-plus"></i> + Keranjang
+                                </button>
+                                <div class="bestseller-market-row">
+                                    <a href="https://shopee.co.id/aromansa_id" target="_blank" rel="noopener noreferrer" class="btn-bestseller btn-bestseller-secondary"><i class="fa fa-shopping-bag"></i> Shopee</a>
+                                    <a href="https://www.tokopedia.com/aromansa" target="_blank" rel="noopener noreferrer" class="btn-bestseller btn-bestseller-secondary"><i class="fa fa-store"></i> Tokopedia</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 14. Peppermint Spray -->
+                    <div class="bestseller-card">
+                        <div class="bestseller-badge">Ruangan Segar</div>
+                        <div class="bestseller-img">
+                            <img src="https://down-id.img.susercontent.com/file/id-11134207-81zth-muiy4o5hndab9f@resize_w900_nl.webp" alt="Peppermint Linen &amp; Room Spray Aromansa" loading="lazy" onerror="this.src='img/aromansa-logo-baru.png'">
+                        </div>
+                        <div class="bestseller-info">
+                            <span class="bestseller-note">Room Spray · 100ml</span>
+                            <h3>Peppermint Linen &amp; Room Spray</h3>
+                            <p>Semprotan ruangan beraroma peppermint segar untuk menjernihkan udara ruang kerja dan menghilangkan bau pengap.</p>
+                            <div class="bestseller-price">Rp60.000 <span>/ 100 ml</span></div>
+                            <div class="bestseller-cta">
+                                <button type="button" class="btn-bestseller btn-bestseller-primary" data-add-to-cart data-product-id="14" data-product-name="Peppermint Linen &amp; Room Spray" data-product-price="60000" data-product-size="100ml" data-product-category="Spray" data-product-image="https://down-id.img.susercontent.com/file/id-11134207-81zth-muiy4o5hndab9f@resize_w900_nl.webp">
+                                    <i class="fa fa-cart-plus"></i> + Keranjang
+                                </button>
+                                <div class="bestseller-market-row">
+                                    <a href="https://shopee.co.id/aromansa_id" target="_blank" rel="noopener noreferrer" class="btn-bestseller btn-bestseller-secondary"><i class="fa fa-shopping-bag"></i> Shopee</a>
+                                    <a href="https://www.tokopedia.com/aromansa" target="_blank" rel="noopener noreferrer" class="btn-bestseller btn-bestseller-secondary"><i class="fa fa-store"></i> Tokopedia</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="discovery-section" aria-labelledby="discovery-title">
+            <div class="container discovery-layout">
+                <div class="discovery-copy">
+                    <span class="section-label">Eksplorasi Interaktif</span>
+                    <h2 id="discovery-title">Belum Yakin Aroma Mana yang Cocok?</h2>
+                    <p class="discovery-lead">Kami menyiapkan dua fitur bantu agar Anda tidak salah memilih botol pertama.</p>
+                    <a href="ai-personalization.html" class="discovery-link active"><span><strong>Konsultan Aromansa</strong><small>Diskusikan keluhan tidur, stres, atau takaran diffuser secara langsung.</small></span><i class="fa fa-arrow-right" aria-hidden="true"></i></a>
+                    <a href="ar-mood-scan.html" class="discovery-link"><span><strong>Scan Mood AR</strong><small>Pindai ekspresi wajah dan kondisi harian untuk rekomendasi instan.</small></span><i class="fa fa-arrow-right" aria-hidden="true"></i></a>
+                    <a href="ai-personalization.html" class="button-solid">Mulai Konsultasi Gratis</a>
+                </div>
+                <div class="discovery-visual" aria-hidden="true">
+                    <div class="discovery-visual-label">Sulingan Alami · Botol Kaca Amber</div>
+                    <img src="img/lemon-essential-oil.png" alt="Essential oil Lemon Aromansa" loading="lazy">
                 </div>
             </div>
         </section>
@@ -1445,9 +1443,13 @@
         <section class="testimonials-stunning">
             <div class="container">
                 <div class="section-head">
-                    <span class="section-label" style="background: rgba(199, 164, 76, 0.2); border-color: rgba(199, 164, 76, 0.4); color: #c7a44c;"><i class="fa fa-quote-left"></i> Testimonials</span>
-                    <h2 style="color: #ffffff;">What Our Customers Say</h2>
-                    <p style="color: rgba(255, 255, 255, 0.8);">Real stories from real people who transformed their wellness journey</p>
+                    <span class="section-label">Kesan Pelanggan</span>
+                    <h2>Dipakai Setiap Hari di Rumah.</h2>
+                    <p>Cerita jujur dari pelanggan yang menggunakan Aromansa dalam keseharian mereka.</p>
+                </div>
+                <div class="carousel-controls" aria-label="Navigasi cerita pelanggan">
+                    <button type="button" data-carousel-target=".testimonials-grid" data-direction="-1" aria-label="Cerita sebelumnya"><i class="fa fa-angle-left" aria-hidden="true"></i></button>
+                    <button type="button" data-carousel-target=".testimonials-grid" data-direction="1" aria-label="Cerita berikutnya"><i class="fa fa-angle-right" aria-hidden="true"></i></button>
                 </div>
                 <div class="testimonials-grid">
                     <div class="testimonial-card-stunning">
@@ -1458,12 +1460,12 @@
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
                         </div>
-                        <p class="testimonial-text">"Lavender oil from Aromansa completely changed my sleep quality. I diffuse it every night and fall asleep so much faster. The quality is amazing!"</p>
+                        <p class="testimonial-text">"Biasanya susah tidur kalau habis lembur. Sekarang tiap jam 9 malam selalu nyalain diffuser pakai 4 tetes Lavender Aromansa, kamar langsung adem dan tidur jauh lebih nyenyak."</p>
                         <div class="testimonial-author">
                             <div class="testimonial-avatar">S</div>
                             <div class="testimonial-author-info">
                                 <h4>Sarah M.</h4>
-                                <p>Jakarta, Indonesia</p>
+                                <p>Jakarta Selatan · Pengguna Lavender 10ml</p>
                             </div>
                         </div>
                     </div>
@@ -1475,12 +1477,12 @@
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
                         </div>
-                        <p class="testimonial-text">"I use Peppermint oil for my morning focus routine. Just one drop on my wrists and I'm ready to tackle the day. Pure quality at great prices!"</p>
+                        <p class="testimonial-text">"Peppermint Roll-On-nya selalu saya kantongi di tas kerja. Kalau kepala mulai berat pas siang hari, tinggal oles di pelipis dan belakang leher—dinginnya pas, nggak bikin lengket."</p>
                         <div class="testimonial-author">
                             <div class="testimonial-avatar">A</div>
                             <div class="testimonial-author-info">
                                 <h4>Ahmad R.</h4>
-                                <p>Bandung, Indonesia</p>
+                                <p>Bandung · Pengguna Peppermint Roll-On</p>
                             </div>
                         </div>
                     </div>
@@ -1492,12 +1494,12 @@
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
                         </div>
-                        <p class="testimonial-text">"Tea Tree oil is my go-to for skincare. Aromansa's quality is therapeutic grade and you can really tell the difference. Highly recommend!"</p>
+                        <p class="testimonial-text">"Suka banget sama Frangipani dan Lemongrass-nya. Wanginya natural, nggak nyengat kayak pewangi ruangan buatan. Tamu yang datang ke rumah selalu nanya pakai pengharum apa."</p>
                         <div class="testimonial-author">
                             <div class="testimonial-avatar">D</div>
                             <div class="testimonial-author-info">
                                 <h4>Diana L.</h4>
-                                <p>Surabaya, Indonesia</p>
+                                <p>Surabaya · Pengguna Frangipani &amp; Lemongrass</p>
                             </div>
                         </div>
                     </div>
@@ -1509,45 +1511,37 @@
         <section class="benefits-stunning">
             <div class="container">
                 <div class="section-head">
-                    <span class="section-label"><i class="fa fa-check-circle"></i> Why Aromansa</span>
-                    <h2>The Aromansa Difference</h2>
-                    <p>What makes our essential oils the preferred choice for wellness enthusiasts</p>
+                    <span class="section-label">Standar Aromansa</span>
+                    <h2>Diracik dengan Jujur dan Teliti.</h2>
+                    <p>Empat hal yang selalu kami jaga di setiap botol yang dikirim dari Cianjur.</p>
                 </div>
                 <div class="benefits-grid-stunning">
                     <div class="benefit-card-stunning">
-                        <div class="benefit-icon-stunning">
-                            <i class="fa fa-certificate"></i>
-                        </div>
+                        <div class="benefit-meta"><span>01</span><small>Kemurnian Bahan</small></div>
                         <div class="benefit-content">
-                            <h3>Therapeutic Grade</h3>
-                            <p>Third-party tested for purity and potency. Only the highest quality oils make it to our collection</p>
+                            <h3>Sulingan Botani Murni</h3>
+                            <p>Diekstrak langsung dari bahan tanaman asli tanpa campuran alkohol pemicu pusing.</p>
                         </div>
                     </div>
                     <div class="benefit-card-stunning">
-                        <div class="benefit-icon-stunning">
-                            <i class="fa fa-truck"></i>
-                        </div>
+                        <div class="benefit-meta"><span>02</span><small>Perlindungan Kualitas</small></div>
                         <div class="benefit-content">
-                            <h3>Free Shipping</h3>
-                            <p>Free shipping on all orders over Rp 200.000. Delivered safely to your door across Indonesia</p>
+                            <h3>Botol Kaca Amber</h3>
+                            <p>Melindungi kualitas minyak esensial dari paparan sinar UV agar karakter wangi tetap terjaga.</p>
                         </div>
                     </div>
                     <div class="benefit-card-stunning">
-                        <div class="benefit-icon-stunning">
-                            <i class="fa fa-user-md"></i>
-                        </div>
+                        <div class="benefit-meta"><span>03</span><small>Keamanan Pakai</small></div>
                         <div class="benefit-content">
-                            <h3>Expert Guidance</h3>
-                            <p>AI consultant and aromatherapy experts ready to help you find the perfect oils for your needs</p>
+                            <h3>Panduan Takaran Jelas</h3>
+                            <p>Dilengkapi panduan pengenceran dan konsultasi agar aman digunakan di ruang keluarga.</p>
                         </div>
                     </div>
                     <div class="benefit-card-stunning">
-                        <div class="benefit-icon-stunning">
-                            <i class="fa fa-hand-holding-heart"></i>
-                        </div>
+                        <div class="benefit-meta"><span>04</span><small>Pengiriman Cianjur</small></div>
                         <div class="benefit-content">
-                            <h3>Satisfaction Guarantee</h3>
-                            <p>Love your essential oils or your money back. We stand behind the quality of every product</p>
+                            <h3>Pengemasan Berlapis</h3>
+                            <p>Dikemas aman dan dikirim cepat melalui Shopee, Tokopedia, maupun WhatsApp.</p>
                         </div>
                     </div>
                 </div>
@@ -1557,16 +1551,15 @@
         <!-- CTA Section -->
         <section class="cta-stunning">
             <div class="container">
-                <h2>Ready to Start Your Wellness Journey?</h2>
-                <p>Get personalized essential oil recommendations from our AI consultant or explore our full product catalog</p>
+                <span class="section-label cta-eyebrow">Mulai Dari Sini</span>
+                <h2>Hadirkan Ketenangan Alami di Ruang Anda.</h2>
+                <p>Pilih langsung varian essential oil favorit Anda atau diskusikan kebutuhan Anda bersama kami.</p>
                 <div class="cta-buttons-stunning">
-                    <a href="ai-personalization.html" class="btn-cta-stunning">
-                        <i class="fa fa-robot"></i>
-                        <span>Get AI Recommendations</span>
+                    <a href="equipment.html" class="btn-cta-stunning">
+                        <span>Lihat Semua Produk</span>
                     </a>
-                    <a href="equipment.html" class="btn-cta-stunning btn-outline">
-                        <i class="fa fa-shopping-bag"></i>
-                        <span>View Products</span>
+                    <a href="ai-personalization.html" class="btn-cta-stunning btn-outline">
+                        <span>Tanya Konsultan AI</span>
                     </a>
                 </div>
             </div>
@@ -1577,49 +1570,55 @@
     <footer id="footer">
         <div class="footer-top">
             <div class="container">
-                <div class="row">
-                    <div class="col-lg-4 col-md-6 footer-info">
-                        <h3><span>Aromansa</span></h3>
-                        <p>Your trusted source for premium therapeutic grade essential oils, aromatherapy diffusers, and natural wellness products. Transform your home into a wellness sanctuary.</p>
+                <div class="footer-grid">
+                    <div class="footer-info">
+                        <a href="index.html" class="footer-brand">
+                            <img src="img/aromansa-logo-baru.png?v=3" alt="Logo Aromansa" class="footer-brand-logo">
+                            <span>Aromansa</span>
+                        </a>
+                        <p>Essential oil murni, roll-on, dan spray aromaterapi yang diracik untuk menemani waktu istirahat dan keseharian Anda.</p>
                         <div class="footer-social">
-                            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                            <a href="#" aria-label="Pinterest"><i class="fab fa-pinterest-p"></i></a>
-                            <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-                            <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                            <a href="https://wa.me/6285782909266" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp Aromansa"><i class="fab fa-whatsapp"></i></a>
+                            <a href="https://shopee.co.id/aromansa_id" target="_blank" rel="noopener noreferrer" aria-label="Shopee Aromansa"><i class="fa fa-shopping-bag"></i></a>
+                            <a href="https://www.tokopedia.com/aromansa" target="_blank" rel="noopener noreferrer" aria-label="Tokopedia Aromansa"><i class="fa fa-store"></i></a>
+                            <a href="mailto:aromansaofficial@gmail.com" aria-label="Email Aromansa"><i class="fa fa-envelope"></i></a>
                         </div>
                     </div>
-                    <div class="col-lg-2 col-md-6 footer-links">
-                        <h4>Quick Links</h4>
+                    <div class="footer-links">
+                        <h4>Navigasi</h4>
                         <ul>
-                            <li><a href="index.html">Home</a></li>
-                            <li><a href="equipment.html">Products</a></li>
-                            <li><a href="ai-personalization.html">AI Consultant</a></li>
-                            <li><a href="contact.html">Contact</a></li>
+                            <li><a href="index.html">Beranda</a></li>
+                            <li><a href="equipment.html">Produk</a></li>
+                            <li><a href="ai-personalization.html">Konsultan AI</a></li>
+                            <li><a href="ar-mood-scan.html">Scan Mood AR</a></li>
+                            <li><a href="contact.html">Kontak</a></li>
                         </ul>
                     </div>
-                    <div class="col-lg-3 col-md-6 footer-contact">
-                        <h4>Contact Us</h4>
-                        <p><i class="fa fa-map-marker-alt"></i> <span>Jl. Raya Bandung KM 8.8, Cianjur, Jawa Barat (43281), Indonesia</span></p>
-                        <p><i class="fa fa-phone"></i> <a href="tel:+6285782909266">+62 857-8290-9266</a></p>
-                        <p><i class="fa fa-envelope"></i> <a href="mailto:aromansaofficial@gmail.com">aromansaofficial@gmail.com</a></p>
-                        <p><i class="fa fa-clock"></i> <span>Mon - Sat: 08:00 - 20:00</span></p>
+                    <div class="footer-links">
+                        <h4>Koleksi</h4>
+                        <ul>
+                            <li><a href="equipment.html">Essential Oil</a></li>
+                            <li><a href="equipment.html">Roll-On Aromaterapi</a></li>
+                            <li><a href="equipment.html">Linen &amp; Room Spray</a></li>
+                            <li><a href="ai-personalization.html">Panduan Racikan</a></li>
+                            <li><a href="https://shopee.co.id/aromansa_id" target="_blank" rel="noopener noreferrer">Toko Resmi Shopee</a></li>
+                        </ul>
                     </div>
-                    <div class="col-lg-3 col-md-6 footer-newsletter">
-                        <h4>Wellness Newsletter</h4>
-                        <p>Subscribe for essential oil tips, wellness guides, and exclusive offers delivered to your inbox!</p>
-                        <form class="newsletter-form" action="#" method="post">
-                            <input type="email" name="email" placeholder="Your email address" required>
-                            <button type="submit" aria-label="Subscribe"><i class="fa fa-paper-plane"></i></button>
-                        </form>
+                    <div class="footer-contact">
+                        <h4>Hubungi Kami</h4>
+                        <p><i class="fa fa-map-marker-alt" aria-hidden="true"></i> <span>Jl. Raya Bandung KM 8.8, Cianjur, Jawa Barat 43281</span></p>
+                        <p><i class="fa fa-phone" aria-hidden="true"></i> <a href="tel:+6285782909266">+62 857-8290-9266</a></p>
+                        <p><i class="fa fa-envelope" aria-hidden="true"></i> <a href="mailto:aromansaofficial@gmail.com">aromansaofficial@gmail.com</a></p>
+                        <p><i class="fa fa-clock" aria-hidden="true"></i> <span>Senin – Sabtu, 08.00 – 20.00 WIB</span></p>
                     </div>
                 </div>
             </div>
         </div>
         <div class="footer-bottom">
             <div class="container">
-                <div class="footer-copyright">
-                    <p>&copy; 2026 <a href="index.html">Aromansa</a>. All Rights Reserved | Premium essential oils &amp; wellness products</p>
+                <div class="footer-bottom-inner">
+                    <p>&copy; 2026 <a href="index.html">Aromansa</a>. Hak cipta dilindungi.</p>
+                    <p class="footer-origin">Cianjur, Jawa Barat · Indonesia</p>
                 </div>
             </div>
         </div>
@@ -1632,11 +1631,13 @@
     <!-- Mobile Nav Overlay -->
     <div id="mobile-body-overly"></div>
     <nav id="mobile-nav">
+        <button class="mobile-nav-close" type="button" aria-label="Tutup navigasi"><i class="fa fa-times" aria-hidden="true"></i></button>
         <ul>
-            <li class="menu-active"><a href="index.html">Home</a></li>
-            <li><a href="equipment.html">Products</a></li>
-            <li><a href="ai-personalization.html">AI Consultant</a></li>
-            <li><a href="contact.html">Contact</a></li>
+            <li class="menu-active"><a href="index.html">Beranda</a></li>
+            <li><a href="equipment.html">Produk</a></li>
+            <li><a href="ai-personalization.html">Konsultan AI</a></li>
+            <li><a href="ar-mood-scan.html">Scan Mood AR</a></li>
+            <li><a href="contact.html">Kontak</a></li>
         </ul>
     </nav>
 
@@ -1645,7 +1646,9 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
 
     <!-- Template Javascript -->
-    <script src="js/main.js"></script>
+    <script src="js/main.js?theme=1"></script>
+    <script src="js/home-carousel.js"></script>
+    <script src="js/homepage-hero.js"></script>
     
     <!-- Typewriter Animation Script -->
     <script>
@@ -1705,5 +1708,6 @@
             setTimeout(typeWriter, 1000);
         })();
     </script>
+    <script src="js/cart.js?v=6"></script>
 </body>
 </html>

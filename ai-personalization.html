@@ -1,14 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="utf-8">
-    <title>AI Consultant - Aromansa | Personalized Essential Oil Recommendations</title>
+    <title>Konsultan AI - Aromansa</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="AI aromatherapy consultation, essential oil recommendations, wellness assistant, personalized aromatherapy" name="keywords">
     <meta content="Get personalized essential oil recommendations powered by AI. Let our intelligent assistant help you choose the right Aromansa products for your wellness goals." name="description">
 
     <!-- Favicon -->
-    <link href="img/favicon.ico" rel="icon">
+    <link href="img/favicon.png?v=3" rel="icon" type="image/png">
+    <link href="img/favicon.ico?v=3" rel="shortcut icon">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,600&display=swap" rel="stylesheet">
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -21,6 +23,8 @@
     <link href="css/style.css" rel="stylesheet">
     <link href="css/clean-professional.css" rel="stylesheet">
     <link href="css/footer-stunning.css" rel="stylesheet">
+    <link href="css/cart.css?v=6" rel="stylesheet">
+    <link href="css/aromansa-theme.css?v=8" rel="stylesheet">
     
     <style>
         /* ===== AI CONSULTANT STUNNING REDESIGN ===== */
@@ -113,20 +117,26 @@
             50% { transform: scale(1.2); }
         }
 
-        .ai-hero-content h1 {
-            font-size: 64px;
-            font-weight: 900;
-            margin: 0 0 25px 0;
-            font-family: 'Inter', sans-serif;
-            line-height: 1.1;
-            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        .ai-hero-content h1,
+        .hero-title-stunning {
+            font-size: clamp(2.35rem, 5vw, 3.85rem) !important;
+            font-weight: 600 !important;
+            margin: 0 auto 18px !important;
+            font-family: 'Playfair Display', Georgia, serif !important;
+            line-height: 1.14 !important;
+            letter-spacing: -0.025em !important;
+            color: #ffffff !important;
+            text-shadow: none !important;
+            max-width: 18ch !important;
         }
 
-        .ai-hero-content h1 .highlight {
-            background: linear-gradient(135deg, #c7a44c, #e5cf95, #a8842f);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+        .ai-hero-content h1 .highlight,
+        .hero-title-stunning .highlight {
+            color: #ffffff !important;
+            background: none !important;
+            -webkit-text-fill-color: currentColor !important;
+            font-family: 'Playfair Display', Georgia, serif !important;
+            font-weight: 600 !important;
         }
 
         .ai-hero-subtitle {
@@ -185,278 +195,568 @@
 
         /* Chat Section */
         .ai-chat-section {
-            padding: 100px 0;
-            background: linear-gradient(135deg, #fff9ea 0%, #ffffff 50%, #fff9ea 100%);
+            padding: 40px 0 80px;
+            background: #fafaf7;
             position: relative;
         }
 
         .chat-container-wrapper {
-            max-width: 1000px;
+            max-width: 980px;
             margin: 0 auto;
+            padding: 0 20px;
         }
 
         .chat-container-modern {
             background: #ffffff;
-            border-radius: 28px;
+            border-radius: 20px;
             overflow: hidden;
-            border: 2px solid rgba(199, 164, 76, 0.2);
-            box-shadow: 0 20px 70px rgba(199, 164, 76, 0.15);
+            border: 1px solid rgba(73, 76, 53, 0.16);
+            box-shadow: 0 16px 44px rgba(32, 34, 27, 0.08);
             display: flex;
             flex-direction: column;
-            max-height: 800px;
+            height: 680px;
+            max-height: calc(100vh - 130px);
             position: relative;
         }
 
         /* Chat Header */
         .chat-header-modern {
-            background: linear-gradient(135deg, #c7a44c, #a8842f);
-            padding: 28px 35px;
+            flex-shrink: 0;
+            background: #343726;
+            padding: 16px 24px;
             display: flex;
             align-items: center;
             justify-content: space-between;
             color: #ffffff;
             position: relative;
-            overflow: hidden;
-        }
-
-        .chat-header-modern::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
-            pointer-events: none;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .chat-header-left {
             display: flex;
             align-items: center;
-            gap: 18px;
+            gap: 14px;
             position: relative;
             z-index: 2;
         }
 
         .chat-avatar-modern {
-            width: 65px;
-            height: 65px;
-            background: rgba(255, 255, 255, 0.2);
+            width: 42px;
+            height: 42px;
+            background: rgba(255, 255, 255, 0.14);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 30px;
-            animation: chatAvatarPulse 3s ease-in-out infinite;
-            border: 3px solid rgba(255, 255, 255, 0.3);
-        }
-
-        @keyframes chatAvatarPulse {
-            0%, 100% { transform: scale(1); box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); }
-            50% { transform: scale(1.05); box-shadow: 0 6px 25px rgba(0, 0, 0, 0.3); }
+            font-size: 18px;
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            flex-shrink: 0;
         }
 
         .chat-header-left h3 {
-            font-size: 22px;
-            font-weight: 700;
-            margin: 0 0 6px 0;
-            font-family: 'Inter', sans-serif;
+            font-size: 20px;
+            font-weight: 600;
+            margin: 0 0 3px 0;
+            font-family: 'Playfair Display', Georgia, serif;
+            color: #ffffff;
+            letter-spacing: -0.015em;
+            line-height: 1.25;
         }
 
         .chat-status-modern {
             display: flex;
             align-items: center;
-            gap: 8px;
-            font-size: 13px;
-            opacity: 0.95;
+            gap: 7px;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.82);
+            font-family: 'Inter', sans-serif;
         }
 
         .status-dot-modern {
-            width: 10px;
-            height: 10px;
+            width: 8px;
+            height: 8px;
             background: #4ade80;
             border-radius: 50%;
-            animation: statusPulseModern 2s ease-in-out infinite;
-        }
-
-        @keyframes statusPulseModern {
-            0%, 100% { opacity: 1; transform: scale(1); box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.5); }
-            50% { opacity: 0.7; transform: scale(1.2); box-shadow: 0 0 0 6px rgba(74, 222, 128, 0); }
+            box-shadow: 0 0 6px rgba(74, 222, 128, 0.7);
         }
 
         .chat-header-actions {
             display: flex;
-            gap: 12px;
+            gap: 8px;
             position: relative;
             z-index: 2;
         }
 
         .chat-header-btn-modern {
-            width: 48px;
-            height: 48px;
-            background: rgba(255, 255, 255, 0.2);
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            border-radius: 14px;
+            width: 38px;
+            height: 38px;
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.22);
+            border-radius: 10px;
             color: #ffffff;
-            font-size: 18px;
+            font-size: 14px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
         .chat-header-btn-modern:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: scale(1.08);
-            border-color: rgba(255, 255, 255, 0.5);
+            background: rgba(255, 255, 255, 0.22);
+            transform: scale(1.05);
         }
 
         /* Chat Messages */
         .chat-messages-modern {
-            flex: 1;
+            flex: 1 1 auto;
+            min-height: 0;
             overflow-y: auto;
-            padding: 35px;
-            background: linear-gradient(135deg, #fffbf0, #fff9ea);
+            padding: 24px 28px;
+            background: #fafaf7;
             scroll-behavior: smooth;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
         }
 
         .chat-messages-modern::-webkit-scrollbar {
-            width: 10px;
+            width: 6px;
         }
 
         .chat-messages-modern::-webkit-scrollbar-track {
-            background: #f0f0e5;
+            background: transparent;
         }
 
         .chat-messages-modern::-webkit-scrollbar-thumb {
-            background: linear-gradient(135deg, #c7a44c, #a8842f);
-            border-radius: 5px;
+            background: rgba(73, 76, 53, 0.2);
+            border-radius: 10px;
+        }
+
+        .chat-messages-modern::-webkit-scrollbar-thumb:hover {
+            background: rgba(73, 76, 53, 0.35);
         }
 
         .chat-message {
-            margin-bottom: 28px;
-            animation: messageSlide 0.4s ease;
+            margin: 0;
+            animation: messageSlide 0.25s ease;
+            width: 100%;
         }
 
         @keyframes messageSlide {
-            from { opacity: 0; transform: translateY(20px); }
+            from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
         .message-content-modern {
             display: flex;
-            gap: 14px;
+            gap: 12px;
             align-items: flex-start;
+            width: 100%;
         }
 
         .message-avatar-modern {
-            width: 48px;
-            height: 48px;
-            background: linear-gradient(135deg, #c7a44c, #a8842f);
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #ffffff;
-            font-size: 22px;
+            font-size: 15px;
             flex-shrink: 0;
-            border: 3px solid rgba(199, 164, 76, 0.3);
+            margin-top: 2px;
+        }
+
+        .ai-message .message-avatar-modern {
+            background: #3e6b55;
+            color: #ffffff;
+            box-shadow: 0 2px 8px rgba(62, 107, 85, 0.25);
         }
 
         .user-message .message-avatar-modern {
-            background: linear-gradient(135deg, #8a6f2a, #6b5520);
-            border-color: rgba(138, 111, 42, 0.3);
+            background: #494c35;
+            color: #ffffff;
+            box-shadow: 0 2px 8px rgba(73, 76, 53, 0.2);
         }
 
-        .message-bubble {
-            flex: 1;
+        /* AI Message (Left Aligned) */
+        .ai-message .message-content-modern {
+            flex-direction: row;
+            justify-content: flex-start;
+        }
+
+        .ai-message .message-bubble {
+            max-width: 82%;
             background: #ffffff;
-            padding: 20px 24px;
-            border-radius: 20px;
-            border-top-left-radius: 6px;
-            box-shadow: 0 4px 15px rgba(199, 164, 76, 0.08);
-            border: 1px solid rgba(199, 164, 76, 0.15);
-            transition: all 0.3s ease;
+            padding: 18px 22px;
+            border-radius: 18px 18px 18px 4px;
+            box-shadow: 0 3px 14px rgba(32, 34, 27, 0.04);
+            border: 1px solid rgba(73, 76, 53, 0.12);
+            transition: box-shadow 0.2s ease;
+            word-break: break-word;
+            font-size: 14.5px;
+            line-height: 1.65;
+            color: #20221b;
         }
 
-        .message-bubble:hover {
-            box-shadow: 0 6px 20px rgba(199, 164, 76, 0.15);
+        /* User Message (Right Aligned) */
+        .user-message .message-content-modern {
+            flex-direction: row-reverse;
+            justify-content: flex-start;
         }
 
         .user-message .message-bubble {
-            background: linear-gradient(135deg, #c7a44c, #a8842f);
+            max-width: 75%;
+            background: #3e6b55;
             color: #ffffff;
-            border-top-left-radius: 20px;
-            border-top-right-radius: 6px;
-            border-color: transparent;
+            padding: 13px 18px;
+            border-radius: 18px 18px 4px 18px;
+            border: none;
+            box-shadow: 0 4px 14px rgba(62, 107, 85, 0.2);
+            word-break: break-word;
+            font-size: 14.5px;
+            line-height: 1.55;
         }
 
         .message-bubble p {
-            margin: 0 0 12px 0;
-            font-size: 15px;
-            line-height: 1.7;
+            margin: 0 0 10px 0;
+            font-size: 14.5px;
+            line-height: 1.65;
+            font-family: 'Inter', -apple-system, sans-serif;
+        }
+
+        .ai-message .message-bubble p {
             color: #2d3748;
-            font-family: 'Inter', sans-serif;
         }
 
         .user-message .message-bubble p {
-            color: #ffffff;
+            color: #ffffff !important;
         }
 
         .message-bubble p:last-child {
             margin-bottom: 0;
         }
 
+        /* Headings in AI Message */
+        .ai-message .message-bubble h2,
+        .ai-message .message-bubble h3,
+        .ai-message .message-bubble h4,
+        .ai-message .message-bubble h5 {
+            color: #20221b;
+            line-height: 1.35;
+            margin-top: 22px;
+            margin-bottom: 12px;
+            font-family: 'Playfair Display', Georgia, serif !important;
+            font-weight: 600 !important;
+        }
+
+        .ai-message .message-bubble h2:first-child,
+        .ai-message .message-bubble h3:first-child,
+        .ai-message .message-bubble h4:first-child,
+        .ai-message .message-bubble h5:first-child {
+            margin-top: 0;
+        }
+
+        .ai-message .message-bubble h2 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #2e3321;
+            padding-bottom: 8px;
+            border-bottom: 2px solid rgba(73, 76, 53, 0.14);
+            letter-spacing: -0.01em;
+        }
+
+        .ai-message .message-bubble h3 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #343726;
+            letter-spacing: -0.01em;
+        }
+
+        .ai-message .message-bubble h4 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #494c35;
+            margin-top: 18px;
+        }
+
+        .ai-message .message-bubble h5 {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #66685f;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Lists in AI Message */
         .message-bubble ul, .message-bubble ol {
-            margin: 12px 0;
+            margin: 12px 0 16px 0;
             padding-left: 22px;
         }
 
         .message-bubble li {
-            font-size: 14px;
+            font-size: 14.5px;
             line-height: 1.7;
-            color: #4a5568;
-            margin-bottom: 8px;
+            color: #374151;
+            margin-bottom: 9px;
             font-family: 'Inter', sans-serif;
+        }
+
+        .ai-message .message-bubble ol > li::marker {
+            color: #494c35;
+            font-weight: 700;
+        }
+
+        .ai-message .message-bubble ul > li::marker {
+            color: #c7a44c;
         }
 
         .user-message .message-bubble li {
             color: rgba(255, 255, 255, 0.95);
         }
 
-        .message-bubble strong {
-            color: #a8842f;
+        /* Strong & Bold Typography Fix (No washed-out mustard) */
+        .ai-message .message-bubble strong {
+            color: #20221b;
             font-weight: 700;
         }
 
         .user-message .message-bubble strong {
             color: #ffffff;
+            font-weight: 700;
+        }
+
+        /* Responsive AI Tables */
+        .ai-table-responsive {
+            width: 100%;
+            overflow-x: auto;
+            margin: 18px 0;
+            border-radius: 12px;
+            border: 1px solid rgba(73, 76, 53, 0.16);
+            box-shadow: 0 4px 16px rgba(52, 55, 38, 0.05);
+            background: #ffffff;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .ai-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            font-size: 13.5px;
+            line-height: 1.55;
+            text-align: left;
+            color: #20221b;
+            margin: 0;
+        }
+
+        .ai-table thead {
+            background: #f4f5f0;
+        }
+
+        .ai-table th {
+            padding: 12px 16px;
+            font-weight: 700;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: #343726;
+            border-bottom: 2px solid rgba(73, 76, 53, 0.18);
+            white-space: nowrap;
+        }
+
+        .ai-table td {
+            padding: 12px 16px;
+            border-bottom: 1px solid rgba(73, 76, 53, 0.08);
+            vertical-align: middle;
+            color: #374151;
+        }
+
+        .ai-table tbody tr:nth-child(even) {
+            background: #fafaf8;
+        }
+
+        .ai-table tbody tr:hover {
+            background: #f0f2eb;
+            transition: background 0.15s ease;
+        }
+
+        .ai-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .ai-table td:first-child strong {
+            color: #2e3321;
+            font-weight: 700;
+        }
+
+        /* Price Badges */
+        .ai-price-badge {
+            display: inline-flex;
+            align-items: center;
+            background: #eef7f1;
+            color: #1a7a44;
+            font-weight: 700;
+            font-size: 13px;
+            padding: 3px 9px;
+            border-radius: 6px;
+            white-space: nowrap;
+            border: 1px solid rgba(47, 158, 98, 0.28);
+            letter-spacing: -0.01em;
+        }
+
+        .ai-table td .ai-price-badge {
+            font-size: 13.5px;
+        }
+
+        /* Subtle Luxury Divider */
+        .message-bubble hr,
+        .message-bubble .ai-divider {
+            margin: 22px 0;
+            border: none;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(73, 76, 53, 0.2) 15%, rgba(73, 76, 53, 0.2) 85%, transparent);
+        }
+
+        /* Callout Cards */
+        .ai-callout {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 13px 16px;
+            border-radius: 12px;
+            margin: 16px 0;
+            font-size: 13.5px;
+            line-height: 1.6;
+        }
+
+        .ai-callout.warning {
+            background: #fff9ee;
+            border: 1px solid rgba(217, 119, 6, 0.25);
+            border-left: 4px solid #d97706;
+            color: #92400e;
+        }
+
+        .ai-callout.tip {
+            background: #f0f7f3;
+            border: 1px solid rgba(47, 158, 98, 0.25);
+            border-left: 4px solid #2f9e62;
+            color: #166534;
+        }
+
+        .ai-callout-icon {
+            font-size: 18px;
+            line-height: 1;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .ai-callout-text {
+            flex: 1;
+        }
+
+        .ai-callout-text strong {
+            color: inherit !important;
+        }
+
+        /* CTA Action Chips */
+        .ai-cta-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 7px 14px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            text-decoration: none !important;
+            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+            margin: 4px 4px 4px 0;
+            vertical-align: middle;
+        }
+
+        .ai-cta-chip.shopee {
+            background: #fff5f2;
+            color: #ee4d2d;
+            border: 1px solid rgba(238, 77, 45, 0.3);
+        }
+
+        .ai-cta-chip.shopee:hover {
+            background: #ee4d2d;
+            color: #ffffff;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 10px rgba(238, 77, 45, 0.25);
+        }
+
+        .ai-cta-chip.tokopedia {
+            background: #f0fff6;
+            color: #00aa5b;
+            border: 1px solid rgba(0, 170, 91, 0.3);
+        }
+
+        .ai-cta-chip.tokopedia:hover {
+            background: #00aa5b;
+            color: #ffffff;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 10px rgba(0, 170, 91, 0.25);
+        }
+
+        .ai-cta-chip.whatsapp {
+            background: #e6f9ed;
+            color: #128c7e;
+            border: 1px solid rgba(18, 140, 126, 0.3);
+        }
+
+        .ai-cta-chip.whatsapp:hover {
+            background: #128c7e;
+            color: #ffffff;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 10px rgba(18, 140, 126, 0.25);
+        }
+
+        .ai-message .message-bubble code {
+            background: #f3f4ee;
+            padding: 2px 7px;
+            border-radius: 5px;
+            font-size: 13px;
+            color: #343726;
+            border: 1px solid rgba(73, 76, 53, 0.12);
+            font-family: SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+        }
+
+        .ai-message .message-bubble blockquote {
+            margin: 16px 0;
+            padding: 12px 18px;
+            background: #f9faf7;
+            border-left: 4px solid #494c35;
+            border-radius: 4px;
+            color: #4b5563;
+            font-style: italic;
         }
 
         /* Typing Indicator */
         .typing-indicator-modern {
             display: flex;
-            gap: 14px;
+            gap: 12px;
             align-items: flex-start;
-            margin-bottom: 28px;
+            margin-bottom: 16px;
         }
 
         .typing-dots-modern {
             display: flex;
             gap: 6px;
-            padding: 20px 24px;
+            padding: 14px 18px;
             background: #ffffff;
-            border-radius: 20px;
-            border-top-left-radius: 6px;
-            box-shadow: 0 4px 15px rgba(199, 164, 76, 0.1);
-            border: 1px solid rgba(199, 164, 76, 0.15);
+            border-radius: 18px 18px 18px 4px;
+            box-shadow: 0 3px 12px rgba(32, 34, 27, 0.04);
+            border: 1px solid rgba(73, 76, 53, 0.12);
         }
 
         .typing-dot-modern {
-            width: 10px;
-            height: 10px;
-            background: linear-gradient(135deg, #c7a44c, #a8842f);
+            width: 8px;
+            height: 8px;
+            background: #3e6b55;
             border-radius: 50%;
             animation: typingBounceModern 1.4s ease-in-out infinite;
         }
@@ -471,120 +771,141 @@
 
         @keyframes typingBounceModern {
             0%, 60%, 100% { transform: translateY(0); }
-            30% { transform: translateY(-10px); }
+            30% { transform: translateY(-8px); }
         }
 
         /* Chat Input */
         .chat-input-modern {
-            padding: 28px 35px;
+            flex-shrink: 0;
+            padding: 14px 24px 18px;
             background: #ffffff;
-            border-top: 2px solid rgba(199, 164, 76, 0.1);
+            border-top: 1px solid rgba(73, 76, 53, 0.12);
+            position: relative;
+            z-index: 5;
         }
 
         .quick-actions-modern {
             display: flex;
-            gap: 12px;
-            margin-bottom: 18px;
-            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 12px;
+            overflow-x: auto;
+            padding-bottom: 4px;
+            scrollbar-width: none;
+            -webkit-overflow-scrolling: touch;
+            flex-wrap: nowrap;
+        }
+
+        .quick-actions-modern::-webkit-scrollbar {
+            display: none;
         }
 
         .quick-btn-modern {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            padding: 12px 20px;
-            background: linear-gradient(135deg, rgba(199, 164, 76, 0.1), rgba(168, 132, 47, 0.08));
-            border: 2px solid rgba(199, 164, 76, 0.25);
-            border-radius: 28px;
-            color: #8a6f2a;
-            font-size: 14px;
+            gap: 7px;
+            padding: 8px 15px;
+            background: #f4f5f0;
+            border: 1px solid rgba(73, 76, 53, 0.16);
+            border-radius: 999px;
+            color: #343726;
+            font-size: 12.5px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
             font-family: 'Inter', sans-serif;
             white-space: nowrap;
+            flex-shrink: 0;
         }
 
         .quick-btn-modern i {
-            font-size: 16px;
+            font-size: 13px;
+            color: #3e6b55;
+            transition: color 0.2s ease;
         }
 
         .quick-btn-modern:hover {
-            background: linear-gradient(135deg, #c7a44c, #a8842f);
+            background: #3e6b55;
             color: #ffffff;
-            border-color: transparent;
-            transform: translateY(-3px);
-            box-shadow: 0 6px 15px rgba(199, 164, 76, 0.3);
+            border-color: #3e6b55;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(62, 107, 85, 0.2);
+        }
+
+        .quick-btn-modern:hover i {
+            color: #ffffff;
         }
 
         .input-wrapper-modern {
             position: relative;
             display: flex;
-            gap: 14px;
+            gap: 10px;
             align-items: flex-end;
         }
 
         .input-wrapper-modern textarea {
             flex: 1;
-            padding: 18px 22px;
-            border: 2px solid rgba(199, 164, 76, 0.2);
-            border-radius: 18px;
-            font-size: 15px;
+            padding: 13px 16px;
+            border: 1.5px solid rgba(73, 76, 53, 0.2);
+            border-radius: 14px;
+            font-size: 14.5px;
             font-family: 'Inter', sans-serif;
-            color: #2d3748;
-            background: #fffbf0;
+            color: #1f2937;
+            background: #fafaf7;
             resize: none;
-            min-height: 60px;
-            max-height: 140px;
-            transition: all 0.3s ease;
+            min-height: 50px;
+            max-height: 120px;
+            line-height: 1.5;
+            transition: all 0.2s ease;
+            box-sizing: border-box;
         }
 
         .input-wrapper-modern textarea:focus {
             outline: none;
-            border-color: #c7a44c;
+            border-color: #3e6b55;
             background: #ffffff;
-            box-shadow: 0 0 0 4px rgba(199, 164, 76, 0.1);
+            box-shadow: 0 0 0 3px rgba(62, 107, 85, 0.12);
         }
 
         .send-btn-modern {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, #c7a44c, #a8842f);
+            width: 50px;
+            height: 50px;
+            background: #3e6b55;
             border: none;
-            border-radius: 18px;
+            border-radius: 14px;
             color: #ffffff;
-            font-size: 22px;
+            font-size: 17px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
             display: flex;
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
-            box-shadow: 0 6px 20px rgba(199, 164, 76, 0.3);
+            box-shadow: 0 4px 14px rgba(62, 107, 85, 0.25);
         }
 
         .send-btn-modern:hover {
-            transform: scale(1.08);
-            box-shadow: 0 8px 25px rgba(199, 164, 76, 0.4);
+            background: #2e5241;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(62, 107, 85, 0.35);
         }
 
         .send-btn-modern:active {
-            transform: scale(0.95);
+            transform: scale(0.96);
         }
 
         .chat-footer-info {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
-            margin-top: 15px;
-            font-size: 12px;
-            color: #a0aec0;
+            gap: 6px;
+            margin-top: 10px;
+            font-size: 11.5px;
+            color: #8c8f82;
             font-family: 'Inter', sans-serif;
         }
 
         .chat-footer-info i {
-            font-size: 14px;
+            font-size: 13px;
         }
 
         /* How It Works Section */
@@ -602,131 +923,116 @@
 
         .step-card-modern {
             background: #ffffff;
-            border-radius: 24px;
-            padding: 40px 30px;
+            border-radius: 18px;
+            padding: 36px 26px;
             text-align: center;
             position: relative;
-            border: 2px solid rgba(199, 164, 76, 0.15);
-            box-shadow: 0 8px 30px rgba(199, 164, 76, 0.08);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(73, 76, 53, 0.14);
+            box-shadow: 0 8px 24px rgba(32, 34, 27, 0.05);
+            transition: all 0.3s ease;
         }
 
         .step-card-modern:hover {
-            transform: translateY(-15px);
-            box-shadow: 0 20px 50px rgba(199, 164, 76, 0.2);
-            border-color: rgba(199, 164, 76, 0.35);
+            transform: translateY(-8px);
+            box-shadow: 0 16px 36px rgba(32, 34, 27, 0.1);
+            border-color: rgba(62, 107, 85, 0.3);
         }
 
         .step-number-badge {
-            width: 70px;
-            height: 70px;
-            background: linear-gradient(135deg, #c7a44c, #a8842f);
+            width: 60px;
+            height: 60px;
+            background: #3e6b55;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 32px;
-            font-weight: 900;
+            font-size: 24px;
+            font-weight: 800;
             color: #ffffff;
-            margin: 0 auto 25px;
-            box-shadow: 0 8px 25px rgba(199, 164, 76, 0.4);
-            border: 4px solid rgba(255, 255, 255, 0.9);
+            margin: 0 auto 20px;
+            box-shadow: 0 6px 18px rgba(62, 107, 85, 0.25);
+            border: 3px solid rgba(255, 255, 255, 0.9);
             transition: all 0.3s ease;
         }
 
         .step-card-modern:hover .step-number-badge {
-            transform: scale(1.15) rotate(5deg);
-            box-shadow: 0 12px 35px rgba(199, 164, 76, 0.5);
+            transform: scale(1.08);
+            box-shadow: 0 10px 24px rgba(62, 107, 85, 0.35);
         }
 
         .step-card-modern h3 {
             font-size: 20px;
-            font-weight: 700;
-            color: #2d3748;
-            margin: 0 0 15px 0;
-            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            color: #20221b;
+            margin: 0 0 12px 0;
+            font-family: 'Playfair Display', Georgia, serif;
+            letter-spacing: -0.015em;
         }
 
         .step-card-modern p {
-            font-size: 15px;
-            color: #718096;
-            line-height: 1.7;
+            font-size: 14.5px;
+            color: #4b5563;
+            line-height: 1.65;
             margin: 0;
             font-family: 'Inter', sans-serif;
         }
 
         /* AI Features Section */
         .ai-features-section {
-            padding: 100px 0;
-            background: linear-gradient(135deg, #fff9ea 0%, #ffffff 50%, #fff9ea 100%);
+            padding: 80px 0;
+            background: #fafaf7;
         }
 
         .ai-features-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-            margin-top: 60px;
+            gap: 28px;
+            margin-top: 50px;
         }
 
         .ai-feature-modern {
             background: #ffffff;
-            border-radius: 24px;
-            padding: 40px 30px;
+            border-radius: 18px;
+            padding: 36px 26px;
             text-align: center;
-            border: 2px solid rgba(199, 164, 76, 0.15);
-            box-shadow: 0 8px 30px rgba(199, 164, 76, 0.08);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(73, 76, 53, 0.14);
+            box-shadow: 0 8px 24px rgba(32, 34, 27, 0.05);
+            transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
         }
 
-        .ai-feature-modern::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 50% 0%, rgba(199, 164, 76, 0.1) 0%, transparent 70%);
-            opacity: 0;
-            transition: opacity 0.4s ease;
-        }
-
         .ai-feature-modern:hover {
-            transform: translateY(-15px);
-            box-shadow: 0 20px 50px rgba(199, 164, 76, 0.2);
-            border-color: rgba(199, 164, 76, 0.35);
-        }
-
-        .ai-feature-modern:hover::before {
-            opacity: 1;
+            transform: translateY(-8px);
+            box-shadow: 0 16px 36px rgba(32, 34, 27, 0.1);
+            border-color: rgba(62, 107, 85, 0.3);
         }
 
         .ai-feature-icon {
-            width: 95px;
-            height: 95px;
-            margin: 0 auto 25px;
-            background: linear-gradient(135deg, rgba(199, 164, 76, 0.12), rgba(168, 132, 47, 0.08));
+            width: 76px;
+            height: 76px;
+            margin: 0 auto 20px;
+            background: rgba(62, 107, 85, 0.08);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.4s ease;
-            border: 3px solid rgba(199, 164, 76, 0.25);
+            transition: all 0.3s ease;
+            border: 1.5px solid rgba(62, 107, 85, 0.2);
             position: relative;
             z-index: 2;
         }
 
         .ai-feature-icon i {
-            font-size: 42px;
-            color: #a8842f;
-            transition: all 0.4s ease;
+            font-size: 32px;
+            color: #3e6b55;
+            transition: all 0.3s ease;
         }
 
         .ai-feature-modern:hover .ai-feature-icon {
-            background: linear-gradient(135deg, #c7a44c, #a8842f);
-            transform: scale(1.15) rotate(5deg);
-            box-shadow: 0 12px 30px rgba(199, 164, 76, 0.4);
+            background: #3e6b55;
+            transform: scale(1.08);
+            box-shadow: 0 8px 20px rgba(62, 107, 85, 0.28);
         }
 
         .ai-feature-modern:hover .ai-feature-icon i {
@@ -734,19 +1040,20 @@
         }
 
         .ai-feature-modern h3 {
-            font-size: 22px;
-            font-weight: 700;
-            color: #2d3748;
-            margin: 0 0 15px 0;
-            font-family: 'Inter', sans-serif;
+            font-size: 21px;
+            font-weight: 600;
+            color: #20221b;
+            margin: 0 0 12px 0;
+            font-family: 'Playfair Display', Georgia, serif;
             position: relative;
             z-index: 2;
+            letter-spacing: -0.015em;
         }
 
         .ai-feature-modern p {
-            font-size: 15px;
-            color: #718096;
-            line-height: 1.7;
+            font-size: 14.5px;
+            color: #4b5563;
+            line-height: 1.65;
             margin: 0;
             font-family: 'Inter', sans-serif;
             position: relative;
@@ -823,10 +1130,10 @@
 
         .testimonial-author-modern h4 {
             font-size: 16px;
-            font-weight: 700;
+            font-weight: 600;
             color: #2d3748;
             margin: 0 0 5px 0;
-            font-family: 'Inter', sans-serif;
+            font-family: 'Playfair Display', Georgia, serif !important;
         }
 
         .testimonial-author-modern p {
@@ -865,10 +1172,12 @@
 
         .ai-cta-section h2 {
             font-size: 52px;
-            font-weight: 900;
+            font-weight: 600;
             margin: 0 0 25px 0;
-            font-family: 'Inter', sans-serif;
+            font-family: 'Playfair Display', Georgia, serif !important;
             color: #ffffff;
+            letter-spacing: -0.025em;
+            line-height: 1.15;
             text-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
             position: relative;
             z-index: 2;
@@ -928,10 +1237,13 @@
         /* Fullscreen Chat Mode */
         .chat-container-modern.chat-fullscreen {
             position: fixed;
-            inset: 15px;
+            inset: 0;
+            width: 100vw;
+            height: 100vh;
             max-height: none;
-            z-index: 10001;
-            border-radius: 18px;
+            z-index: 100050;
+            border-radius: 0;
+            border: none;
         }
 
         body.chat-fullscreen-active {
@@ -948,46 +1260,47 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            padding: 10px 22px;
-            background: linear-gradient(135deg, rgba(199, 164, 76, 0.12), rgba(168, 132, 47, 0.08));
-            color: #8a6f2a;
-            font-size: 13px;
+            padding: 8px 18px;
+            background: rgba(62, 107, 85, 0.08);
+            color: #3e6b55;
+            font-size: 12px;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 1.5px;
             border-radius: 28px;
-            margin-bottom: 22px;
+            margin-bottom: 18px;
             font-family: 'Inter', sans-serif;
-            border: 2px solid rgba(199, 164, 76, 0.25);
+            border: 1px solid rgba(62, 107, 85, 0.22);
         }
 
         .section-label-modern i {
-            font-size: 14px;
-            color: #c7a44c;
+            font-size: 13px;
+            color: #3e6b55;
         }
 
         .section-header-modern h2 {
-            font-size: 46px;
-            font-weight: 900;
-            color: #2d3748;
-            margin: 0 0 18px 0;
-            font-family: 'Inter', sans-serif;
-            line-height: 1.2;
+            font-size: clamp(2rem, 4vw, 2.75rem);
+            font-weight: 600;
+            color: #20221b;
+            margin: 0 0 16px 0;
+            font-family: 'Playfair Display', Georgia, serif;
+            letter-spacing: -0.025em;
+            line-height: 1.18;
         }
 
         .section-header-modern p {
-            font-size: 18px;
-            color: #718096;
+            font-size: 16.5px;
+            color: #4b5563;
             max-width: 650px;
             margin: 0 auto;
             font-family: 'Inter', sans-serif;
-            line-height: 1.6;
+            line-height: 1.65;
         }
 
         /* Responsive */
         @media (max-width: 991.98px) {
             .ai-hero-content h1 {
-                font-size: 48px;
+                font-size: 44px;
             }
 
             .how-it-works-grid,
@@ -997,53 +1310,56 @@
             }
 
             .ai-cta-section h2 {
-                font-size: 40px;
+                font-size: 38px;
             }
 
             .section-header-modern h2 {
-                font-size: 38px;
+                font-size: 34px;
             }
         }
 
         @media (max-width: 767.98px) {
             .ai-hero-section {
-                padding: 130px 0 70px;
+                padding: 120px 0 60px;
             }
 
             .ai-hero-content h1 {
-                font-size: 38px;
+                font-size: 34px;
             }
 
             .ai-hero-subtitle {
-                font-size: 18px;
+                font-size: 16px;
             }
 
             .ai-hero-stats {
-                gap: 15px;
+                gap: 12px;
             }
 
             .ai-stat-pill {
-                padding: 12px 20px;
+                padding: 10px 18px;
             }
 
             .ai-stat-pill .stat-number {
-                font-size: 20px;
+                font-size: 18px;
             }
 
             .chat-container-modern {
-                max-height: 700px;
+                height: 560px;
+                max-height: calc(100vh - 120px);
+                border-radius: 16px;
             }
 
             .chat-header-modern {
-                padding: 22px;
+                padding: 12px 16px;
             }
 
             .chat-messages-modern {
-                padding: 25px;
+                padding: 16px 14px;
+                gap: 12px;
             }
 
             .chat-input-modern {
-                padding: 22px;
+                padding: 12px 14px 14px;
             }
 
             .how-it-works-grid,
@@ -1086,6 +1402,7 @@
             }
         }
     </style>
+    <link href="css/aromansa-theme.css?v=8" rel="stylesheet">
 </head>
 
 <body>
@@ -1095,29 +1412,34 @@
             <div class="nav-left">
                 <div id="logo">
                     <a href="index.html">
-                        <img src="img/aromansa-logo.png" alt="Aromansa Logo" class="navbar-logo-img">
+                        <img src="img/aromansa-logo-baru.png?v=3" alt="Logo Aromansa" class="navbar-logo-img">
                     </a>
                 </div>
             </div>
 
             <nav id="nav-menu-container" aria-label="Main navigation">
                 <ul class="nav-menu">
-                    <li><a href="index.html"><span class="nav-text">Home</span><span class="nav-indicator"></span></a></li>
-                    <li><a href="equipment.html"><span class="nav-text">Products</span><span class="nav-indicator"></span></a></li>
-                    <li class="menu-active"><a href="ai-personalization.html"><span class="nav-text">AI Consultant</span><span class="nav-indicator"></span></a></li>
-                    <li><a href="contact.html"><span class="nav-text">Contact</span><span class="nav-indicator"></span></a></li>
+                    <li><a href="index.html"><span class="nav-text">Beranda</span><span class="nav-indicator"></span></a></li>
+                    <li><a href="equipment.html"><span class="nav-text">Produk</span><span class="nav-indicator"></span></a></li>
+                    <li class="menu-active"><a href="ai-personalization.html"><span class="nav-text">Konsultan AI</span><span class="nav-indicator"></span></a></li>
+                    <li><a href="ar-mood-scan.html"><span class="nav-text">Scan Mood AR</span><span class="nav-indicator"></span></a></li>
+                    <li><a href="contact.html"><span class="nav-text">Kontak</span><span class="nav-indicator"></span></a></li>
                 </ul>
             </nav>
 
             <div class="nav-right">
-                <a href="https://shopee.co.id/aromansa_id" target="_blank" rel="noopener noreferrer" class="nav-cta">Shop Now</a>
-                <a href="#" id="mobile-nav-toggle" aria-label="Toggle mobile navigation">
+                <button type="button" class="nav-cart-btn" id="open-cart-btn" aria-label="Buka Keranjang Belanja">
+                    <i class="fa fa-shopping-bag" aria-hidden="true"></i>
+                    <span class="cart-badge" id="cart-badge">0</span>
+                </button>
+                <a href="https://shopee.co.id/aromansa_id" target="_blank" rel="noopener noreferrer" class="nav-cta">Belanja</a>
+                <button type="button" id="mobile-nav-toggle" aria-label="Buka navigasi" aria-expanded="false" aria-controls="mobile-nav">
                     <span class="hamburger">
                         <span class="hamburger-line"></span>
                         <span class="hamburger-line"></span>
                         <span class="hamburger-line"></span>
                     </span>
-                </a>
+                </button>
             </div>
         </div>
     </header>
@@ -1129,39 +1451,13 @@
             <div class="ai-hero-glow"></div>
             <div class="container">
                 <div class="ai-hero-content">
-                    <div class="ai-hero-badge">
-                        <i class="fa fa-robot"></i>
-                        <span>Powered by Advanced AI</span>
-                    </div>
-                    <h1>
-                        <span class="highlight">Aromansa AI</span>
+                    <span class="hero-eyebrow">Panduan Aroma Personal</span>
+                    <h1 class="hero-title-stunning">
+                        <span class="highlight">Diskusikan aroma yang paling pas untuk tubuh Anda.</span>
                     </h1>
                     <p class="ai-hero-subtitle">
-                        Tell us your wellness goals and let our intelligent AI assistant recommend the perfect essential oils, custom blends, and usage routines tailored just for you.
+                        Ceritakan apa yang sedang Anda rasakan—mulai dari susah tidur, kepala tegang setelah bekerja, hingga takaran diffuser yang aman untuk ruang keluarga.
                     </p>
-                    <div class="ai-hero-stats">
-                        <div class="ai-stat-pill">
-                            <i class="fa fa-comments"></i>
-                            <div>
-                                <div class="stat-number">24/7</div>
-                                <div class="stat-label">Available</div>
-                            </div>
-                        </div>
-                        <div class="ai-stat-pill">
-                            <i class="fa fa-flask"></i>
-                            <div>
-                                <div class="stat-number">14+</div>
-                                <div class="stat-label">Essential Oils</div>
-                            </div>
-                        </div>
-                        <div class="ai-stat-pill">
-                            <i class="fa fa-magic"></i>
-                            <div>
-                                <div class="stat-number">100%</div>
-                                <div class="stat-label">Personalized</div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </section>
@@ -1175,21 +1471,21 @@
                         <div class="chat-header-modern">
                             <div class="chat-header-left">
                                 <div class="chat-avatar-modern">
-                                    <i class="fa fa-robot"></i>
+                                    <i class="fa fa-leaf"></i>
                                 </div>
                                 <div>
-                                    <h3>Aromansa AI Assistant</h3>
+                                    <h3>Konsultan Aromansa</h3>
                                     <div class="chat-status-modern">
                                         <span class="status-dot-modern"></span>
-                                        Online & Ready to Help
+                                        Aktif · Panduan Interaktif
                                     </div>
                                 </div>
                             </div>
                             <div class="chat-header-actions">
-                                <button class="chat-header-btn-modern" id="toggleFullscreenBtn" title="Toggle fullscreen">
+                                <button type="button" class="chat-header-btn-modern" id="toggleFullscreenBtn" title="Layar penuh">
                                     <i class="fa fa-expand"></i>
                                 </button>
-                                <button class="chat-header-btn-modern" id="clearChatBtn" title="Clear chat">
+                                <button type="button" class="chat-header-btn-modern" id="clearChatBtn" title="Hapus percakapan">
                                     <i class="fa fa-trash"></i>
                                 </button>
                             </div>
@@ -1201,24 +1497,18 @@
                             <div class="chat-message ai-message">
                                 <div class="message-content-modern">
                                     <div class="message-avatar-modern">
-                                        <i class="fa fa-robot"></i>
+                                        <i class="fa fa-leaf"></i>
                                     </div>
                                     <div class="message-bubble">
-                                        <p>Hello! I'm your <strong>Aromansa AI aromatherapy assistant</strong>. I'm here to help you discover the perfect essential oils for your unique wellness needs.</p>
-                                        <p>I can provide:</p>
+                                        <p>Halo! Selamat datang di ruang konsultasi <strong>Aromansa</strong>. Saya siap membantu Anda memilih varian essential oil, roll-on, atau linen spray yang tepat.</p>
+                                        <p><strong>Apa yang ingin Anda tanyakan hari ini?</strong></p>
                                         <ul>
-                                            <li>🎯 <strong>Personalized recommendations</strong> based on your goals</li>
-                                            <li>🧪 <strong>Custom blend recipes</strong> with exact ratios</li>
-                                            <li>💡 <strong>Usage tips</strong> and safety guidelines</li>
-                                            <li>💰 <strong>Budget-friendly options</strong> that work</li>
+                                            <li><strong>Aroma untuk tidur &amp; istirahat:</strong> pilihan floral dan herbal agar tidur malam lebih lelap</li>
+                                            <li><strong>Fokus kerja &amp; pereda pegal:</strong> kombinasi mint, citrus, atau gandapura</li>
+                                            <li><strong>Takaran campuran diffuser:</strong> jumlah tetes ideal sesuai ukuran kamar</li>
+                                            <li><strong>Keamanan pemakaian:</strong> cara pengenceran untuk kulit sensitif atau ruang keluarga</li>
                                         </ul>
-                                        <p><strong>To get started, tell me:</strong></p>
-                                        <ul>
-                                            <li>What are you looking to achieve? (relaxation, energy, focus, skincare)</li>
-                                            <li>Who will use the oils? (yourself, family, children)</li>
-                                            <li>Any aroma preferences? (floral, citrus, minty, earthy)</li>
-                                            <li>Your experience level? (beginner, intermediate, experienced)</li>
-                                        </ul>
+                                        <p>Pilih topik cepat di bawah atau tulis langsung kebutuhan Anda.</p>
                                     </div>
                                 </div>
                             </div>
@@ -1227,31 +1517,31 @@
                         <!-- Chat Input -->
                         <div class="chat-input-modern">
                             <div class="quick-actions-modern">
-                                <button class="quick-btn-modern" data-prompt="Show me all Single Oil products with prices">
-                                    <i class="fa fa-flask"></i> Single Oils
+                                <button type="button" class="quick-btn-modern" data-prompt="Boleh minta daftar lengkap varian Essential Oil Aromansa beserta harganya?">
+                                    <i class="fa fa-tint"></i> Daftar Essential Oil
                                 </button>
-                                <button class="quick-btn-modern" data-prompt="Show me all Roll-On products with prices">
-                                    <i class="fa fa-circle-notch"></i> Roll-On
+                                <button type="button" class="quick-btn-modern" data-prompt="Apa saja pilihan Roll-On Aromansa dan cara pemakaian praktisnya?">
+                                    <i class="fa fa-compass"></i> Pilihan Roll-On
                                 </button>
-                                <button class="quick-btn-modern" data-prompt="Show me all Spray products with prices">
-                                    <i class="fa fa-spray-can"></i> Spray
+                                <button type="button" class="quick-btn-modern" data-prompt="Boleh info koleksi Linen &amp; Room Spray Aromansa untuk relaksasi kamar?">
+                                    <i class="fa fa-wind"></i> Linen &amp; Room Spray
                                 </button>
-                                <button class="quick-btn-modern" data-prompt="Recommend essential oils for relaxation and sleep">
-                                    <i class="fa fa-moon"></i> Relaxation
+                                <button type="button" class="quick-btn-modern" data-prompt="Saya sering susah tidur dan insomnia, rekomendasi aroma apa yang paling pas?">
+                                    <i class="fa fa-moon"></i> Susah Tidur
                                 </button>
-                                <button class="quick-btn-modern" data-prompt="What are the best oils for energy and focus?">
-                                    <i class="fa fa-bolt"></i> Energy
+                                <button type="button" class="quick-btn-modern" data-prompt="Aroma apa yang pas untuk membantu fokus kerja dan redakan lelah mental?">
+                                    <i class="fa fa-sun"></i> Fokus Kerja
                                 </button>
                             </div>
                             <div class="input-wrapper-modern">
-                                <textarea id="chatInput" placeholder="Tell me about your wellness goals..." rows="1"></textarea>
-                                <button class="send-btn-modern" id="sendBtn">
+                                <textarea id="chatInput" placeholder="Tulis keluhan atau aroma yang Anda cari..." rows="1"></textarea>
+                                <button type="button" class="send-btn-modern" id="sendBtn" aria-label="Kirim pesan">
                                     <i class="fa fa-paper-plane"></i>
                                 </button>
                             </div>
                             <div class="chat-footer-info">
                                 <i class="fa fa-info-circle"></i>
-                                AI may produce inaccurate information. Please verify important details.
+                                Panduan ini bersifat informatif dan tidak menggantikan saran medis profesional.
                             </div>
                         </div>
                     </div>
@@ -1263,149 +1553,30 @@
         <section class="ai-how-it-works">
             <div class="container">
                 <div class="section-header-modern">
-                    <span class="section-label-modern"><i class="fa fa-lightbulb"></i> Simple Process</span>
-                    <h2>How It Works</h2>
-                    <p>Get your personalized essential oil recommendations in just 4 easy steps</p>
+                    <span class="section-label-modern">Panduan Penggunaan</span>
+                    <h2>Cara mendapatkan rekomendasi yang akurat</h2>
+                    <p>Cukup ceritakan kondisi keseharian Anda agar saran aroma lebih tepat sasaran.</p>
                 </div>
                 <div class="how-it-works-grid">
                     <div class="step-card-modern">
-                        <div class="step-number-badge">1</div>
-                        <h3>Share Your Goals</h3>
-                        <p>Tell our AI what you want to achieve - better sleep, more energy, clearer skin, or stress relief</p>
+                        <div class="step-meta"><span>01</span><small>Kondisi Tubuh</small></div>
+                        <h3>Sebutkan Keluhan Anda</h3>
+                        <p>Misalnya sulit tidur nyenyak, sering pusing saat bekerja di depan layar, atau hidung tersumbat saat hujan.</p>
                     </div>
                     <div class="step-card-modern">
-                        <div class="step-number-badge">2</div>
-                        <h3>AI Analysis</h3>
-                        <p>Our AI analyzes your needs, preferences, and experience level to find the perfect matches</p>
+                        <div class="step-meta"><span>02</span><small>Preferensi Aroma</small></div>
+                        <h3>Pilih Karakter Wangi</h3>
+                        <p>Beri tahu apakah Anda lebih menyukai wangi bunga lembut, perasan jeruk segar, atau daun mint yang dingin.</p>
                     </div>
                     <div class="step-card-modern">
-                        <div class="step-number-badge">3</div>
-                        <h3>Get Recommendations</h3>
-                        <p>Receive personalized essential oil suggestions with custom blends and usage instructions</p>
+                        <div class="step-meta"><span>03</span><small>Format Produk</small></div>
+                        <h3>Tentukan Cara Pakai</h3>
+                        <p>Pilih apakah produk akan diteteskan ke diffuser, dioleskan praktis lewat roll-on, atau disemprot ke bantal.</p>
                     </div>
                     <div class="step-card-modern">
-                        <div class="step-number-badge">4</div>
-                        <h3>Shop & Enjoy</h3>
-                        <p>Purchase your recommended oils directly from our store and start your wellness journey</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- AI Features Section -->
-        <section class="ai-features-section">
-            <div class="container">
-                <div class="section-header-modern">
-                    <span class="section-label-modern"><i class="fa fa-magic"></i> AI Capabilities</span>
-                    <h2>What Can AI Help You With?</h2>
-                    <p>Our AI assistant combines essential oil expertise with smart recommendations</p>
-                </div>
-                <div class="ai-features-grid">
-                    <div class="ai-feature-modern">
-                        <div class="ai-feature-icon">
-                            <i class="fa fa-magic"></i>
-                        </div>
-                        <h3>Smart Recommendations</h3>
-                        <p>AI-curated essential oil suggestions based on your unique wellness goals and preferences</p>
-                    </div>
-                    <div class="ai-feature-modern">
-                        <div class="ai-feature-icon">
-                            <i class="fa fa-box-open"></i>
-                        </div>
-                        <h3>Custom Routine Builder</h3>
-                        <p>Practical daily routines with single oils, roll-ons, and sprays tailored to your lifestyle</p>
-                    </div>
-                    <div class="ai-feature-modern">
-                        <div class="ai-feature-icon">
-                            <i class="fa fa-calculator"></i>
-                        </div>
-                        <h3>Budget Optimization</h3>
-                        <p>Find effective, budget-friendly combinations without compromising therapeutic quality</p>
-                    </div>
-                    <div class="ai-feature-modern">
-                        <div class="ai-feature-icon">
-                            <i class="fa fa-flask"></i>
-                        </div>
-                        <h3>Blend Recipes</h3>
-                        <p>Creative blend combinations with exact drop ratios for relaxation, focus, energy, and sleep</p>
-                    </div>
-                    <div class="ai-feature-modern">
-                        <div class="ai-feature-icon">
-                            <i class="fa fa-check-circle"></i>
-                        </div>
-                        <h3>Usage Checklist</h3>
-                        <p>Easy-to-follow usage checklists, dilution tips, and safety reminders for your oils</p>
-                    </div>
-                    <div class="ai-feature-modern">
-                        <div class="ai-feature-icon">
-                            <i class="fa fa-clock"></i>
-                        </div>
-                        <h3>24/7 Consultation</h3>
-                        <p>Ask anytime and get instant answers about product selection and aromatherapy tips</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- AI Testimonials Section -->
-        <section class="ai-testimonials">
-            <div class="container">
-                <div class="section-header-modern">
-                    <span class="section-label-modern"><i class="fa fa-quote-left"></i> Success Stories</span>
-                    <h2>What Users Say</h2>
-                    <p>Real experiences from people who found their perfect essential oils</p>
-                </div>
-                <div class="testimonial-grid">
-                    <div class="testimonial-card-modern">
-                        <div class="testimonial-stars-modern">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                        </div>
-                        <p class="testimonial-text-modern">"The AI recommended Lavender and Chamomile for my sleep issues. After using them for a week, my sleep quality improved dramatically! Amazing technology."</p>
-                        <div class="testimonial-author-modern">
-                            <div class="testimonial-avatar-modern">S</div>
-                            <div class="testimonial-author-info">
-                                <h4>Sarah M.</h4>
-                                <p>Jakarta, Indonesia</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="testimonial-card-modern">
-                        <div class="testimonial-stars-modern">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                        </div>
-                        <p class="testimonial-text-modern">"I asked for energy and focus recommendations. The custom Peppermint-Lemon blend recipe is now my daily morning routine. Game changer!"</p>
-                        <div class="testimonial-author-modern">
-                            <div class="testimonial-avatar-modern">A</div>
-                            <div class="testimonial-author-info">
-                                <h4>Ahmad R.</h4>
-                                <p>Bandung, Indonesia</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="testimonial-card-modern">
-                        <div class="testimonial-stars-modern">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                        </div>
-                        <p class="testimonial-text-modern">"As a beginner, I was confused about which oils to buy. The AI explained everything clearly and helped me start with the perfect starter set."</p>
-                        <div class="testimonial-author-modern">
-                            <div class="testimonial-avatar-modern">D</div>
-                            <div class="testimonial-author-info">
-                                <h4>Diana L.</h4>
-                                <p>Surabaya, Indonesia</p>
-                            </div>
-                        </div>
+                        <div class="step-meta"><span>04</span><small>Panduan Racikan</small></div>
+                        <h3>Dapatkan Takaran Tepat</h3>
+                        <p>Kami memberikan saran varian beserta jumlah tetes dan rasio pengenceran yang aman untuk Anda.</p>
                     </div>
                 </div>
             </div>
@@ -1414,16 +1585,16 @@
         <!-- CTA Section -->
         <section class="ai-cta-section">
             <div class="container">
-                <h2>Ready to Discover Your Perfect Essential Oils?</h2>
-                <p>Start chatting with our AI consultant now and transform your wellness journey</p>
+                <span class="section-label cta-eyebrow">Layanan Pelanggan</span>
+                <h2>Ingin berkonsultasi langsung dengan tim kami?</h2>
+                <p>Tim Aromansa di Cianjur siap membantu Anda memilih produk atau melayani pemesanan via WhatsApp.</p>
                 <div class="ai-cta-buttons-modern">
-                    <a href="#chatContainer" class="ai-cta-btn-modern">
-                        <i class="fa fa-comments"></i>
-                        <span>Start Chatting Now</span>
+                    <a href="https://wa.me/6285782909266" target="_blank" rel="noopener noreferrer" class="ai-cta-btn-modern">
+                        <i class="fab fa-whatsapp"></i>
+                        <span>Chat via WhatsApp</span>
                     </a>
-                    <a href="contact.html" class="ai-cta-btn-modern btn-outline-modern">
-                        <i class="fa fa-headset"></i>
-                        <span>Talk to Human Expert</span>
+                    <a href="equipment.html" class="ai-cta-btn-modern btn-outline-modern">
+                        <span>Lihat Katalog Produk</span>
                     </a>
                 </div>
             </div>
@@ -1434,49 +1605,55 @@
     <footer id="footer">
         <div class="footer-top">
             <div class="container">
-                <div class="row">
-                    <div class="col-lg-4 col-md-6 footer-info">
-                        <h3><span>Aromansa</span></h3>
-                        <p>Your trusted source for premium therapeutic grade essential oils, aromatherapy diffusers, and natural wellness products. Transform your home into a wellness sanctuary.</p>
+                <div class="footer-grid">
+                    <div class="footer-info">
+                        <a href="index.html" class="footer-brand">
+                            <img src="img/aromansa-logo-baru.png?v=3" alt="Logo Aromansa" class="footer-brand-logo">
+                            <span>Aromansa</span>
+                        </a>
+                        <p>Essential oil murni, roll-on, dan spray aromaterapi yang diracik untuk menemani waktu istirahat dan keseharian Anda.</p>
                         <div class="footer-social">
-                            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                            <a href="#" aria-label="Pinterest"><i class="fab fa-pinterest-p"></i></a>
-                            <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-                            <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                            <a href="https://wa.me/6285782909266" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp Aromansa"><i class="fab fa-whatsapp"></i></a>
+                            <a href="https://shopee.co.id/aromansa_id" target="_blank" rel="noopener noreferrer" aria-label="Shopee Aromansa"><i class="fa fa-shopping-bag"></i></a>
+                            <a href="https://www.tokopedia.com/aromansa" target="_blank" rel="noopener noreferrer" aria-label="Tokopedia Aromansa"><i class="fa fa-store"></i></a>
+                            <a href="mailto:aromansaofficial@gmail.com" aria-label="Email Aromansa"><i class="fa fa-envelope"></i></a>
                         </div>
                     </div>
-                    <div class="col-lg-2 col-md-6 footer-links">
-                        <h4>Quick Links</h4>
+                    <div class="footer-links">
+                        <h4>Navigasi</h4>
                         <ul>
-                            <li><a href="index.html">Home</a></li>
-                            <li><a href="equipment.html">Products</a></li>
-                            <li><a href="ai-personalization.html">AI Consultant</a></li>
-                            <li><a href="contact.html">Contact</a></li>
+                            <li><a href="index.html">Beranda</a></li>
+                            <li><a href="equipment.html">Produk</a></li>
+                            <li><a href="ai-personalization.html">Konsultan AI</a></li>
+                            <li><a href="ar-mood-scan.html">Scan Mood AR</a></li>
+                            <li><a href="contact.html">Kontak</a></li>
                         </ul>
                     </div>
-                    <div class="col-lg-3 col-md-6 footer-contact">
-                        <h4>Contact Us</h4>
-                        <p><i class="fa fa-map-marker-alt"></i> <span>Jl. Raya Bandung KM 8.8, Cianjur, Jawa Barat (43281), Indonesia</span></p>
-                        <p><i class="fa fa-phone"></i> <a href="tel:+6285782909266">+62 857-8290-9266</a></p>
-                        <p><i class="fa fa-envelope"></i> <a href="mailto:aromansaofficial@gmail.com">aromansaofficial@gmail.com</a></p>
-                        <p><i class="fa fa-clock"></i> <span>Mon - Sat: 08:00 - 20:00</span></p>
+                    <div class="footer-links">
+                        <h4>Koleksi</h4>
+                        <ul>
+                            <li><a href="equipment.html">Essential Oil</a></li>
+                            <li><a href="equipment.html">Roll-On Aromaterapi</a></li>
+                            <li><a href="equipment.html">Linen &amp; Room Spray</a></li>
+                            <li><a href="ai-personalization.html">Panduan Racikan</a></li>
+                            <li><a href="https://shopee.co.id/aromansa_id" target="_blank" rel="noopener noreferrer">Toko Resmi Shopee</a></li>
+                        </ul>
                     </div>
-                    <div class="col-lg-3 col-md-6 footer-newsletter">
-                        <h4>Wellness Newsletter</h4>
-                        <p>Subscribe for essential oil tips, wellness guides, and exclusive offers delivered to your inbox!</p>
-                        <form class="newsletter-form" action="#" method="post">
-                            <input type="email" name="email" placeholder="Your email address" required>
-                            <button type="submit" aria-label="Subscribe"><i class="fa fa-paper-plane"></i></button>
-                        </form>
+                    <div class="footer-contact">
+                        <h4>Hubungi Kami</h4>
+                        <p><i class="fa fa-map-marker-alt" aria-hidden="true"></i> <span>Jl. Raya Bandung KM 8.8, Cianjur, Jawa Barat 43281</span></p>
+                        <p><i class="fa fa-phone" aria-hidden="true"></i> <a href="tel:+6285782909266">+62 857-8290-9266</a></p>
+                        <p><i class="fa fa-envelope" aria-hidden="true"></i> <a href="mailto:aromansaofficial@gmail.com">aromansaofficial@gmail.com</a></p>
+                        <p><i class="fa fa-clock" aria-hidden="true"></i> <span>Senin – Sabtu, 08.00 – 20.00 WIB</span></p>
                     </div>
                 </div>
             </div>
         </div>
         <div class="footer-bottom">
             <div class="container">
-                <div class="footer-copyright">
-                    <p>&copy; 2026 <a href="index.html">Aromansa</a>. All Rights Reserved | Premium essential oils &amp; wellness products</p>
+                <div class="footer-bottom-inner">
+                    <p>&copy; 2026 <a href="index.html">Aromansa</a>. Hak cipta dilindungi.</p>
+                    <p class="footer-origin">Cianjur, Jawa Barat · Indonesia</p>
                 </div>
             </div>
         </div>
@@ -1489,11 +1666,13 @@
     <!-- Mobile Nav Overlay -->
     <div id="mobile-body-overly"></div>
     <nav id="mobile-nav">
+        <button class="mobile-nav-close" type="button" aria-label="Tutup navigasi"><i class="fa fa-times" aria-hidden="true"></i></button>
         <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="equipment.html">Products</a></li>
-            <li class="menu-active"><a href="ai-personalization.html">AI Consultant</a></li>
-            <li><a href="contact.html">Contact</a></li>
+            <li><a href="index.html">Beranda</a></li>
+            <li><a href="equipment.html">Produk</a></li>
+            <li class="menu-active"><a href="ai-personalization.html">Konsultan AI</a></li>
+            <li><a href="ar-mood-scan.html">Scan Mood AR</a></li>
+            <li><a href="contact.html">Kontak</a></li>
         </ul>
     </nav>
 
@@ -1502,7 +1681,9 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
 
     <!-- Template Javascript -->
-    <script src="js/main.js"></script>
+    <script src="lib/marked/marked.min.js"></script>
+    <script src="js/main.js?theme=1"></script>
+    <script src="js/cart.js?v=6"></script>
     <script src="js/ai-personalization.js"></script>
 </body>
 </html>

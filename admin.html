@@ -1,0 +1,1327 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Admin Aromansa · Verifikasi Pembayaran QRIS</title>
+    <link href="img/favicon.png?v=3" rel="icon" type="image/png">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --adm-bg: #f8fafc;
+            --adm-card: #ffffff;
+            --adm-border: #e2e8f0;
+            --adm-border-subtle: #f1f5f9;
+            --adm-text: #0f172a;
+            --adm-muted: #64748b;
+            --adm-brand: #3e6b55;
+            --adm-brand-hover: #2f5241;
+            --adm-brand-light: #f0fdf4;
+            --adm-amber-bg: #fffbeb;
+            --adm-amber-text: #92400e;
+            --adm-amber-border: #fde68a;
+            --adm-green-bg: #f0fdf4;
+            --adm-green-text: #166534;
+            --adm-green-border: #bbf7d0;
+            --adm-red-bg: #fef2f2;
+            --adm-red-text: #991b1b;
+            --adm-red-border: #fecaca;
+            --adm-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.05);
+            --adm-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+            --adm-radius: 8px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: var(--adm-bg);
+            color: var(--adm-text);
+            line-height: 1.5;
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Login Screen */
+        .login-wrap {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+        }
+
+        .login-card {
+            width: 100%;
+            max-width: 400px;
+            background: var(--adm-card);
+            border: 1px solid var(--adm-border);
+            border-radius: var(--adm-radius);
+            box-shadow: var(--adm-shadow-md);
+            padding: 32px 28px;
+        }
+
+        .login-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .login-brand img {
+            width: 38px;
+            height: 38px;
+            object-fit: contain;
+        }
+
+        .login-brand div h1 {
+            font-size: 17px;
+            font-weight: 700;
+            color: var(--adm-text);
+            line-height: 1.2;
+        }
+
+        .login-brand div p {
+            font-size: 12px;
+            color: var(--adm-muted);
+        }
+
+        .login-error {
+            display: none;
+            padding: 10px 14px;
+            background: var(--adm-red-bg);
+            border: 1px solid var(--adm-red-border);
+            color: var(--adm-red-text);
+            border-radius: 6px;
+            font-size: 13px;
+            margin-bottom: 16px;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--adm-text);
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px 14px;
+            font-size: 14px;
+            border: 1px solid var(--adm-border);
+            border-radius: 6px;
+            outline: none;
+            color: var(--adm-text);
+            background: #ffffff;
+            transition: border-color 0.15s ease, box-shadow 0.15s ease;
+        }
+
+        .form-group input:focus {
+            border-color: var(--adm-brand);
+            box-shadow: 0 0 0 3px rgba(62, 107, 85, 0.12);
+        }
+
+        .btn-adm {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 10px 18px;
+            font-size: 13px;
+            font-weight: 600;
+            border-radius: 6px;
+            border: 1px solid transparent;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.15s ease;
+            white-space: nowrap;
+        }
+
+        .btn-adm-primary {
+            width: 100%;
+            background: var(--adm-brand);
+            color: #ffffff;
+            padding: 12px;
+            font-size: 14px;
+        }
+
+        .btn-adm-primary:hover {
+            background: var(--adm-brand-hover);
+        }
+
+        /* Topbar */
+        .adm-topbar {
+            background: #ffffff;
+            border-bottom: 1px solid var(--adm-border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .adm-topbar-inner {
+            max-width: 1320px;
+            margin: 0 auto;
+            padding: 14px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+        }
+
+        .adm-brand-wrap {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .adm-brand-wrap img {
+            width: 32px;
+            height: 32px;
+            object-fit: contain;
+        }
+
+        .adm-brand-wrap .title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--adm-text);
+        }
+
+        .adm-brand-wrap .sub {
+            font-size: 12px;
+            color: var(--adm-muted);
+            margin-left: 6px;
+        }
+
+        .adm-top-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .adm-refresh-indicator {
+            font-size: 12px;
+            color: var(--adm-muted);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .pulse-dot {
+            width: 7px;
+            height: 7px;
+            background: #22c55e;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .btn-refresh {
+            background: #ffffff;
+            border: 1px solid var(--adm-border);
+            color: var(--adm-text);
+            padding: 6px 12px;
+            font-size: 12px;
+        }
+
+        .btn-refresh:hover {
+            background: #f8fafc;
+            border-color: #cbd5e1;
+        }
+
+        .btn-logout {
+            background: transparent;
+            border: 1px solid var(--adm-border);
+            color: var(--adm-muted);
+            padding: 6px 12px;
+            font-size: 12px;
+        }
+
+        .btn-logout:hover {
+            background: #fee2e2;
+            color: #991b1b;
+            border-color: #fca5a5;
+        }
+
+        /* Main Content */
+        .adm-main {
+            max-width: 1320px;
+            margin: 0 auto;
+            padding: 24px;
+        }
+
+        /* KPI Bar */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .kpi-card {
+            background: var(--adm-card);
+            border: 1px solid var(--adm-border);
+            border-radius: var(--adm-radius);
+            padding: 18px 20px;
+            box-shadow: var(--adm-shadow);
+        }
+
+        .kpi-card.highlight {
+            border-color: #fde68a;
+            background: #fffdf5;
+        }
+
+        .kpi-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--adm-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+        }
+
+        .kpi-value {
+            font-size: 26px;
+            font-weight: 700;
+            color: var(--adm-text);
+            line-height: 1.1;
+        }
+
+        .kpi-card.highlight .kpi-value {
+            color: #b45309;
+        }
+
+        .kpi-sub {
+            font-size: 11px;
+            color: var(--adm-muted);
+            margin-top: 4px;
+        }
+
+        /* Filter & Search Bar */
+        .adm-controls {
+            background: var(--adm-card);
+            border: 1px solid var(--adm-border);
+            border-radius: var(--adm-radius);
+            padding: 14px 18px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .filter-tabs {
+            display: flex;
+            gap: 6px;
+        }
+
+        .tab-btn {
+            padding: 7px 14px;
+            font-size: 13px;
+            font-weight: 600;
+            background: transparent;
+            border: 1px solid transparent;
+            border-radius: 6px;
+            color: var(--adm-muted);
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        .tab-btn:hover {
+            background: #f1f5f9;
+            color: var(--adm-text);
+        }
+
+        .tab-btn.active {
+            background: #0f172a;
+            color: #ffffff;
+        }
+
+        .tab-btn .badge-pill {
+            display: inline-block;
+            margin-left: 6px;
+            padding: 1px 7px;
+            font-size: 11px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+        }
+
+        .tab-btn:not(.active) .badge-pill {
+            background: #e2e8f0;
+            color: #475569;
+        }
+
+        .tab-btn.tab-pending:not(.active) .badge-pill {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .search-wrap {
+            position: relative;
+            min-width: 280px;
+        }
+
+        .search-wrap i {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--adm-muted);
+            font-size: 13px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 8px 12px 8px 34px;
+            font-size: 13px;
+            border: 1px solid var(--adm-border);
+            border-radius: 6px;
+            outline: none;
+            background: #ffffff;
+            color: var(--adm-text);
+        }
+
+        .search-input:focus {
+            border-color: var(--adm-brand);
+        }
+
+        /* Orders Table / Cards */
+        .orders-container {
+            background: var(--adm-card);
+            border: 1px solid var(--adm-border);
+            border-radius: var(--adm-radius);
+            box-shadow: var(--adm-shadow);
+            overflow: hidden;
+        }
+
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        table.adm-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+            text-align: left;
+        }
+
+        table.adm-table th {
+            background: #f8fafc;
+            color: var(--adm-muted);
+            font-weight: 600;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 14px 18px;
+            border-bottom: 1px solid var(--adm-border);
+            white-space: nowrap;
+        }
+
+        table.adm-table td {
+            padding: 16px 18px;
+            border-bottom: 1px solid var(--adm-border-subtle);
+            vertical-align: middle;
+        }
+
+        table.adm-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        table.adm-table tr:hover td {
+            background: #fafbfc;
+        }
+
+        .order-id-badge {
+            font-family: monospace;
+            font-weight: 700;
+            font-size: 13px;
+            color: #0f172a;
+        }
+
+        .order-time {
+            font-size: 11px;
+            color: var(--adm-muted);
+            margin-top: 2px;
+        }
+
+        .customer-name {
+            font-weight: 600;
+            color: var(--adm-text);
+            margin-bottom: 2px;
+        }
+
+        .customer-contact {
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .customer-contact a {
+            color: #059669;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .customer-contact a:hover {
+            text-decoration: underline;
+        }
+
+        .customer-address {
+            font-size: 11px;
+            color: var(--adm-muted);
+            margin-top: 4px;
+            max-width: 220px;
+            line-height: 1.35;
+        }
+
+        .order-items-snippet {
+            font-size: 12px;
+            line-height: 1.5;
+            color: #334155;
+            max-width: 240px;
+        }
+
+        .order-total-price {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--adm-brand);
+            white-space: nowrap;
+        }
+
+        /* Proof thumbnail */
+        .proof-thumb-wrap {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .proof-thumb {
+            width: 44px;
+            height: 44px;
+            border-radius: 6px;
+            object-fit: cover;
+            border: 1px solid var(--adm-border);
+            cursor: pointer;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+
+        .proof-thumb:hover {
+            transform: scale(1.08);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+        }
+
+        .proof-info-text {
+            font-size: 11px;
+            color: var(--adm-muted);
+            line-height: 1.3;
+        }
+
+        .proof-empty {
+            font-size: 12px;
+            color: #94a3b8;
+            font-style: italic;
+        }
+
+        /* Status Pills */
+        .status-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 10px;
+            border-radius: 999px;
+            font-size: 11px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .status-pill.pending {
+            background: var(--adm-amber-bg);
+            color: var(--adm-amber-text);
+            border: 1px solid var(--adm-amber-border);
+        }
+
+        .status-pill.approved {
+            background: var(--adm-green-bg);
+            color: var(--adm-green-text);
+            border: 1px solid var(--adm-green-border);
+        }
+
+        .status-pill.rejected {
+            background: var(--adm-red-bg);
+            color: var(--adm-red-text);
+            border: 1px solid var(--adm-red-border);
+        }
+
+        .status-pill.awaiting_proof {
+            background: #f1f5f9;
+            color: #475569;
+            border: 1px solid #cbd5e1;
+        }
+
+        /* Action Buttons */
+        .adm-actions-cell {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            white-space: nowrap;
+        }
+
+        .btn-action-approve {
+            background: #166534;
+            color: #ffffff;
+            border: none;
+            padding: 6px 12px;
+            font-size: 12px;
+        }
+
+        .btn-action-approve:hover {
+            background: #14532d;
+        }
+
+        .btn-action-reject {
+            background: transparent;
+            color: #991b1b;
+            border: 1px solid #fca5a5;
+            padding: 6px 10px;
+            font-size: 12px;
+        }
+
+        .btn-action-reject:hover {
+            background: #fef2f2;
+        }
+
+        .btn-action-wa {
+            background: #25d366;
+            color: #ffffff;
+            border: none;
+            padding: 6px 10px;
+            font-size: 12px;
+        }
+
+        .btn-action-wa:hover {
+            background: #1ea952;
+        }
+
+        /* Lightbox Modal */
+        .lightbox-modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(4px);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.2s ease;
+        }
+
+        .lightbox-modal.is-open {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .lightbox-content {
+            background: #ffffff;
+            border-radius: var(--adm-radius);
+            max-width: 800px;
+            width: 100%;
+            max-height: 90vh;
+            display: flex;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            position: relative;
+        }
+
+        .lightbox-image-area {
+            flex: 1.2;
+            background: #f8fafc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            border-right: 1px solid var(--adm-border);
+        }
+
+        .lightbox-image-area img {
+            max-width: 100%;
+            max-height: 70vh;
+            object-fit: contain;
+            border-radius: 4px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        .lightbox-details-area {
+            flex: 1;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: #f1f5f9;
+            border: 1px solid var(--adm-border);
+            color: var(--adm-muted);
+            cursor: pointer;
+            font-size: 13px;
+        }
+
+        .lightbox-close:hover {
+            background: #e2e8f0;
+            color: var(--adm-text);
+        }
+
+        /* Empty state */
+        .empty-orders {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--adm-muted);
+        }
+
+        .empty-orders i {
+            font-size: 40px;
+            color: #cbd5e1;
+            margin-bottom: 12px;
+        }
+
+        @media (max-width: 900px) {
+            .kpi-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .lightbox-content {
+                flex-direction: column;
+                max-height: 85vh;
+            }
+            .lightbox-image-area {
+                border-right: none;
+                border-bottom: 1px solid var(--adm-border);
+                max-height: 45vh;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .kpi-grid {
+                grid-template-columns: 1fr;
+            }
+            .adm-topbar-inner {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .adm-controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .search-wrap {
+                min-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 1. LOGIN VIEW -->
+    <div id="login-view" class="login-wrap" style="display:none">
+        <div class="login-card">
+            <div class="login-brand">
+                <img src="img/aromansa-logo-baru.png?v=3" alt="Logo Aromansa">
+                <div>
+                    <h1>Panel Admin Aromansa</h1>
+                    <p>Verifikasi pembayaran QRIS &amp; pesanan</p>
+                </div>
+            </div>
+
+            <div id="login-error-msg" class="login-error"></div>
+
+            <form id="admin-login-form">
+                <div class="form-group">
+                    <label for="adm-username">Nama Pengguna</label>
+                    <input type="text" id="adm-username" value="admin" required autocomplete="username">
+                </div>
+                <div class="form-group">
+                    <label for="adm-password">Kata Sandi</label>
+                    <input type="password" id="adm-password" required autocomplete="current-password" placeholder="••••••••">
+                </div>
+                <button type="submit" class="btn-adm btn-adm-primary" id="btn-login-submit">
+                    Masuk ke Panel <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- 2. DASHBOARD VIEW -->
+    <div id="dashboard-view" style="display:none">
+        <!-- Topbar -->
+        <header class="adm-topbar">
+            <div class="adm-topbar-inner">
+                <div class="adm-brand-wrap">
+                    <img src="img/aromansa-logo-baru.png?v=3" alt="Aromansa">
+                    <div>
+                        <span class="title">Aromansa</span>
+                        <span class="sub">Manajemen Pembayaran QRIS</span>
+                    </div>
+                </div>
+                <div class="adm-top-actions">
+                    <div class="adm-refresh-indicator">
+                        <span class="pulse-dot"></span>
+                        <span id="last-sync-label">Sinkronisasi otomatis</span>
+                    </div>
+                    <button type="button" class="btn-adm btn-refresh" id="btn-manual-refresh" title="Muat ulang data">
+                        <i class="fa fa-sync-alt" id="refresh-icon"></i> Segarkan
+                    </button>
+                    <button type="button" class="btn-adm btn-logout" id="btn-admin-logout">
+                        <i class="fa fa-sign-out-alt"></i> Keluar
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Workspace -->
+        <main class="adm-main">
+            <!-- KPI Summary Cards -->
+            <div class="kpi-grid">
+                <div class="kpi-card highlight" id="kpi-pending-card">
+                    <div class="kpi-label">Menunggu Verifikasi</div>
+                    <div class="kpi-value" id="kpi-pending-count">0</div>
+                    <div class="kpi-sub">Perlu pemeriksaan bukti transfer</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">Pembayaran Disetujui</div>
+                    <div class="kpi-value" id="kpi-approved-count">0</div>
+                    <div class="kpi-sub">Siap dikemas &amp; dikirim</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">Total Pesanan</div>
+                    <div class="kpi-value" id="kpi-total-orders">0</div>
+                    <div class="kpi-sub">Semua riwayat transaksi</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">Omset Terverifikasi</div>
+                    <div class="kpi-value" id="kpi-total-revenue">Rp0</div>
+                    <div class="kpi-sub">Total pembayaran sah diterima</div>
+                </div>
+            </div>
+
+            <!-- Controls (Tabs + Search) -->
+            <div class="adm-controls">
+                <div class="filter-tabs">
+                    <button type="button" class="tab-btn active" data-filter="all">Semua <span class="badge-pill" id="badge-all">0</span></button>
+                    <button type="button" class="tab-btn tab-pending" data-filter="pending_verification">Perlu Approval <span class="badge-pill" id="badge-pending">0</span></button>
+                    <button type="button" class="tab-btn" data-filter="approved">Disetujui <span class="badge-pill" id="badge-approved">0</span></button>
+                    <button type="button" class="tab-btn" data-filter="rejected">Ditolak <span class="badge-pill" id="badge-rejected">0</span></button>
+                </div>
+                <div class="search-wrap">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                    <input type="text" id="order-search-input" class="search-input" placeholder="Cari ID pesanan, nama, nomor WhatsApp...">
+                </div>
+            </div>
+
+            <!-- Orders Table Container -->
+            <div class="orders-container">
+                <div class="table-responsive">
+                    <table class="adm-table">
+                        <thead>
+                            <tr>
+                                <th>Pesanan</th>
+                                <th>Pelanggan</th>
+                                <th>Item &amp; Rincian</th>
+                                <th>Total</th>
+                                <th>Bukti Transfer</th>
+                                <th>Status</th>
+                                <th style="text-align:right">Tindakan</th>
+                            </tr>
+                        </thead>
+                        <tbody id="orders-tbody">
+                            <tr>
+                                <td colspan="7" class="empty-orders">
+                                    <i class="fa fa-spinner fa-spin"></i>
+                                    <p>Memuat data pesanan...</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- 3. LIGHTBOX MODAL (BUKTI PEMBAYARAN) -->
+    <div id="lightbox-modal" class="lightbox-modal">
+        <div class="lightbox-content">
+            <button type="button" class="lightbox-close" id="btn-close-lightbox" aria-label="Tutup preview">
+                <i class="fa fa-times"></i>
+            </button>
+            <div class="lightbox-image-area">
+                <img id="lightbox-img" src="" alt="Bukti Transfer QRIS">
+            </div>
+            <div class="lightbox-details-area" id="lightbox-details"></div>
+        </div>
+    </div>
+
+    <script>
+        (function () {
+            'use strict';
+
+            const TOKEN_KEY = 'aromansa_admin_token';
+            let currentToken = localStorage.getItem(TOKEN_KEY) || sessionStorage.getItem(TOKEN_KEY);
+            let ordersData = [];
+            let activeFilter = 'all';
+            let searchQuery = '';
+            let syncInterval = null;
+            let lastOrderCount = 0;
+
+            const loginView = document.getElementById('login-view');
+            const dashboardView = document.getElementById('dashboard-view');
+            const loginForm = document.getElementById('admin-login-form');
+            const loginError = document.getElementById('login-error-msg');
+            const ordersTbody = document.getElementById('orders-tbody');
+            const searchInput = document.getElementById('order-search-input');
+            const lightbox = document.getElementById('lightbox-modal');
+
+            function getApiBaseUrl() {
+                if (typeof window !== 'undefined') {
+                    const { protocol, hostname, port } = window.location;
+                    if (protocol === 'file:') return 'http://localhost:3000';
+                    if (hostname === 'localhost' || hostname === '127.0.0.1') {
+                        if (port && port !== '3000') {
+                            return `http://${hostname}:3000`;
+                        }
+                    }
+                }
+                return '';
+            }
+
+            function formatRupiah(number) {
+                return 'Rp' + (number || 0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+            }
+
+            function formatDate(isoString) {
+                if (!isoString) return '-';
+                try {
+                    const d = new Date(isoString);
+                    return d.toLocaleDateString('id-ID', {
+                        day: 'numeric',
+                        month: 'short',
+                        year: 'numeric',
+                        hour: '2-digit',
+                        minute: '2-digit'
+                    }) + ' WIB';
+                } catch (_) {
+                    return isoString;
+                }
+            }
+
+            // Auth verification
+            async function checkAuth() {
+                if (!currentToken) {
+                    showLogin();
+                    return;
+                }
+                try {
+                    const res = await fetch(`${getApiBaseUrl()}/api/admin/me`, {
+                        headers: { 'Authorization': `Bearer ${currentToken}` }
+                    });
+                    if (res.ok) {
+                        showDashboard();
+                        loadOrders();
+                        startSync();
+                    } else {
+                        logout();
+                    }
+                } catch (_) {
+                    // Offline or server not ready, show login
+                    showLogin();
+                }
+            }
+
+            function showLogin() {
+                loginView.style.display = 'flex';
+                dashboardView.style.display = 'none';
+                stopSync();
+            }
+
+            function showDashboard() {
+                loginView.style.display = 'none';
+                dashboardView.style.display = 'block';
+            }
+
+            function logout() {
+                localStorage.removeItem(TOKEN_KEY);
+                sessionStorage.removeItem(TOKEN_KEY);
+                currentToken = null;
+                showLogin();
+            }
+
+            // Login Handler
+            loginForm.addEventListener('submit', async function (e) {
+                e.preventDefault();
+                const username = document.getElementById('adm-username').value.trim();
+                const password = document.getElementById('adm-password').value;
+                const submitBtn = document.getElementById('btn-login-submit');
+
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Memverifikasi...';
+                loginError.style.display = 'none';
+
+                try {
+                    const res = await fetch(`${getApiBaseUrl()}/api/admin/login`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ username, password })
+                    });
+                    const data = await res.json();
+
+                    if (res.ok && data.success && data.token) {
+                        currentToken = data.token;
+                        localStorage.setItem(TOKEN_KEY, data.token);
+                        showDashboard();
+                        loadOrders();
+                        startSync();
+                    } else {
+                        loginError.textContent = data.error || 'Kata sandi atau pengguna salah.';
+                        loginError.style.display = 'block';
+                    }
+                } catch (err) {
+                    loginError.textContent = 'Gagal menghubungi server. Pastikan server aktif.';
+                    loginError.style.display = 'block';
+                } finally {
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = 'Masuk ke Panel <i class="fa fa-arrow-right" aria-hidden="true"></i>';
+                }
+            });
+
+            document.getElementById('btn-admin-logout').addEventListener('click', logout);
+
+            // Fetch Orders
+            async function loadOrders(isSilent = false) {
+                const refreshIcon = document.getElementById('refresh-icon');
+                if (!isSilent && refreshIcon) refreshIcon.classList.add('fa-spin');
+
+                try {
+                    const res = await fetch(`${getApiBaseUrl()}/api/admin/orders`, {
+                        headers: { 'Authorization': `Bearer ${currentToken}` }
+                    });
+                    if (res.status === 401) {
+                        logout();
+                        return;
+                    }
+                    const data = await res.json();
+                    if (res.ok && data.success) {
+                        ordersData = data.orders || [];
+                        updateKPIs(data.stats);
+                        renderOrders();
+
+                        const now = new Date();
+                        document.getElementById('last-sync-label').textContent =
+                            `Sinkron ${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}:${now.getSeconds().toString().padStart(2, '0')}`;
+                    }
+                } catch (err) {
+                    console.error('Error fetching admin orders:', err);
+                } finally {
+                    if (!isSilent && refreshIcon) {
+                        setTimeout(() => refreshIcon.classList.remove('fa-spin'), 300);
+                    }
+                }
+            }
+
+            function updateKPIs(stats) {
+                if (!stats) return;
+                document.getElementById('kpi-pending-count').textContent = stats.pendingVerificationCount;
+                document.getElementById('kpi-approved-count').textContent = stats.approvedCount;
+                document.getElementById('kpi-total-orders').textContent = stats.totalOrders;
+                document.getElementById('kpi-total-revenue').textContent = formatRupiah(stats.totalRevenueApproved);
+
+                document.getElementById('badge-all').textContent = stats.totalOrders;
+                document.getElementById('badge-pending').textContent = stats.pendingVerificationCount;
+                document.getElementById('badge-approved').textContent = stats.approvedCount;
+                document.getElementById('badge-rejected').textContent = stats.rejectedCount;
+
+                const pendingCard = document.getElementById('kpi-pending-card');
+                if (stats.pendingVerificationCount > 0) {
+                    pendingCard.classList.add('highlight');
+                } else {
+                    pendingCard.classList.remove('highlight');
+                }
+            }
+
+            function renderOrders() {
+                let filtered = ordersData.slice();
+
+                // Status filter
+                if (activeFilter === 'pending_verification') {
+                    filtered = filtered.filter(o => o.status === 'pending_verification' || o.status === 'pending_payment');
+                } else if (activeFilter === 'approved') {
+                    filtered = filtered.filter(o => o.status === 'approved');
+                } else if (activeFilter === 'rejected') {
+                    filtered = filtered.filter(o => o.status === 'rejected');
+                }
+
+                // Search query
+                if (searchQuery) {
+                    const q = searchQuery.toLowerCase();
+                    filtered = filtered.filter(o =>
+                        o.id.toLowerCase().includes(q) ||
+                        (o.customer && o.customer.name && o.customer.name.toLowerCase().includes(q)) ||
+                        (o.customer && o.customer.phone && o.customer.phone.includes(q))
+                    );
+                }
+
+                if (filtered.length === 0) {
+                    ordersTbody.innerHTML = `
+                        <tr>
+                            <td colspan="7" class="empty-orders">
+                                <i class="fa fa-clipboard-list"></i>
+                                <p>Tidak ada data pesanan yang sesuai filter.</p>
+                            </td>
+                        </tr>
+                    `;
+                    return;
+                }
+
+                ordersTbody.innerHTML = filtered.map(order => {
+                    const cust = order.customer || {};
+                    const cleanPhone = cust.phone ? cust.phone.replace(/\D/g, '') : '';
+                    const intlPhone = cleanPhone.startsWith('0') ? '62' + cleanPhone.slice(1) : cleanPhone;
+                    const itemsSummary = (order.items || []).map(i => `${i.name} (${i.quantity}x)`).join('<br>');
+
+                    // Status Pill
+                    let statusPill = '';
+                    if (order.status === 'pending_verification') {
+                        statusPill = '<span class="status-pill pending"><i class="fa fa-clock"></i> Menunggu Verifikasi</span>';
+                    } else if (order.status === 'pending_payment') {
+                        statusPill = '<span class="status-pill awaiting_proof"><i class="fa fa-hourglass-start"></i> Belum Upload Struk</span>';
+                    } else if (order.status === 'approved') {
+                        statusPill = '<span class="status-pill approved"><i class="fa fa-check-circle"></i> Disetujui / Lunas</span>';
+                    } else if (order.status === 'rejected') {
+                        statusPill = '<span class="status-pill rejected"><i class="fa fa-times-circle"></i> Ditolak</span>';
+                    }
+
+                    // Proof thumbnail
+                    let proofHtml = '<span class="proof-empty">Belum ada</span>';
+                    if (order.paymentProof && order.paymentProof.file) {
+                        const proofUrl = `${getApiBaseUrl()}/api/admin/proofs/${order.paymentProof.file}?token=${currentToken}`;
+                        const sender = order.paymentProof.senderNote ? `<br><strong>${order.paymentProof.senderNote}</strong>` : '';
+                        proofHtml = `
+                            <div class="proof-thumb-wrap">
+                                <img src="${proofUrl}" class="proof-thumb" alt="Bukti ${order.id}" onclick="window.viewProof('${order.id}')">
+                                <div class="proof-info-text">
+                                    <a href="javascript:void(0)" onclick="window.viewProof('${order.id}')" style="color:var(--adm-brand);font-weight:600">Lihat Foto</a>
+                                    ${sender}
+                                </div>
+                            </div>
+                        `;
+                    }
+
+                    // WA Direct link
+                    const waMessage = encodeURIComponent(
+                        order.status === 'approved'
+                            ? `Halo Kak ${cust.name}, pembayaran QRIS pesanan #${order.id} sebesar ${formatRupiah(order.totalAmount)} telah disetujui tim Aromansa. Pesanan Anda saat ini sedang kami siapkan untuk pengiriman ke ${cust.address}. Terima kasih!`
+                            : `Halo Kak ${cust.name}, mengenai pesanan #${order.id} di Aromansa...`
+                    );
+                    const waLink = `https://wa.me/${intlPhone}?text=${waMessage}`;
+
+                    // Action buttons
+                    let actionsHtml = '';
+                    if (order.status === 'pending_verification' || order.status === 'pending_payment') {
+                        actionsHtml = `
+                            <button type="button" class="btn-adm btn-action-approve" onclick="window.updateOrderStatus('${order.id}', 'approved')">
+                                <i class="fa fa-check"></i> Setujui
+                            </button>
+                            <button type="button" class="btn-adm btn-action-reject" onclick="window.promptReject('${order.id}')" title="Tolak">
+                                <i class="fa fa-times"></i>
+                            </button>
+                        `;
+                    } else if (order.status === 'approved') {
+                        actionsHtml = `
+                            <a href="${waLink}" target="_blank" rel="noopener noreferrer" class="btn-adm btn-action-wa" title="Kirim WA Konfirmasi">
+                                <i class="fab fa-whatsapp"></i> WA Pembeli
+                            </a>
+                        `;
+                    } else {
+                        actionsHtml = `
+                            <button type="button" class="btn-adm btn-refresh" style="font-size:11px" onclick="window.updateOrderStatus('${order.id}', 'approved')">
+                                Setujui Ulang
+                            </button>
+                        `;
+                    }
+
+                    return `
+                        <tr>
+                            <td>
+                                <div class="order-id-badge">#${order.id}</div>
+                                <div class="order-time">${formatDate(order.createdAt)}</div>
+                            </td>
+                            <td>
+                                <div class="customer-name">${cust.name || '-'}</div>
+                                <div class="customer-contact">
+                                    <a href="https://wa.me/${intlPhone}" target="_blank" rel="noopener noreferrer">
+                                        <i class="fab fa-whatsapp"></i> ${cust.phone || '-'}
+                                    </a>
+                                </div>
+                                <div class="customer-address">${cust.address || ''}${cust.city ? ', ' + cust.city : ''}</div>
+                            </td>
+                            <td>
+                                <div class="order-items-snippet">${itemsSummary}</div>
+                            </td>
+                            <td>
+                                <div class="order-total-price">${formatRupiah(order.totalAmount)}</div>
+                            </td>
+                            <td>
+                                ${proofHtml}
+                            </td>
+                            <td>
+                                ${statusPill}
+                            </td>
+                            <td style="text-align:right">
+                                <div class="adm-actions-cell" style="justify-content:flex-end">
+                                    ${actionsHtml}
+                                </div>
+                            </td>
+                        </tr>
+                    `;
+                }).join('');
+            }
+
+            // Window actions
+            window.updateOrderStatus = async function (orderId, newStatus, adminNotes = '') {
+                try {
+                    const res = await fetch(`${getApiBaseUrl()}/api/admin/orders/${orderId}/status`, {
+                        method: 'PATCH',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${currentToken}`
+                        },
+                        body: JSON.stringify({ status: newStatus, adminNotes })
+                    });
+                    const data = await res.json();
+                    if (res.ok && data.success) {
+                        window.closeLightbox();
+                        loadOrders(true);
+                    } else {
+                        alert(data.error || 'Gagal memperbarui status pesanan.');
+                    }
+                } catch (err) {
+                    alert('Gagal menghubungi server.');
+                }
+            };
+
+            window.promptReject = function (orderId) {
+                const reason = prompt('Masukkan alasan penolakan (misal: "Nominal tidak sesuai" atau "Bukti tidak terbaca"):', 'Nominal transfer tidak sesuai');
+                if (reason !== null && reason.trim()) {
+                    window.updateOrderStatus(orderId, 'rejected', reason.trim());
+                }
+            };
+
+            window.viewProof = function (orderId) {
+                const order = ordersData.find(o => o.id === orderId);
+                if (!order || !order.paymentProof || !order.paymentProof.file) return;
+
+                const proofUrl = `${getApiBaseUrl()}/api/admin/proofs/${order.paymentProof.file}?token=${currentToken}`;
+                const cust = order.customer || {};
+                const img = document.getElementById('lightbox-img');
+                const details = document.getElementById('lightbox-details');
+
+                img.src = proofUrl;
+
+                const itemsSummary = (order.items || []).map(i => `• ${i.name} (${i.quantity}x) = ${formatRupiah(i.subtotal)}`).join('<br>');
+
+                details.innerHTML = `
+                    <p style="font-size:11px;font-weight:700;color:var(--adm-brand);letter-spacing:0.5px;text-transform:uppercase;margin-bottom:4px">VERIFIKASI BUKTI TRANSFER</p>
+                    <h3 style="margin:0 0 12px;font-size:18px;font-weight:700">Pesanan #${order.id}</h3>
+                    
+                    <div style="background:#f8fafc;border:1px solid var(--adm-border);border-radius:6px;padding:12px;font-size:13px;line-height:1.6;margin-bottom:16px">
+                        <p><strong>Total Tagihan:</strong> <span style="color:var(--adm-brand);font-weight:700;font-size:15px">${formatRupiah(order.totalAmount)}</span></p>
+                        <p><strong>Pembeli:</strong> ${cust.name} (${cust.phone})</p>
+                        <p><strong>Alamat:</strong> ${cust.address}, ${cust.city}</p>
+                        ${order.paymentProof.senderNote ? `<p><strong>Catatan Pengirim:</strong> ${order.paymentProof.senderNote}</p>` : ''}
+                        <p><strong>Waktu Upload:</strong> ${formatDate(order.paymentProof.uploadedAt)}</p>
+                    </div>
+
+                    <div style="font-size:12px;color:var(--adm-muted);margin-bottom:20px">
+                        <strong>Daftar Item:</strong><br>
+                        ${itemsSummary}
+                    </div>
+
+                    <div style="margin-top:auto;display:flex;gap:10px">
+                        <button type="button" class="btn-adm btn-action-approve" style="flex:1;padding:12px;font-size:13px" onclick="window.updateOrderStatus('${order.id}', 'approved')">
+                            <i class="fa fa-check"></i> Setujui Pembayaran Ini
+                        </button>
+                        <button type="button" class="btn-adm btn-action-reject" style="padding:12px" onclick="window.promptReject('${order.id}')" title="Tolak">
+                            <i class="fa fa-times"></i> Tolak
+                        </button>
+                    </div>
+                `;
+
+                lightbox.classList.add('is-open');
+            };
+
+            window.closeLightbox = function () {
+                lightbox.classList.remove('is-open');
+            };
+
+            document.getElementById('btn-close-lightbox').addEventListener('click', window.closeLightbox);
+            lightbox.addEventListener('click', function (e) {
+                if (e.target === lightbox) window.closeLightbox();
+            });
+
+            // Tabs click
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.addEventListener('click', function () {
+                    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    activeFilter = this.dataset.filter;
+                    renderOrders();
+                });
+            });
+
+            // Search input
+            searchInput.addEventListener('input', function () {
+                searchQuery = this.value.trim();
+                renderOrders();
+            });
+
+            // Refresh button
+            document.getElementById('btn-manual-refresh').addEventListener('click', () => loadOrders(false));
+
+            // Polling interval (every 15 seconds)
+            function startSync() {
+                stopSync();
+                syncInterval = setInterval(() => {
+                    loadOrders(true);
+                }, 15000);
+            }
+
+            function stopSync() {
+                if (syncInterval) clearInterval(syncInterval);
+                syncInterval = null;
+            }
+
+            // Initial auth check
+            checkAuth();
+        })();
+    </script>
+</body>
+</html>

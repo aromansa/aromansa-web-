@@ -1,9 +1,6 @@
 (function () {
     'use strict';
 
-    // ===== OpenRouter Configuration =====
-    const API_KEY = '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';
-
     // ===== System Prompt =====
     const SYSTEM_PROMPT = `You are an AI aromatherapy and essential oil consultant for Aromansa, a premium essential oils retail brand in Indonesia.
 
@@ -133,8 +130,8 @@ Remember: Essential oils are natural but powerful. Always emphasize responsible 
         showTypingIndicator();
 
         try {
-            // Call OpenRouter API
-            const response = await callOpenRouterAPI(message);
+            // Call Backend AI API (Groq)
+            const response = await callBackendAI(message);
             removeTypingIndicator();
 
             // Add AI response to chat
@@ -287,13 +284,13 @@ Pre-mixed & ready to spray! Perfect untuk room freshener & linen spray.
 
 **💜 Lavender Spray**
 ▸ Size: 100ml
-▸ Price: **Rp45.000**
+▸ Price: **Rp60.000**
 ▸ Benefits: Pillow mist, room freshener, relaxation
 ▸ Usage: Spray on pillows, linens, bedroom
 
 **🍃 Peppermint Spray**
 ▸ Size: 100ml
-▸ Price: **Rp45.000**
+▸ Price: **Rp60.000**
 ▸ Benefits: Air freshener, energizing, odor elimination
 ▸ Usage: Spray in rooms, office, car
 
@@ -416,68 +413,62 @@ Saya siap membantu! Ceritakan kebutuhan Anda:
         return responses[oilType] || responses.general;
     }
 
-    // ===== Call OpenRouter API =====
-    async function callOpenRouterAPI(userMessage) {
-        // Build conversation context
-        const messages = [];
+    // ===== Helper API Base URL (Supports port 5500 Live Server, port 3000 Express, and file://) =====
+    function getApiBaseUrl() {
+        if (typeof window !== 'undefined') {
+            const { protocol, hostname, port } = window.location;
+            if (protocol === 'file:') return 'http://localhost:3000';
+            if (hostname === 'localhost' || hostname === '127.0.0.1') {
+                if (port && port !== '3000') {
+                    return `http://${hostname}:3000`;
+                }
+            }
+        }
+        return '';
+    }
 
-        // Add system prompt
-        messages.push({
-            role: 'system',
-            content: SYSTEM_PROMPT
-        });
+    // ===== Call Backend AI API (Groq) =====
+    async function callBackendAI(userMessage) {
+        const apiBase = getApiBaseUrl();
+        const endpoint = `${apiBase}/api/ai-chat`;
+        console.log('Memanggil API Backend Aromansa via:', endpoint);
 
-        // Add chat history (last 10 messages for context)
-        const recentHistory = chatHistory.slice(-10);
-        for (const msg of recentHistory) {
-            if (msg.role === 'user') {
-                messages.push({
-                    role: 'user',
-                    content: msg.content
+        let response;
+        try {
+            response = await fetch(endpoint, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    message: userMessage,
+                    chatHistory: chatHistory.slice(-8)
+                })
+            });
+        } catch (fetchErr) {
+            // If primary failed and apiBase was empty, try http://localhost:3000 fallback
+            if (!apiBase) {
+                console.warn('Relative fetch failed, retrying http://localhost:3000/api/ai-chat...');
+                response = await fetch('http://localhost:3000/api/ai-chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        message: userMessage,
+                        chatHistory: chatHistory.slice(-8)
+                    })
                 });
-            } else if (msg.role === 'ai') {
-                messages.push({
-                    role: 'assistant',
-                    content: msg.content
-                });
+            } else {
+                throw fetchErr;
             }
         }
 
-        // Add current message
-        messages.push({
-            role: 'user',
-            content: userMessage
-        });
-
-        const requestBody = {
-            model: 'meta-llama/llama-3-8b-instruct:free',
-            messages: messages,
-            temperature: 0.7,
-            max_tokens: 2048
-        };
-
-        console.log('Calling OpenRouter API...');
-
-        const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
-            method: 'POST',
-            headers: {
-                'Authorization': `Bearer ${API_KEY}`,
-                'Content-Type': 'application/json',
-                'HTTP-Referer': window.location.origin,
-                'X-Title': 'Aromansa AI Consultant'
-            },
-            body: JSON.stringify(requestBody)
-        });
-
         if (!response.ok) {
-            const errorData = await response.json();
-            throw new Error(errorData.error?.message || `API error: ${response.status}`);
+            const errorData = await response.json().catch(() => ({}));
+            throw new Error(errorData.error || `API error: ${response.status}`);
         }
 
         const data = await response.json();
-        console.log('OpenRouter DeepSeek response:', data);
-        
-        return data.choices[0].message.content;
+        return data.response;
     }
 
     // ===== Show Demo Mode Notification =====
@@ -579,7 +570,7 @@ Saya siap membantu! Ceritakan kebutuhan Anda:
         messageDiv.innerHTML = `
             <div class="message-content-modern">
                 <div class="message-avatar-modern">
-                    <i class="fa fa-robot"></i>
+                    <i class="fa fa-leaf"></i>
                 </div>
                 <div class="message-bubble">${formatMessage(message)}</div>
             </div>
@@ -595,7 +586,7 @@ Saya siap membantu! Ceritakan kebutuhan Anda:
         typingDiv.id = 'typingIndicator';
         typingDiv.innerHTML = `
             <div class="message-avatar-modern">
-                <i class="fa fa-robot"></i>
+                <i class="fa fa-leaf"></i>
             </div>
             <div class="typing-dots-modern">
                 <span class="typing-dot-modern"></span>
@@ -615,33 +606,237 @@ Saya siap membantu! Ceritakan kebutuhan Anda:
         }
     }
 
-    // ===== Format Message =====
+    // ===== Format Message (High-End Markdown & Table Parser) =====
     function formatMessage(text) {
-        // Convert markdown-like syntax to HTML
-        let formatted = escapeHtml(text);
+        if (!text) return '';
 
-        // Bold: **text** or __text__
-        formatted = formatted.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-        formatted = formatted.replace(/__(.*?)__/g, '<strong>$1</strong>');
+        let html = '';
 
-        // Italic: *text* or _text_
-        formatted = formatted.replace(/\*(.*?)\*/g, '<em>$1</em>');
-        formatted = formatted.replace(/_(.*?)_/g, '<em>$1</em>');
+        // 1. Try Marked.js first if available
+        if (typeof window !== 'undefined' && window.marked && typeof window.marked.parse === 'function') {
+            try {
+                window.marked.setOptions({
+                    gfm: true,
+                    breaks: true
+                });
+                html = window.marked.parse(text);
+            } catch (err) {
+                console.warn('Marked parse error, using fallback:', err);
+                html = fallbackMarkdown(text);
+            }
+        } else {
+            // 2. Built-in resilient fallback parser
+            html = fallbackMarkdown(text);
+        }
 
-        // Line breaks
-        formatted = formatted.replace(/\n/g, '<br>');
+        // 3. Post-process HTML for luxury typography & visual polish
+        return postProcessHtml(html);
+    }
 
-        // Bullet points
-        formatted = formatted.replace(/•/g, '&bull;');
-        formatted = formatted.replace(/▸/g, '&rarr;');
+    // ===== Post-Process HTML for Luxury Editorial Polish =====
+    function postProcessHtml(html) {
+        if (!html) return '';
 
-        // Horizontal rules
-        formatted = formatted.replace(/─{3,}/g, '<hr style="margin: 15px 0; border: none; border-top: 1px solid rgba(102, 126, 234, 0.2);">');
+        // 1. Wrap tables in responsive container & assign custom class
+        html = html.replace(/<table(?:\s+class="[^"]*")?>/gi, '<div class="ai-table-responsive"><table class="ai-table">');
+        html = html.replace(/<\/table>/gi, '</table></div>');
 
-        // Numbered lists
-        formatted = formatted.replace(/(\d+)\.\s/g, '<br>$1. ');
+        // 2. Highlight Prices (Rp 110.000, Rp45.000, etc.) in text nodes only
+        html = html.replace(/(>|^)([^<]+)(<|$)/g, function(match, prefix, textContent, suffix) {
+            const formattedText = textContent.replace(/(Rp\.?\s?[0-9]{1,3}(?:\.[0-9]{3})*(?:,-)?)/g, '<span class="ai-price-badge">$1</span>');
+            return prefix + formattedText + suffix;
+        });
 
-        return formatted;
+        // 3. Transform action links (Shopee, Tokopedia, WhatsApp, External) into interactive chips
+        html = html.replace(/<a\s+([^>]*?)href="([^"]*)"([^>]*)>(.*?)<\/a>/gi, function(match, preAttr, href, postAttr, text) {
+            let chipClass = 'ai-cta-chip';
+            let icon = '<i class="fa fa-external-link-alt"></i>';
+
+            if (href.includes('shopee.co.id')) {
+                chipClass += ' shopee';
+                icon = '<i class="fa fa-shopping-bag"></i>';
+            } else if (href.includes('tokopedia.com')) {
+                chipClass += ' tokopedia';
+                icon = '<i class="fa fa-store"></i>';
+            } else if (href.includes('wa.me') || href.includes('whatsapp.com')) {
+                chipClass += ' whatsapp';
+                icon = '<i class="fab fa-whatsapp"></i>';
+            }
+
+            return `<a href="${href}" target="_blank" rel="noopener noreferrer" class="${chipClass}">${icon} <span>${text}</span></a>`;
+        });
+
+        // 4. Style callout alerts (paragraphs starting with ⚠️, 💡, 📌, ❗)
+        html = html.replace(/<p>(?:<strong>)?(⚠️|💡|📌|❗)(?:<\/strong>)?\s*([\s\S]*?)<\/p>/gi, function(match, emoji, content) {
+            const type = (emoji === '⚠️' || emoji === '❗') ? 'warning' : 'tip';
+            return `<div class="ai-callout ${type}"><span class="ai-callout-icon">${emoji}</span><div class="ai-callout-text">${content}</div></div>`;
+        });
+
+        // 5. Enhance hr with subtle divider class
+        html = html.replace(/<hr(?:\s*\/)?>/gi, '<hr class="ai-divider">');
+
+        return html;
+    }
+
+    // ===== Pure JS Resilient Fallback Markdown Parser =====
+    function fallbackMarkdown(md) {
+        if (!md) return '';
+        const lines = md.replace(/\r\n/g, '\n').split('\n');
+        const html = [];
+        let inList = false;
+        let listType = '';
+        let inTable = false;
+        let tableRows = [];
+
+        function closeList() {
+            if (inList) {
+                html.push(listType === 'ol' ? '</ol>' : '</ul>');
+                inList = false;
+                listType = '';
+            }
+        }
+
+        function flushTable() {
+            if (!inTable) return;
+            if (tableRows.length > 0) {
+                let tableHtml = '<div class="ai-table-responsive"><table class="ai-table">';
+                let hasHeader = false;
+                let headerIdx = -1;
+
+                if (tableRows.length >= 2 && /^\|?(\s*:?-+:?\s*\|?)+$/.test(tableRows[1].trim())) {
+                    hasHeader = true;
+                    headerIdx = 1;
+                }
+
+                for (let i = 0; i < tableRows.length; i++) {
+                    if (i === headerIdx) continue;
+                    let cells = tableRows[i].split('|').map(function(c) { return c.trim(); });
+                    if (cells[0] === '') cells.shift();
+                    if (cells.length > 0 && cells[cells.length - 1] === '') cells.pop();
+
+                    if (hasHeader && i === 0) {
+                        tableHtml += '<thead><tr>' + cells.map(function(c) { return '<th>' + inlineMarkdown(c) + '</th>'; }).join('') + '</tr></thead><tbody>';
+                    } else {
+                        if (!hasHeader && i === 0) tableHtml += '<tbody>';
+                        tableHtml += '<tr>' + cells.map(function(c) { return '<td>' + inlineMarkdown(c) + '</td>'; }).join('') + '</tr>';
+                    }
+                }
+                tableHtml += (hasHeader || tableRows.length > 0 ? '</tbody>' : '') + '</table></div>';
+                html.push(tableHtml);
+            }
+            inTable = false;
+            tableRows = [];
+        }
+
+        function inlineMarkdown(str) {
+            if (!str) return '';
+            let s = escapeHtml(str);
+            // Bold
+            s = s.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+            s = s.replace(/__(.*?)__/g, '<strong>$1</strong>');
+            // Italic
+            s = s.replace(/\*(.*?)\*/g, '<em>$1</em>');
+            s = s.replace(/_(.*?)_/g, '<em>$1</em>');
+            // Inline Code
+            s = s.replace(/`([^`]+)`/g, '<code>$1</code>');
+            // Markdown Links: [text](url)
+            s = s.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>');
+            // Raw URLs
+            s = s.replace(/(^|[\s])(https?:\/\/[^\s<]+)/g, '$1<a href="$2">$2</a>');
+            return s;
+        }
+
+        for (let i = 0; i < lines.length; i++) {
+            const line = lines[i];
+            const trimmed = line.trim();
+
+            // Table row: starts and ends with |
+            if (trimmed.startsWith('|') && trimmed.endsWith('|')) {
+                closeList();
+                inTable = true;
+                tableRows.push(trimmed);
+                continue;
+            } else if (inTable) {
+                flushTable();
+            }
+
+            // Horizontal rules
+            if (/^(-{3,}|\*{3,}|_{3,}|─{3,}|━{3,})$/.test(trimmed)) {
+                closeList();
+                html.push('<hr class="ai-divider">');
+                continue;
+            }
+
+            // Headings
+            if (trimmed.startsWith('#### ')) {
+                closeList();
+                html.push('<h5>' + inlineMarkdown(trimmed.substring(5)) + '</h5>');
+                continue;
+            }
+            if (trimmed.startsWith('### ')) {
+                closeList();
+                html.push('<h4>' + inlineMarkdown(trimmed.substring(4)) + '</h4>');
+                continue;
+            }
+            if (trimmed.startsWith('## ')) {
+                closeList();
+                html.push('<h3>' + inlineMarkdown(trimmed.substring(3)) + '</h3>');
+                continue;
+            }
+            if (trimmed.startsWith('# ')) {
+                closeList();
+                html.push('<h2>' + inlineMarkdown(trimmed.substring(2)) + '</h2>');
+                continue;
+            }
+
+            // Numbered list
+            const olMatch = trimmed.match(/^(\d+)\.\s+(.*)$/);
+            if (olMatch) {
+                if (!inList || listType !== 'ol') {
+                    closeList();
+                    inList = true;
+                    listType = 'ol';
+                    html.push('<ol class="ai-ordered-list">');
+                }
+                html.push('<li>' + inlineMarkdown(olMatch[2]) + '</li>');
+                continue;
+            }
+
+            // Bullet list
+            const ulMatch = trimmed.match(/^[-*•▸]\s+(.*)$/);
+            if (ulMatch) {
+                if (!inList || listType !== 'ul') {
+                    closeList();
+                    inList = true;
+                    listType = 'ul';
+                    html.push('<ul class="ai-unordered-list">');
+                }
+                html.push('<li>' + inlineMarkdown(ulMatch[1]) + '</li>');
+                continue;
+            }
+
+            // Blockquote
+            if (trimmed.startsWith('> ')) {
+                closeList();
+                html.push('<blockquote>' + inlineMarkdown(trimmed.substring(2)) + '</blockquote>');
+                continue;
+            }
+
+            // Empty line
+            if (!trimmed) {
+                closeList();
+                continue;
+            }
+
+            // Normal paragraph
+            closeList();
+            html.push('<p>' + inlineMarkdown(trimmed) + '</p>');
+        }
+
+        closeList();
+        flushTable();
+
+        return html.join('\n');
     }
 
     // ===== Escape HTML =====
@@ -653,7 +848,13 @@ Saya siap membantu! Ceritakan kebutuhan Anda:
 
     // ===== Scroll to Bottom =====
     function scrollToBottom() {
-        chatMessages.scrollTop = chatMessages.scrollHeight;
+        if (!chatMessages) return;
+        requestAnimationFrame(() => {
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+            setTimeout(() => {
+                if (chatMessages) chatMessages.scrollTop = chatMessages.scrollHeight;
+            }, 80);
+        });
     }
 
     // ===== Clear Chat =====

@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Status Pesanan · Aromansa</title>
+    <link href="img/favicon.png?v=3" rel="icon" type="image/png">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --status-bg: #f8fafc;
+            --status-card: #ffffff;
+            --status-border: #e2e8f0;
+            --status-text: #0f172a;
+            --status-muted: #64748b;
+            --status-brand: #3e6b55;
+            --status-amber-bg: #fffbeb;
+            --status-amber-text: #92400e;
+            --status-amber-border: #fde68a;
+            --status-green-bg: #f0fdf4;
+            --status-green-text: #166534;
+            --status-green-border: #bbf7d0;
+            --status-red-bg: #fef2f2;
+            --status-red-text: #991b1b;
+            --status-red-border: #fecaca;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: var(--status-bg);
+            color: var(--status-text);
+            line-height: 1.6;
+            padding: 40px 20px;
+        }
+
+        .status-container {
+            max-width: 620px;
+            margin: 0 auto;
+        }
+
+        .status-brand-header {
+            text-align: center;
+            margin-bottom: 28px;
+        }
+
+        .status-brand-header img {
+            width: 44px;
+            height: 44px;
+            object-fit: contain;
+            margin-bottom: 8px;
+        }
+
+        .status-brand-header h1 {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--status-text);
+        }
+
+        .status-card {
+            background: var(--status-card);
+            border: 1px solid var(--status-border);
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            padding: 28px 24px;
+            margin-bottom: 20px;
+        }
+
+        .lookup-form {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .lookup-input {
+            flex: 1;
+            padding: 10px 14px;
+            border: 1px solid var(--status-border);
+            border-radius: 6px;
+            font-size: 14px;
+            outline: none;
+            color: var(--status-text);
+        }
+
+        .lookup-input:focus {
+            border-color: var(--status-brand);
+        }
+
+        .btn-lookup {
+            padding: 10px 18px;
+            background: var(--status-brand);
+            color: #ffffff;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            border-radius: 999px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .status-badge.pending {
+            background: var(--status-amber-bg);
+            color: var(--status-amber-text);
+            border: 1px solid var(--status-amber-border);
+        }
+
+        .status-badge.approved {
+            background: var(--status-green-bg);
+            color: var(--status-green-text);
+            border: 1px solid var(--status-green-border);
+        }
+
+        .status-badge.rejected {
+            background: var(--status-red-bg);
+            color: var(--status-red-text);
+            border: 1px solid var(--status-red-border);
+        }
+
+        /* Timeline */
+        .timeline-steps {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+            margin: 24px 0 28px;
+        }
+
+        .timeline-steps::before {
+            content: '';
+            position: absolute;
+            top: 14px;
+            left: 24px;
+            right: 24px;
+            height: 2px;
+            background: #e2e8f0;
+            z-index: 1;
+        }
+
+        .timeline-step {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            flex: 1;
+        }
+
+        .timeline-step-icon {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: #ffffff;
+            border: 2px solid #cbd5e1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 6px;
+            font-size: 11px;
+            color: #94a3b8;
+        }
+
+        .timeline-step.done .timeline-step-icon {
+            background: var(--status-brand);
+            border-color: var(--status-brand);
+            color: #ffffff;
+        }
+
+        .timeline-step.active .timeline-step-icon {
+            background: #fffdf5;
+            border-color: #f59e0b;
+            color: #d97706;
+        }
+
+        .timeline-step.rejected .timeline-step-icon {
+            background: #fef2f2;
+            border-color: #ef4444;
+            color: #ef4444;
+        }
+
+        .timeline-step-label {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--status-muted);
+        }
+
+        .timeline-step.done .timeline-step-label,
+        .timeline-step.active .timeline-step-label {
+            color: var(--status-text);
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            font-size: 13px;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .detail-row:last-child {
+            border-bottom: none;
+        }
+
+        .detail-label {
+            color: var(--status-muted);
+        }
+
+        .detail-val {
+            font-weight: 600;
+            color: var(--status-text);
+            text-align: right;
+        }
+
+        .items-box {
+            background: #f8fafc;
+            border: 1px solid var(--status-border);
+            border-radius: 8px;
+            padding: 14px 16px;
+            margin: 16px 0;
+            font-size: 13px;
+        }
+
+        .items-box h4 {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--status-muted);
+            margin-bottom: 8px;
+        }
+
+        .btn-wa-support {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background: #25d366;
+            color: #ffffff;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            text-align: center;
+            text-decoration: none;
+            margin-top: 16px;
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            font-size: 13px;
+            color: var(--status-muted);
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            color: var(--status-brand);
+        }
+    </style>
+</head>
+<body>
+    <div class="status-container">
+        <div class="status-brand-header">
+            <a href="index.html"><img src="img/aromansa-logo-baru.png?v=3" alt="Aromansa"></a>
+            <h1>Lacak Status Pesanan</h1>
+        </div>
+
+        <div class="status-card">
+            <form id="order-lookup-form" class="lookup-form">
+                <input type="text" id="order-id-input" class="lookup-input" placeholder="Masukkan ID Pesanan (misal: ARO-2610-XXX)" required>
+                <button type="submit" class="btn-lookup">Cek Status</button>
+            </form>
+
+            <div id="status-result">
+                <p style="text-align:center;color:var(--status-muted);font-size:13px">Masukkan ID pesanan Anda untuk melihat perkembangan verifikasi pembayaran dan pengiriman.</p>
+            </div>
+        </div>
+
+        <a href="index.html" class="back-link"><i class="fa fa-arrow-left"></i> Kembali ke Beranda Aromansa</a>
+    </div>
+
+    <script>
+        (function () {
+            'use strict';
+
+            const form = document.getElementById('order-lookup-form');
+            const input = document.getElementById('order-id-input');
+            const result = document.getElementById('status-result');
+
+            function formatRupiah(num) {
+                return 'Rp' + (num || 0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+            }
+
+            function getApiBaseUrl() {
+                if (typeof window !== 'undefined') {
+                    const { protocol, hostname, port } = window.location;
+                    if (protocol === 'file:') return 'http://localhost:3000';
+                    if (hostname === 'localhost' || hostname === '127.0.0.1') {
+                        if (port && port !== '3000') {
+                            return `http://${hostname}:3000`;
+                        }
+                    }
+                }
+                return '';
+            }
+
+            function formatDate(iso) {
+                if (!iso) return '-';
+                try {
+                    return new Date(iso).toLocaleDateString('id-ID', {
+                        day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit'
+                    }) + ' WIB';
+                } catch (_) { return iso; }
+            }
+
+            async function checkOrder(orderId) {
+                const cleanId = orderId.trim().toUpperCase().replace(/^#/, '');
+                result.innerHTML = '<p style="text-align:center;padding:20px;color:var(--status-muted)"><i class="fa fa-spinner fa-spin"></i> Mencari pesanan #' + cleanId + '...</p>';
+
+                try {
+                    const res = await fetch(`${getApiBaseUrl()}/api/orders/${cleanId}`);
+                    if (!res.ok) {
+                        result.innerHTML = '<div style="text-align:center;padding:20px;color:#991b1b;background:#fef2f2;border:1px solid #fecaca;border-radius:6px;font-size:13px">Pesanan #' + cleanId + ' tidak ditemukan. Periksa kembali ID pesanan Anda.</div>';
+                        return;
+                    }
+
+                    const data = await res.json();
+                    renderOrderDetails(data);
+                } catch (err) {
+                    result.innerHTML = '<div style="text-align:center;padding:20px;color:#991b1b;font-size:13px">Gagal memuat status pesanan. Coba lagi dalam beberapa saat.</div>';
+                }
+            }
+
+            function renderOrderDetails(order) {
+                let badgeClass = 'pending';
+                let badgeText = 'Menunggu Persetujuan Admin';
+                let step3Class = 'active';
+
+                if (order.status === 'approved') {
+                    badgeClass = 'approved';
+                    badgeText = 'Pembayaran Disetujui · Sedang Dikemas';
+                    step3Class = 'done';
+                } else if (order.status === 'rejected') {
+                    badgeClass = 'rejected';
+                    badgeText = 'Pembayaran Ditolak';
+                    step3Class = 'rejected';
+                } else if (order.status === 'pending_payment') {
+                    badgeClass = 'pending';
+                    badgeText = 'Menunggu Bukti Transfer';
+                    step3Class = '';
+                }
+
+                const itemsList = (order.items || []).map(i => `
+                    <div style="display:flex;justify-content:space-between;margin-bottom:6px">
+                        <span>${i.name} (${i.quantity}x)</span>
+                        <strong>${formatRupiah(i.subtotal)}</strong>
+                    </div>
+                `).join('');
+
+                const waMessage = encodeURIComponent(
+                    `Halo Admin Aromansa, saya ingin menanyakan perkembangan pesanan #${order.id} atas nama ${order.customer ? order.customer.name : ''}.`
+                );
+                const waLink = `https://wa.me/6285782909266?text=${waMessage}`;
+
+                result.innerHTML = `
+                    <div style="text-align:center">
+                        <span class="status-badge ${badgeClass}">
+                            <i class="fa fa-info-circle"></i> ${badgeText}
+                        </span>
+                    </div>
+
+                    <div class="timeline-steps">
+                        <div class="timeline-step done">
+                            <div class="timeline-step-icon"><i class="fa fa-check"></i></div>
+                            <div class="timeline-step-label">Pesanan Dibuat</div>
+                        </div>
+                        <div class="timeline-step ${order.hasProof ? 'done' : 'active'}">
+                            <div class="timeline-step-icon"><i class="fa fa-${order.hasProof ? 'check' : 'cloud-upload-alt'}"></i></div>
+                            <div class="timeline-step-label">Bukti Transfer</div>
+                        </div>
+                        <div class="timeline-step ${step3Class}">
+                            <div class="timeline-step-icon"><i class="fa fa-${order.status === 'approved' ? 'check' : (order.status === 'rejected' ? 'times' : 'clock')}"></i></div>
+                            <div class="timeline-step-label">Approval Admin</div>
+                        </div>
+                    </div>
+
+                    ${order.adminNotes ? `
+                        <div style="background:#fef2f2;border:1px solid #fecaca;color:#991b1b;padding:12px;border-radius:6px;font-size:13px;margin-bottom:16px">
+                            <strong>Catatan Admin:</strong> ${order.adminNotes}
+                        </div>
+                    ` : ''}
+
+                    <div class="detail-row">
+                        <span class="detail-label">ID Pesanan</span>
+                        <span class="detail-val">#${order.id}</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Waktu Pemesanan</span>
+                        <span class="detail-val">${formatDate(order.createdAt)}</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Penerima</span>
+                        <span class="detail-val">${order.customer.name} (${order.customer.phone})</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Alamat Kirim</span>
+                        <span class="detail-val" style="max-width:280px">${order.customer.address}</span>
+                    </div>
+
+                    <div class="items-box">
+                        <h4>Rincian Produk</h4>
+                        ${itemsList}
+                        <div style="display:flex;justify-content:space-between;margin-top:10px;padding-top:10px;border-top:1px dashed #cbd5e1;font-size:14px">
+                            <strong>Total Tagihan</strong>
+                            <strong style="color:var(--status-brand)">${formatRupiah(order.totalAmount)}</strong>
+                        </div>
+                    </div>
+
+                    <a href="${waLink}" target="_blank" rel="noopener noreferrer" class="btn-wa-support">
+                        <i class="fab fa-whatsapp"></i> Hubungi Admin di WhatsApp
+                    </a>
+                `;
+            }
+
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+                const id = input.value.trim();
+                if (id) checkOrder(id);
+            });
+
+            // Check URL param ?id=...
+            const urlParams = new URLSearchParams(window.location.search);
+            const queryId = urlParams.get('id');
+            if (queryId) {
+                input.value = queryId;
+                checkOrder(queryId);
+            }
+        })();
+    </script>
+</body>
+</html>

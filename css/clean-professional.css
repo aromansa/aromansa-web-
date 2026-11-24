@@ -393,15 +393,10 @@
     font-family: 'Inter', sans-serif;
 }
 
-/* Accent line under heading */
+/* Accent line under heading disabled for clean dot aesthetic */
 .section-head h2::after {
-    content: '';
-    display: block;
-    width: 60px;
-    height: 4px;
-    background: linear-gradient(90deg, #48bb78, #38a169);
-    border-radius: 2px;
-    margin: 15px auto 0;
+    display: none !important;
+    content: none !important;
 }
 
 .section-head p {
